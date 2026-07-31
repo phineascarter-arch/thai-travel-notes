@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- 這個資料夾**不是 git repository**(`git -C . rev-parse` 會失敗),所以本計畫不含 `git commit` 步驟;每個任務做完直接進下一步即可。
+- 這個資料夾已經 `git init` 並有一個 baseline commit(main 分支)。每個任務完成後要 commit;訊息格式跟慣例由執行流程(subagent-driven-development)決定,計畫本身不規定逐字訊息。
 - 不新增任何**執行期**依賴(不裝 framer-motion 等手勢/動畫函式庫);唯一允許新增的套件是開發期用的 `vitest`。
 - 拖拽互動、視覺呈現、播音時機等 UI/手勢邏輯**只做手動瀏覽器驗證**,不寫自動化測試;只有 `src/lib/random.ts` 這種不涉及 UI/DOM 的純函式要寫 Vitest 單元測試(使用者在規劃階段的明確決定)。
 - 所有新增的使用者可見文案(hint 文字、aria-label)用繁體中文,語氣跟現有站內文案(「拖拖看」「精選筆記」等手帳風格)一致。
