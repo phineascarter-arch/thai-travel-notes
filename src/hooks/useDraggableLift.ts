@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
+import type { MouseEvent as ReactMouseEvent, PointerEvent as ReactPointerEvent } from "react";
 
 export type LiftPhase = "idle" | "dragging" | "lifted";
 
@@ -22,6 +22,7 @@ interface UseDraggableLiftResult {
     onPointerMove: (e: ReactPointerEvent<HTMLDivElement>) => void;
     onPointerUp: (e: ReactPointerEvent<HTMLDivElement>) => void;
     onPointerCancel: (e: ReactPointerEvent<HTMLDivElement>) => void;
+    onClick: (e: ReactMouseEvent<HTMLDivElement>) => void;
   };
   liftNow: () => void;
 }
@@ -40,6 +41,12 @@ export function useDraggableLift({
   const [offset, setOffset] = useState<Offset>(ZERO);
   const startRef = useRef<Offset | null>(null);
   const offsetRef = useRef<Offset>(ZERO);
+  // 拖曳超過門檻放開的那個 pointerup，瀏覽器隨後會再合成一個 click 事件。
+  // 那次拖曳本身已經呼叫過一次 onLift()，若不擋掉這個合成 click，會變成
+  // 同一個手勢觸發兩次 onLift()（在 VinylRecord 裡等於重播/取消重播兩次
+  // speak()）。這個 ref 只在「這次 pointerup 剛好完成一次拿起」時設成
+  // true，讓緊接著的那次合成 click 被吞掉一次，之後恢復正常。
+  const suppressClickRef = useRef(false);
 
   const onPointerDown = useCallback(
     (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -68,6 +75,7 @@ export function useDraggableLift({
     if (phase !== "dragging" || !startRef.current) return;
     const dist = Math.hypot(offsetRef.current.x, offsetRef.current.y);
     if (dist >= liftThreshold) {
+      suppressClickRef.current = true;
       setPhase("lifted");
       setOffset(liftOffset);
       onLift();
@@ -77,6 +85,20 @@ export function useDraggableLift({
     }
     startRef.current = null;
   }, [phase, liftThreshold, liftOffset, onLift]);
+
+  const onClick = useCallback(() => {
+    if (suppressClickRef.current) {
+      // 吞掉剛剛那次拖曳拿起手勢所合成的 click，避免 onLift() 被多呼叫一次。
+      suppressClickRef.current = false;
+      return;
+    }
+    if (phase === "lifted") {
+      // 已經拿起的唱片，單純點擊（沒有拖曳）＝重播發音。
+      onLift();
+    }
+    // phase !== "lifted"（例如 "idle"）時，點擊不做任何事——
+    // 唱片只能靠拖曳或鍵盤 Enter/Space 拿起，不能靠點擊拿起。
+  }, [phase, onLift]);
 
   const liftNow = useCallback(() => {
     if (phase === "lifted") {
@@ -96,6 +118,7 @@ export function useDraggableLift({
       onPointerMove,
       onPointerUp: release,
       onPointerCancel: release,
+      onClick,
     },
     liftNow,
   };

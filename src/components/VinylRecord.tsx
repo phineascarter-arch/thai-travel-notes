@@ -40,6 +40,7 @@ export default function VinylRecord({ note, accent, tilt }: Props) {
         onPointerMove={handlers.onPointerMove}
         onPointerUp={handlers.onPointerUp}
         onPointerCancel={handlers.onPointerCancel}
+        onClick={handlers.onClick}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
