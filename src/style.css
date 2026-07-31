@@ -1017,6 +1017,28 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   .content-grid { padding-bottom: 50px; }
   .note-modal { padding: 32px 24px; }
   .word-heading h2 { font-size: 50px; }
+  /* 唱片牆：3 張封套 140px + 2 個 56px 間距 = 532px。.record-wall 左右
+     padding 各 24px，寬度介於 561px~579px 之間時可用寬度會落到
+     532px 以下（例：570px 時可用寬度只有 522px），若不縮小這裡會在
+     還沒進到 560px 斷點前就先擠出換行。縮到 116/100/40 之後
+     3*116+2*40=428px，涵蓋這個斷點內所有寬度都還能一行排下。
+     .vinyl 的 bottom 從 -18px 改成 -22px，是為了讓「靜止時黑膠露出
+     封套頂端的距離」（= sleeve高 - vinyl高 + |bottom|）維持在跟桌面版
+     一樣的 38px（116 - 100 + 22 = 38），這樣拿起來後上冒的距離也
+     維持在 38 - 96 = -58px，跟桌面版一致，不會讓上面 .record-wall-hint
+     的間距在這個斷點失準。 */
+  /* .record-wall 前綴不是裝飾——這個「Responsive」區塊在檔案裡排在
+     「Record wall」那個區塊（.record-row/.record-sleeve/.vinyl 的
+     無條件基礎規則）前面，兩者 specificity 一樣的話，後面出現的基礎規則
+     會贏（CSS 同 specificity 比的是原始碼順序，跟是否包在 @media 裡無關），
+     這裡加的縮小規則就會被完全蓋掉、白寫。加 .record-wall 前綴把
+     specificity 墊高，才能確保無論原始碼順序如何，這裡的斷點規則
+     都贏得過後面的基礎規則。 */
+  .record-wall .record-row { gap: 40px; }
+  .record-wall .record-sleeve { width: 116px; height: 116px; }
+  .record-wall .vinyl { width: 100px; height: 100px; bottom: -22px; margin-left: -50px; }
+  .record-wall .vinyl-label { width: 38px; height: 38px; }
+  .record-wall .vinyl-lifted .vinyl-label { width: 65px; height: 65px; }
 }
 
 @media (width <= 560px) {
@@ -1045,9 +1067,167 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   footer { flex-direction: column; align-items: flex-start; }
   .polaroid { flex-basis: 200px; }
   .wall-scroll { gap: 24px; }
+  /* 唱片牆：手機寬度下 3 張封套一定擠不進一行，改用直排讓「一排一張」
+     的結果不用再賭寬度剛好落在哪裡。真正要顧的是垂直間距：拿起唱片的
+     位移量寫死在 useDraggableLift 的 liftOffset（translate(0, -96px)，
+     跟斷點無關、CSS 改不到），加上 .vinyl-replay 固定 bottom:-40px，
+     兩者都不會因為斷點縮小而跟著變小。把 .vinyl 的 bottom 調到 -24px，
+     讓這個斷點下「靜止時黑膠露出封套頂端的距離」還是 38px
+     （104 - 90 + 24 = 38），拿起來後一樣上冒 38 - 96 = -58px（跟桌面版
+     一致）。同一排相鄰兩張唱片都被拿起的最壞情況需要的垂直間距是
+     「上冒 58px ＋ 下面重播按鈕垂到封套下緣外 40px」= 98px，
+     這裡給 120px（多留 22px 緩衝），確保不會疊到。 */
+  /* 同上面 850px 斷點的理由：加 .record-wall 前綴確保 specificity 贏過
+     後面「Record wall」區塊裡的無條件基礎規則。 */
+  .record-wall .record-row { flex-direction: column; align-items: center; flex-wrap: nowrap; gap: 120px; }
+  .record-wall .record-sleeve { width: 104px; height: 104px; }
+  .record-wall .vinyl { width: 90px; height: 90px; bottom: -24px; margin-left: -45px; }
+  .record-wall .vinyl-label { width: 35px; height: 35px; }
+  .record-wall .vinyl-lifted .vinyl-label { width: 59px; height: 59px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .polaroid, .note-row { transition: none; }
+}
+
+/* ---------- Record wall ---------- */
+.record-wall {
+  background: var(--night);
+  padding: 8px 24px 64px;
+  text-align: center;
+}
+
+.record-wall-hint {
+  color: var(--night-dim);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  /* 一顆拿起來的唱片會從封套頂端往上冒出約 58px（見下方 .vinyl 的算法：
+     靜止時 top = 140 - (-18) - 120 = 38px，拿起時再位移 -96px，
+     38 - 96 = -58px），40px 的間距不夠、蓋到這句提示文字。
+     80px 留出約 22px 緩衝，唱片牆三個斷點都刻意讓這個上冒距離維持
+     58px（見 .vinyl 在兩個 media query 裡的 bottom 值），所以這裡不用
+     另外針對斷點加規則。 */
+  margin: 0 0 80px;
+}
+
+.record-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+
+.record-sleeve {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.record-tilt-1 {
+  transform: rotate(-4deg);
+}
+
+.record-tilt-2 {
+  transform: rotate(3deg);
+}
+
+.record-tilt-3 {
+  transform: rotate(-2deg);
+}
+
+.accent-rust .vinyl-label {
+  background: var(--rust);
+}
+
+.accent-orange .vinyl-label {
+  background: var(--orange);
+}
+
+.accent-gold .vinyl-label {
+  background: var(--gold);
+}
+
+.vinyl {
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    #1a1a1a 0px,
+    #1a1a1a 2px,
+    #262626 3px,
+    #1a1a1a 4px
+  );
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  cursor: grab;
+  touch-action: none;
+  transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinyl-dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+.vinyl-lifted {
+  cursor: pointer;
+}
+
+.vinyl-label {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  color: var(--ink);
+  font-size: 9px;
+  line-height: 1.3;
+  text-align: center;
+  padding: 4px;
+}
+
+.vinyl-lifted .vinyl-label {
+  width: 78px;
+  height: 78px;
+  font-size: 10px;
+}
+
+.vinyl-label strong {
+  display: block;
+  font-size: 13px;
+}
+
+.vinyl-mystery {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--night);
+}
+
+.vinyl-replay {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vinyl {
+    transition: none;
+  }
 }

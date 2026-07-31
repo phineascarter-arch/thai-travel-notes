@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
 import { CATEGORIES, sortedNotes, quizPool, type Category } from "./data/notes";
 import ReviewQuiz from "./components/ReviewQuiz";
 import NoteModal from "./components/NoteModal";
+import RecordWall from "./components/RecordWall";
 import SpeakButton from "./components/SpeakButton";
 import { recordVisitToday, getStreak } from "./lib/progress";
 
@@ -70,6 +71,8 @@ function App() {
         <p className="thai-title">สมุดโน้ตภาษาไทยสำหรับนักท่องเที่ยว</p>
         <p className="hero-sub">每天學一句，下次去泰國自助旅行就能自己開口</p>
       </section>
+
+      <RecordWall />
 
       <section className="note-wall" aria-label="精選筆記">
         <span className="doodle doodle-one">ไทย</span>

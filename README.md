@@ -11,6 +11,12 @@ npm run dev
 
 打開終端機顯示的網址（預設 `http://localhost:5173`）即可看到畫面，存檔會自動更新（HMR）。
 
+想跑測試（目前只有 `src/lib/random.ts` 這種不碰 DOM 的純函式有寫 Vitest 單元測試）：
+
+```bash
+npm test
+```
+
 ## 怎麼新增一天的內容？
 
 **只需要編輯一個檔案：[`src/data/notes.ts`](src/data/notes.ts)。**
@@ -90,6 +96,12 @@ npm run dev
 
 側欄的「連續學習」數字是**真的每天打開這個網站才會累積**的天數（存在 `localStorage`，key：`thai-notes-visited-days`），不是內容寫了幾天。中斷一天沒開，數字就會歸零重算。這跟首頁「看全部 N 篇筆記」的內容篇數是兩件事，不要搞混。
 
+## 首頁的黑膠唱片牆 🎵
+
+Hero 標題下方會隨機抽 3 篇筆記，用黑膠唱片的造型呈現：一開始蓋在封套下面只看得到一個「?」，拖曳唱片（或是 Tab 移過去、按 Enter）把它拿起來，拖超過一定距離放開，就會揭曉泰文／拼音／中文，同時用 Web Speech API 唸出來。已經揭曉的唱片，點旁邊的 🔊 或是再點一次唱片本身都可以重播發音。每次重新整理頁面才會重新抽一批，同一次不會抽到重複的兩天。
+
+實作分三塊：`src/lib/random.ts` 的 `pickRandom` 負責不重複隨機抽選、`src/hooks/useDraggableLift.ts` 封裝拖拽手勢的狀態機（idle／dragging／lifted）、`src/components/VinylRecord.tsx` + `src/components/RecordWall.tsx` 負責畫面跟排版。跟複習測驗一樣不呼叫任何 AI 或 API。
+
 ## 部署
 
 跑 `npm run build` 產生 `dist/` 資料夾，丟到 Cloudflare Pages / Vercel / Netlify / GitHub Pages 任何一個都可以直接上線，是純靜態網站。
@@ -106,9 +118,15 @@ src/
 ├── components/
 │   ├── ReviewQuiz.tsx      複習測驗（三種模式 + 弱點加強 + 錯題重考）
 │   ├── NoteModal.tsx       筆記詳細內容彈窗
+│   ├── RecordWall.tsx      首頁黑膠唱片牆容器（隨機抽 3 篇 + 排版）
+│   ├── VinylRecord.tsx     單張黑膠唱片（拖拽／Enter 拿起 + 播音）
 │   └── SpeakButton.tsx     發音按鈕
-├── hooks/useSpeech.ts       Web Speech API 封裝
-├── lib/progress.ts          本機學習紀錄（答題權重、連續天數）
+├── hooks/
+│   ├── useSpeech.ts         Web Speech API 封裝
+│   └── useDraggableLift.ts  唱片拖拽手勢的狀態機（idle/dragging/lifted）
+├── lib/
+│   ├── progress.ts          本機學習紀錄（答題權重、連續天數）
+│   └── random.ts             pickRandom：不重複、不會抽爆的隨機抽選
 ├── App.tsx                  頁面主結構
 └── style.css                 手寫的手帳風格樣式
 ```
