@@ -1231,3 +1231,129 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
     transition: none;
   }
 }
+
+/* ---------- Record player ---------- */
+.record-player {
+  position: relative;
+  z-index: 1;
+  width: 220px;
+  height: 170px;
+  margin: 0 auto 26px;
+}
+
+.record-player-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #d8cfbc, #a89878);
+  border-radius: 12px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.record-player-platter {
+  position: absolute;
+  left: 30px;
+  top: 26px;
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    #1a1a1a 0px,
+    #1a1a1a 2px,
+    #262626 3px,
+    #1a1a1a 4px
+  );
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 0 0 7px #3a3a3a;
+}
+
+.record-player-platter::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
+.record-player-arm {
+  position: absolute;
+  top: 18px;
+  right: 30px;
+  width: 8px;
+  height: 88px;
+  background: linear-gradient(180deg, #c7cee0, #8b96ad);
+  border-radius: 4px;
+  transform: rotate(34deg);
+  transform-origin: top center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 480ms ease;
+}
+
+.record-player-arm::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #465272;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.record-player-arm-down {
+  transform: rotate(9deg);
+}
+
+.record-player-knob {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #465272;
+}
+
+.record-player-caption {
+  min-height: 64px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--night-dim);
+  font-size: 13px;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 320ms ease;
+}
+
+.record-player-caption-visible {
+  opacity: 1;
+}
+
+.record-player-caption strong {
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.record-player-caption em {
+  color: var(--cream);
+  font-style: normal;
+}
+
+.record-player-caption b {
+  color: var(--night-dim);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .record-player-arm {
+    transition: none;
+  }
+}
