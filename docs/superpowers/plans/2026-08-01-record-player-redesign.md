@@ -1108,10 +1108,18 @@ export default function RecordWall() {
   /* 唱片牆改成撥放器 + 底部一排唱片後，對接位置是即時量測算出來的
      （見 VinylRecord 的 getDockTarget/computeDockOffset），不需要再
      像舊版那樣為了固定位移量精算每個斷點的像素數字。這裡只是讓撥放器
-     跟唱片架在較窄的螢幕上不會太擠。 */
-  .record-player { width: 190px; height: 148px; }
-  .record-player-platter { width: 100px; height: 100px; }
-  .vinyl { width: 80px; height: 80px; }
+     跟唱片架在較窄的螢幕上不會太擠。
+     .record-wall 前綴不是裝飾——這裡的斷點規則跟後面「Record player」/
+     「Record wall」區塊裡的無條件基礎規則 specificity 一樣（都是單一
+     class 選擇器），同 specificity 時 CSS 比原始碼順序決定輸贏，
+     跟是否包在 @media 裡無關；基礎規則排在檔案更後面，沒有前綴的話
+     會贏、讓這裡的縮小規則整個變成死代碼。加 .record-wall 前綴把
+     specificity 墊高，才能確保無論原始碼順序如何都贏得過基礎規則
+     ——跟舊版（已刪除）的 .record-sleeve/.vinyl-lifted 斷點規則用的
+     是同一招。 */
+  .record-wall .record-player { width: 190px; height: 148px; }
+  .record-wall .record-player-platter { width: 100px; height: 100px; }
+  .record-wall .vinyl { width: 80px; height: 80px; }
 ```
 
 找到（在 `@media (width <= 560px) { ... }` 區塊裡面）:
@@ -1139,11 +1147,11 @@ export default function RecordWall() {
 換成:
 
 ```css
-  .record-player { width: 160px; height: 126px; }
-  .record-player-platter { width: 86px; height: 86px; left: 24px; top: 20px; }
-  .record-player-arm { height: 72px; }
-  .vinyl { width: 68px; height: 68px; }
-  .record-row { gap: 24px; }
+  .record-wall .record-player { width: 160px; height: 126px; }
+  .record-wall .record-player-platter { width: 86px; height: 86px; left: 24px; top: 20px; }
+  .record-wall .record-player-arm { height: 72px; }
+  .record-wall .vinyl { width: 68px; height: 68px; }
+  .record-wall .record-row { gap: 24px; }
 ```
 
 - [ ] **Step 4: 型別檢查**
