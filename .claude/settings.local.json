@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"C:\\\\Users\\\\USER\\\\Documents\\\\claudework\" -maxdepth 3 | head -100)",
+      "Bash(command -v npm)",
+      "Bash(git init *)",
+      "Bash(git branch *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git config *)",
+      "Bash(bash \"/c/Users/USER/.claude/skills/subagent-driven-development/scripts/review-package\" \"docs/superpowers/plans/2026-07-31-vinyl-record-wall.md\" \"2b1bc44d9d190d07b4a8a9c5edf9f21b5555283c\" \"HEAD\")",
+      "Bash(powershell -NoProfile -Command \"Get-NetTCPConnection -LocalPort 5173 -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty OwningProcess\")",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Id 7952 -Force\")",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(bash \"/c/Users/USER/.claude/skills/subagent-driven-development/scripts/task-brief\" \"docs/superpowers/plans/2026-07-31-vinyl-record-wall.md\" 4)",
+      "Bash(echo \"EXIT_CODE=$?\")",
+      "Bash(npx oxlint *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(echo \"---EXIT=$?\")",
+      "Bash(gh pr *)",
+      "Bash(git checkout *)",
+      "Bash(git pull *)"
+    ]
+  }
+}
