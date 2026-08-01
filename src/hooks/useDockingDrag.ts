@@ -9,7 +9,12 @@ interface UseDockingDragOptions {
   // 的位置」跟「撥放器轉盤的位置」算出對接用的位移／縮放比例。放在
   // callback 裡而不是預先算好，是因為唱片在架上的座標只有觸發當下才
   // 準確（重新整理頁面抽到不同筆記、視窗尺寸改變都會影響座標）。
-  getDockTarget: () => DockOffset;
+  // currentOffset 是呼叫當下唱片身上「已經套用」的拖拽位移（放開時是
+  // dragOffsetRef.current，dockNow() 沒有拖拽過程所以是 {x:0,y:0}）：
+  // getBoundingClientRect() 量到的矩形已經反映這個位移，呼叫端要拿它
+  // 扣掉才能還原「架上原本、還沒被拖拽影響」的座標，否則算出來的對接
+  // 位移會少掉這一段，唱片飛過去時會偏移「拖拽距離」那麼多。
+  getDockTarget: (currentOffset: { x: number; y: number }) => DockOffset;
   onDock: () => void;
   dragThreshold?: number;
 }
@@ -73,7 +78,7 @@ export function useDockingDrag({
     const dist = Math.hypot(dragOffsetRef.current.x, dragOffsetRef.current.y);
     if (dist >= dragThreshold) {
       setPhase("docked");
-      setOffset(getDockTarget());
+      setOffset(getDockTarget(dragOffsetRef.current));
       onDock();
     } else {
       setPhase("idle");
@@ -85,7 +90,7 @@ export function useDockingDrag({
   const dockNow = useCallback(() => {
     if (phase === "docked") return;
     setPhase("docked");
-    setOffset(getDockTarget());
+    setOffset(getDockTarget({ x: 0, y: 0 }));
     onDock();
   }, [phase, getDockTarget, onDock]);
 

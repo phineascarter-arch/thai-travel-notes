@@ -96,11 +96,11 @@ npm test
 
 側欄的「連續學習」數字是**真的每天打開這個網站才會累積**的天數（存在 `localStorage`，key：`thai-notes-visited-days`），不是內容寫了幾天。中斷一天沒開，數字就會歸零重算。這跟首頁「看全部 N 篇筆記」的內容篇數是兩件事，不要搞混。
 
-## 首頁的黑膠唱片牆 🎵
+## 首頁的黑膠唱片撥放器 🎵
 
-Hero 標題下方會隨機抽 3 篇筆記，用黑膠唱片的造型呈現：一開始蓋在封套下面只看得到一個「?」，拖曳唱片（或是 Tab 移過去、按 Enter）把它拿起來，拖超過一定距離放開，就會揭曉泰文／拼音／中文，同時用 Web Speech API 唸出來。已經揭曉的唱片，點旁邊的 🔊 或是再點一次唱片本身都可以重播發音。每次重新整理頁面才會重新抽一批，同一次不會抽到重複的兩天。
+Hero 標題下方會隨機抽 3 篇筆記，用黑膠唱片的造型排在一台復古撥放器下方，一開始只看得到「?」。把唱片拖到撥放器上（或是 Tab 移過去、按 Enter）——拖超過一定距離放開就會對接：唱片飛到轉盤上、撥放器的唱臂搖下來、唱片持續旋轉，同時撥放器下方的標籤區揭曉泰文／拼音／中文，並用 Web Speech API 唸出來。播放結束後（或裝置不支援語音、等幾秒降級逾時後）唱片會自動飛回架上原位。撥放器同時只能對接一張唱片：播放中拖另一張上去，前一張會立刻中斷飛回原位。每次重新整理頁面才會重新抽一批，同一次不會抽到重複的兩天。
 
-實作分三塊：`src/lib/random.ts` 的 `pickRandom` 負責不重複隨機抽選、`src/hooks/useDraggableLift.ts` 封裝拖拽手勢的狀態機（idle／dragging／lifted）、`src/components/VinylRecord.tsx` + `src/components/RecordWall.tsx` 負責畫面跟排版。跟複習測驗一樣不呼叫任何 AI 或 API。
+實作分幾塊：`src/lib/random.ts` 的 `pickRandom` 負責不重複隨機抽選、`src/lib/dockOffset.ts` 的 `computeDockOffset` 即時算出唱片飛到轉盤上的位移／縮放、`src/hooks/useDockingDrag.ts` 封裝拖拽手勢的狀態機（idle／dragging／docked）、`src/components/RecordPlayer.tsx` 畫撥放器本體、`src/components/VinylRecord.tsx` + `src/components/RecordWall.tsx` 負責單張唱片行為跟整體排版／狀態協調。跟複習測驗一樣不呼叫任何 AI 或 API。
 
 ## 部署
 
@@ -118,15 +118,17 @@ src/
 ├── components/
 │   ├── ReviewQuiz.tsx      複習測驗（三種模式 + 弱點加強 + 錯題重考）
 │   ├── NoteModal.tsx       筆記詳細內容彈窗
-│   ├── RecordWall.tsx      首頁黑膠唱片牆容器（隨機抽 3 篇 + 排版）
-│   ├── VinylRecord.tsx     單張黑膠唱片（拖拽／Enter 拿起 + 播音）
+│   ├── RecordPlayer.tsx    黑膠撥放器本體（唱臂／轉盤／標籤區，純顯示）
+│   ├── RecordWall.tsx      首頁唱片撥放器容器（隨機抽 3 篇 + 狀態協調 + 排版）
+│   ├── VinylRecord.tsx     單張黑膠唱片（拖拽／Enter 對接撥放器 + 播音）
 │   └── SpeakButton.tsx     發音按鈕
 ├── hooks/
 │   ├── useSpeech.ts         Web Speech API 封裝
-│   └── useDraggableLift.ts  唱片拖拽手勢的狀態機（idle/dragging/lifted）
+│   └── useDockingDrag.ts    唱片拖到撥放器上的手勢狀態機（idle/dragging/docked）
 ├── lib/
 │   ├── progress.ts          本機學習紀錄（答題權重、連續天數）
-│   └── random.ts             pickRandom：不重複、不會抽爆的隨機抽選
+│   ├── random.ts             pickRandom：不重複、不會抽爆的隨機抽選
+│   └── dockOffset.ts         computeDockOffset：算對接位移／縮放的純函式
 ├── App.tsx                  頁面主結構
 └── style.css                 手寫的手帳風格樣式
 ```

@@ -20,11 +20,23 @@ export default function VinylRecord({ note, accent, platterRef, isActive, onDock
   const { speak, supported } = useSpeech();
   const vinylRef = useRef<HTMLDivElement>(null);
 
-  const getDockTarget = useCallback(() => {
+  const getDockTarget = useCallback((currentOffset: { x: number; y: number }) => {
     const vinyl = vinylRef.current;
     const platter = platterRef.current;
     if (!vinyl || !platter) return { x: 0, y: 0, scale: 1 };
-    return computeDockOffset(vinyl.getBoundingClientRect(), platter.getBoundingClientRect());
+    const vinylRect = vinyl.getBoundingClientRect();
+    // vinylRect 反映的是「目前套用的 transform 之後」的位置；拖拽放開的
+    // 當下，.vinyl 身上還留著這次拖拽的 translate(currentOffset)，量出來
+    // 的矩形要先扣掉這個已經套用的位移，才會是「原本在架上、還沒被拖拽
+    // 影響」的真實座標。不扣掉的話，算出來的對接位移會少了 currentOffset
+    // 這一段，唱片會偏移「拖拽距離」那麼多，飛不到轉盤正中央。
+    const restingRect = {
+      left: vinylRect.left - currentOffset.x,
+      top: vinylRect.top - currentOffset.y,
+      width: vinylRect.width,
+      height: vinylRect.height,
+    };
+    return computeDockOffset(restingRect, platter.getBoundingClientRect());
   }, [platterRef]);
 
   const handleDockRequest = useCallback(() => onDock(note.day), [onDock, note.day]);
@@ -44,6 +56,7 @@ export default function VinylRecord({ note, accent, platterRef, isActive, onDock
   // 收尾。故意只依賴 [isDocked]：speak/supported/note 在同一次對接期間
   // 不會變，列進依賴只會讓 effect 在無關的重新渲染時誤重跑、打斷正在
   // 播放的語音。
+  // oxlint-disable react/exhaustive-deps
   useEffect(() => {
     if (!isDocked) return;
     let cancelled = false;
@@ -67,6 +80,7 @@ export default function VinylRecord({ note, accent, platterRef, isActive, onDock
       if (fallbackTimer != null) clearTimeout(fallbackTimer);
     };
   }, [isDocked]);
+  // oxlint-enable react/exhaustive-deps
 
   // 被別的唱片搶走撥放器：isActive 從 true 變 false 時立刻中斷、飛回原位。
   useEffect(() => {
