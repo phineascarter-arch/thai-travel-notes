@@ -1119,28 +1119,6 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   flex-wrap: wrap;
 }
 
-.record-sleeve {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-.record-tilt-1 {
-  transform: rotate(-4deg);
-}
-
-.record-tilt-2 {
-  transform: rotate(3deg);
-}
-
-.record-tilt-3 {
-  transform: rotate(-2deg);
-}
-
 .accent-rust .vinyl-label {
   background: var(--rust);
 }
@@ -1153,13 +1131,37 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   background: var(--gold);
 }
 
+/* z-index:2 是刻意的簡化：讓對接中／已對接的唱片一律蓋在整台撥放器
+   （z-index:1，見 Task 1 的 .record-player）上面，包含唱臂。真實世界
+   唱臂應該要蓋在唱片上面才對，但唱片元素跟撥放器元素是兩棵不同的
+   DOM 子樹（分別在 .record-row / .record-player 底下），要讓唱臂單獨
+   蓋在唱片上面、唱片又蓋在轉盤上面，需要把唱臂拆成獨立的第三層或用
+   React portal 重新掛載唱片節點，對這個規模的個人專案不划算。目前的
+   簡化結果：唱臂角度設計成從撥放器右上角斜插進來、只碰到轉盤邊緣，
+   跟唱片主要蓋住的中心區域重疊不多，視覺上還可以接受。 */
 .vinyl {
-  position: absolute;
-  left: 50%;
-  bottom: -18px;
-  width: 120px;
-  height: 120px;
-  margin-left: -60px;
+  position: relative;
+  z-index: 2;
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  cursor: grab;
+  touch-action: none;
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.vinyl-dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+.vinyl-docked {
+  cursor: default;
+}
+
+.vinyl-disc {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   background: repeating-radial-gradient(
     circle at center,
@@ -1169,66 +1171,43 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
     #1a1a1a 4px
   );
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
-  cursor: grab;
-  touch-action: none;
-  transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.vinyl-dragging {
-  transition: none;
-  cursor: grabbing;
+.vinyl-docked .vinyl-disc {
+  animation: record-spin 1.8s linear infinite;
 }
 
-.vinyl-lifted {
-  cursor: pointer;
+@keyframes record-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .vinyl-label {
-  width: 46px;
-  height: 46px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
-  color: var(--ink);
-  font-size: 9px;
-  line-height: 1.3;
-  text-align: center;
-  padding: 4px;
-}
-
-.vinyl-lifted .vinyl-label {
-  width: 78px;
-  height: 78px;
-  font-size: 10px;
-}
-
-.vinyl-label strong {
-  display: block;
-  font-size: 13px;
 }
 
 .vinyl-mystery {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--night);
-}
-
-.vinyl-replay {
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .vinyl {
     transition: none;
+  }
+
+  .vinyl-docked .vinyl-disc {
+    animation: none;
   }
 }
 

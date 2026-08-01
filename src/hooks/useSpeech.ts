@@ -25,7 +25,7 @@ export function useSpeech() {
   const thaiVoice = voices.find((v) => v.lang?.toLowerCase().startsWith("th"));
 
   const speak = useCallback(
-    (text: string, rate = 0.65) => {
+    (text: string, rate = 0.65, onEnd?: () => void) => {
       if (!supported) return;
       const synth = window.speechSynthesis;
 
@@ -40,9 +40,11 @@ export function useSpeech() {
         utter.rate = rate;
         utter.onend = () => {
           if (activeUtterance === utter) activeUtterance = null;
+          onEnd?.();
         };
         utter.onerror = () => {
           if (activeUtterance === utter) activeUtterance = null;
+          onEnd?.();
         };
         activeUtterance = utter; // 強引用住，播放完成前不能被 GC 回收
         synth.speak(utter);
