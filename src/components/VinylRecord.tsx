@@ -5,8 +5,6 @@ import { computeDockOffset } from "../lib/dockOffset";
 import { useDockingDrag } from "../hooks/useDockingDrag";
 import { useSpeech } from "../hooks/useSpeech";
 
-const UNSUPPORTED_SPEECH_FALLBACK_MS = 3000;
-
 interface Props {
   note: Note;
   accent: "rust" | "orange" | "gold";
@@ -17,7 +15,7 @@ interface Props {
 }
 
 export default function VinylRecord({ note, accent, platterRef, isActive, onDock, onUndock }: Props) {
-  const { speak, supported } = useSpeech();
+  const { speak, stop } = useSpeech();
   const vinylRef = useRef<HTMLDivElement>(null);
 
   const getDockTarget = useCallback((currentOffset: { x: number; y: number }) => {
@@ -40,45 +38,29 @@ export default function VinylRecord({ note, accent, platterRef, isActive, onDock
   }, [platterRef]);
 
   const handleDockRequest = useCallback(() => onDock(note.day), [onDock, note.day]);
+  const handleRemoveRequest = useCallback(() => {
+    stop();
+    onUndock(note.day);
+  }, [stop, onUndock, note.day]);
 
-  const { phase, offset, handlers, dockNow, undock } = useDockingDrag({
+  const { phase, offset, handlers, dockNow, removeNow, undock } = useDockingDrag({
     getDockTarget,
     onDock: handleDockRequest,
+    onRemove: handleRemoveRequest,
   });
 
   const isDocked = phase === "docked";
   const isDragging = phase === "dragging";
 
-  // 對接成功後才開始播放：播完（語音 onEnd）或不支援語音時的降級計時器
-  // 一到，就飛回原位並通知 RecordWall 這張不再是作用中的那張。cleanup
-  // 同時處理「正常播完」跟「被別的唱片打斷」（isDocked 從 true 變 false）
-  // 兩種情況，靠 cancelled 旗標避免計時器/onEnd 在打斷之後才觸發而重複
-  // 收尾。故意只依賴 [isDocked]：speak/supported/note 在同一次對接期間
-  // 不會變，列進依賴只會讓 effect 在無關的重新渲染時誤重跑、打斷正在
-  // 播放的語音。
+  // 對接成功後播放一次語音。不會自動下架——唱片會持續留在轉盤上旋轉，
+  // 直到使用者點擊／按 Enter 或 Space 主動拿下來（onClick/removeNow，
+  // 見 useDockingDrag），或是被別的唱片打斷（下面第二個 effect）。故意
+  // 只依賴 [isDocked]：note 在同一次對接期間不會變，列進依賴只會讓
+  // effect 在無關的重新渲染時誤重跑、打斷正在播放的語音。
   // oxlint-disable react/exhaustive-deps
   useEffect(() => {
     if (!isDocked) return;
-    let cancelled = false;
-    let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
-
-    const finish = () => {
-      if (cancelled) return;
-      cancelled = true;
-      undock();
-      onUndock(note.day);
-    };
-
-    if (supported) {
-      speak(note.thai, undefined, finish);
-    } else {
-      fallbackTimer = setTimeout(finish, UNSUPPORTED_SPEECH_FALLBACK_MS);
-    }
-
-    return () => {
-      cancelled = true;
-      if (fallbackTimer != null) clearTimeout(fallbackTimer);
-    };
+    speak(note.thai);
   }, [isDocked]);
   // oxlint-enable react/exhaustive-deps
 
@@ -90,7 +72,7 @@ export default function VinylRecord({ note, accent, platterRef, isActive, onDock
   }, [isActive, isDocked, undock]);
 
   const ariaLabel = isDocked
-    ? `Day ${note.day}：${note.thai}，${note.zh}，播放中`
+    ? `Day ${note.day}：${note.thai}，${note.zh}，播放中，點擊或按 Enter 拿下唱片`
     : "拖曳或按 Enter 把唱片放上撥放器";
 
   const style = {
@@ -109,10 +91,15 @@ export default function VinylRecord({ note, accent, platterRef, isActive, onDock
       onPointerMove={handlers.onPointerMove}
       onPointerUp={handlers.onPointerUp}
       onPointerCancel={handlers.onPointerCancel}
+      onClick={handlers.onClick}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          dockNow();
+          if (isDocked) {
+            removeNow();
+          } else {
+            dockNow();
+          }
         }
       }}
     >

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
+import type { MouseEvent as ReactMouseEvent, PointerEvent as ReactPointerEvent } from "react";
 import type { DockOffset } from "../lib/dockOffset";
 
 export type DockPhase = "idle" | "dragging" | "docked";
@@ -16,6 +16,8 @@ interface UseDockingDragOptions {
   // 位移會少掉這一段，唱片飛過去時會偏移「拖拽距離」那麼多。
   getDockTarget: (currentOffset: { x: number; y: number }) => DockOffset;
   onDock: () => void;
+  // 使用者主動點擊／按 Enter 或 Space 把已對接的唱片拿下來時呼叫。
+  onRemove: () => void;
   dragThreshold?: number;
 }
 
@@ -27,8 +29,10 @@ interface UseDockingDragResult {
     onPointerMove: (e: ReactPointerEvent<HTMLDivElement>) => void;
     onPointerUp: (e: ReactPointerEvent<HTMLDivElement>) => void;
     onPointerCancel: (e: ReactPointerEvent<HTMLDivElement>) => void;
+    onClick: (e: ReactMouseEvent<HTMLDivElement>) => void;
   };
   dockNow: () => void;
+  removeNow: () => void;
   undock: () => void;
 }
 
@@ -37,18 +41,27 @@ const IDLE_OFFSET: DockOffset = { x: 0, y: 0, scale: 1 };
 // 唱片「拖到撥放器上」的手勢狀態機：idle（在架上）→ dragging（跟著
 // 指標移動，位移用 scale:1 讓唱片維持原本大小、只是鬆鬆跟著手指）→
 // docked（超過門檻放開，或鍵盤觸發 dockNow()，套用 getDockTarget()
-// 算出的精確位移／縮放，疊到轉盤上）。docked 不是終點狀態：呼叫端
-// （VinylRecord）會在播放結束或被別的唱片打斷時呼叫 undock()，讓唱片
-// 飛回架上原位。
+// 算出的精確位移／縮放，疊到轉盤上）。docked 會一直留著、唱片持續
+// 旋轉，不會自動離開——只有使用者點擊／按 Enter 或 Space（onClick/
+// removeNow，觸發 onRemove）或是被別的唱片打斷（呼叫端直接呼叫
+// undock()）才會回到 idle。
 export function useDockingDrag({
   getDockTarget,
   onDock,
+  onRemove,
   dragThreshold = 70,
 }: UseDockingDragOptions): UseDockingDragResult {
   const [phase, setPhase] = useState<DockPhase>("idle");
   const [offset, setOffset] = useState<DockOffset>(IDLE_OFFSET);
   const startRef = useRef<{ x: number; y: number } | null>(null);
   const dragOffsetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  // 拖拽超過門檻放開的那個 pointerup，瀏覽器隨後會再合成一個 click
+  // 事件。那次拖拽本身已經完成一次對接，若不擋掉這個合成 click，會被
+  // onClick 誤判成「使用者點擊已對接的唱片、要拿下來」，唱片前腳剛
+  // 對接、後腳馬上被拿下來。這個 ref 只在「這次 pointerup 剛好完成
+  // 一次對接」時設成 true，讓緊接著的那次合成 click 被吞掉一次，之後
+  // 恢復正常。
+  const suppressClickRef = useRef(false);
 
   const onPointerDown = useCallback(
     (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -77,6 +90,7 @@ export function useDockingDrag({
     if (phase !== "dragging" || !startRef.current) return;
     const dist = Math.hypot(dragOffsetRef.current.x, dragOffsetRef.current.y);
     if (dist >= dragThreshold) {
+      suppressClickRef.current = true;
       setPhase("docked");
       setOffset(getDockTarget(dragOffsetRef.current));
       onDock();
@@ -99,6 +113,23 @@ export function useDockingDrag({
     setOffset(IDLE_OFFSET);
   }, []);
 
+  const removeNow = useCallback(() => {
+    if (phase !== "docked") return;
+    undock();
+    onRemove();
+  }, [phase, undock, onRemove]);
+
+  const onClick = useCallback(() => {
+    if (suppressClickRef.current) {
+      suppressClickRef.current = false;
+      return;
+    }
+    if (phase === "docked") {
+      undock();
+      onRemove();
+    }
+  }, [phase, undock, onRemove]);
+
   return {
     phase,
     offset,
@@ -107,8 +138,10 @@ export function useDockingDrag({
       onPointerMove,
       onPointerUp: release,
       onPointerCancel: release,
+      onClick,
     },
     dockNow,
+    removeNow,
     undock,
   };
 }

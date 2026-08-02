@@ -25,7 +25,7 @@ export function useSpeech() {
   const thaiVoice = voices.find((v) => v.lang?.toLowerCase().startsWith("th"));
 
   const speak = useCallback(
-    (text: string, rate = 0.65, onEnd?: () => void) => {
+    (text: string, rate = 0.65) => {
       if (!supported) return;
       const synth = window.speechSynthesis;
 
@@ -40,11 +40,9 @@ export function useSpeech() {
         utter.rate = rate;
         utter.onend = () => {
           if (activeUtterance === utter) activeUtterance = null;
-          onEnd?.();
         };
         utter.onerror = () => {
           if (activeUtterance === utter) activeUtterance = null;
-          onEnd?.();
         };
         activeUtterance = utter; // 強引用住，播放完成前不能被 GC 回收
         synth.speak(utter);
@@ -64,5 +62,12 @@ export function useSpeech() {
     [supported, thaiVoice]
   );
 
-  return { speak, supported, hasThaiVoice: !!thaiVoice, voiceName: thaiVoice?.name ?? null };
+  // 讓呼叫端可以主動打斷還在播放的語音（例如使用者手動把唱片從撥放器
+  // 上拿下來，不想等它自然播完）。
+  const stop = useCallback(() => {
+    if (!supported) return;
+    window.speechSynthesis.cancel();
+  }, [supported]);
+
+  return { speak, stop, supported, hasThaiVoice: !!thaiVoice, voiceName: thaiVoice?.name ?? null };
 }

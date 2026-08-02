@@ -1026,10 +1026,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
      .record-row 的無條件基礎規則）前面，specificity 一樣時後面的
      基礎規則會贏，不加前綴這裡會被完全蓋掉、白寫（實測驗證過：不加
      前綴時 700px 寬度下 .record-player 算出來的 computed width 仍是
-     基礎規則的 220px，不是這裡的 190px）。 */
-  .record-wall .record-player { width: 190px; }
-  .record-wall .record-player-body { height: 148px; }
-  .record-wall .record-player-platter { width: 100px; height: 100px; }
+     基礎規則的寬度，不是這裡覆寫的值）。 */
+  .record-wall .record-player { width: 242px; }
+  .record-wall .record-player-body { height: 188px; }
+  .record-wall .record-player-platter { width: 127px; height: 127px; }
   .record-wall .vinyl { width: 80px; height: 80px; }
 }
 
@@ -1061,10 +1061,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   .wall-scroll { gap: 24px; }
   /* 同上面 850px 斷點：加 .record-wall 前綴確保 specificity 贏過後面
      「Record wall」/「Record player」區塊裡的無條件基礎規則。 */
-  .record-wall .record-player { width: 160px; }
-  .record-wall .record-player-body { height: 126px; }
-  .record-wall .record-player-platter { width: 86px; height: 86px; left: 24px; top: 20px; }
-  .record-wall .record-player-arm { height: 72px; }
+  .record-wall .record-player { width: 204px; }
+  .record-wall .record-player-body { height: 160px; }
+  .record-wall .record-player-platter { width: 110px; height: 110px; left: 31px; top: 25px; }
+  .record-wall .record-player-arm { height: 92px; }
   .record-wall .vinyl { width: 68px; height: 68px; }
   .record-wall .record-row { gap: 24px; }
 }
@@ -1193,14 +1193,14 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 .record-player {
   position: relative;
   z-index: 1;
-  width: 220px;
+  width: 280px;
   margin: 0 auto 26px;
 }
 
 .record-player-body {
   position: relative;
   width: 100%;
-  height: 170px;
+  height: 216px;
   background: linear-gradient(160deg, #d8cfbc, #a89878);
   border-radius: 12px;
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
@@ -1208,10 +1208,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 
 .record-player-platter {
   position: absolute;
-  left: 30px;
-  top: 26px;
-  width: 116px;
-  height: 116px;
+  left: 38px;
+  top: 33px;
+  width: 148px;
+  height: 148px;
   border-radius: 50%;
   background: repeating-radial-gradient(
     circle at center,
@@ -1228,19 +1228,19 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
+  width: 43px;
+  height: 43px;
+  margin: -22px 0 0 -22px;
   border-radius: 50%;
   background: var(--rust);
 }
 
 .record-player-arm {
   position: absolute;
-  top: 18px;
-  right: 30px;
-  width: 8px;
-  height: 88px;
+  top: 23px;
+  right: 38px;
+  width: 10px;
+  height: 112px;
   background: linear-gradient(180deg, #c7cee0, #8b96ad);
   border-radius: 4px;
   transform: rotate(34deg);
@@ -1252,10 +1252,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 .record-player-arm::before {
   content: "";
   position: absolute;
-  top: -9px;
-  left: -8px;
-  width: 24px;
-  height: 24px;
+  top: -11px;
+  left: -10px;
+  width: 31px;
+  height: 31px;
   border-radius: 50%;
   background: #465272;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -1267,10 +1267,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 
 .record-player-knob {
   position: absolute;
-  bottom: 14px;
-  left: 18px;
-  width: 20px;
-  height: 20px;
+  bottom: 18px;
+  left: 23px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   background: #465272;
 }
