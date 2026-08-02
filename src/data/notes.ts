@@ -47,6 +47,134 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 34,
+    date: "2026.08.24",
+    thai: "พูดได้แค่พื้นฐาน",
+    roman: "phûut dâai khɛ̂ɛ pʉ́ʉn-thǎan",
+    zh: "只會說一點基礎的",
+    category: "閒聊",
+    pattern: "พูดได้แค่ + [程度]",
+    examples: [
+      {
+        zh: "我泰文只會說一點基礎的",
+        thai: "พูดไทยได้แค่พื้นฐานค่ะ",
+        roman: "phûut thai dâai khɛ̂ɛ pʉ́ʉn-thǎan khâ",
+        tokens: [
+          { thai: "พูดไทยได้แค่", roman: "phûut thai dâai khɛ̂ɛ", zh: "泰文只會說" },
+          { thai: "พื้นฐาน", roman: "pʉ́ʉn-thǎan", zh: "基礎、基本" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "但聽懂一點點",
+        thai: "แต่ฟังเข้าใจนิดหน่อยค่ะ",
+        roman: "tɛ̀ɛ fang khâo-jai nít-nòi khâ",
+        tokens: [
+          { thai: "แต่", roman: "tɛ̀ɛ", zh: "但是" },
+          { thai: "ฟังเข้าใจ", roman: "fang khâo-jai", zh: "聽得懂" },
+          { thai: "นิดหน่อย", roman: "nít-nòi", zh: "一點點" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "跟 พูดไทยได้นิดหน่อย 意思相近，這句更強調「只到基礎程度」；先說清楚自己的程度，對方通常會放慢速度配合你。",
+  },
+  {
+    day: 33,
+    date: "2026.08.23",
+    thai: "ฟังไม่รู้เรื่อง",
+    roman: "fang mâi rúu-rʉ̂ang",
+    zh: "聽不懂（聽了但抓不到意思）",
+    category: "閒聊",
+    pattern: "ฟังไม่รู้เรื่อง（固定用語）",
+    examples: [
+      {
+        zh: "你說太快了，我聽不懂",
+        thai: "พูดเร็วไป ฟังไม่รู้เรื่องค่ะ",
+        roman: "phûut reo bpai, fang mâi rúu-rʉ̂ang khâ",
+        tokens: [
+          { thai: "พูดเร็วไป", roman: "phûut reo bpai", zh: "說太快了" },
+          { thai: "ฟังไม่รู้เรื่อง", roman: "fang mâi rúu-rʉ̂ang", zh: "聽不懂" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "可以說慢一點嗎？",
+        thai: "พูดช้าๆได้ไหมคะ",
+        roman: "phûut cháa-cháa dâai mǎi khá",
+        tokens: [
+          { thai: "พูดช้าๆ", roman: "phûut cháa-cháa", zh: "說慢一點" },
+          { thai: "ได้ไหม", roman: "dâai mǎi", zh: "可以嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "ไม่เข้าใจ 是「這件事我不懂」，ฟังไม่รู้เรื่อง 更強調「聽了但完全抓不到意思」，兩句常常一起用。",
+  },
+  {
+    day: 32,
+    date: "2026.08.22",
+    thai: "ไม่เข้าใจ",
+    roman: "mâi khâo-jai",
+    zh: "不懂、不明白",
+    category: "閒聊",
+    pattern: "ไม่เข้าใจ（固定用語）",
+    examples: [
+      {
+        zh: "不好意思，我不懂",
+        thai: "ขอโทษค่ะ ไม่เข้าใจ",
+        roman: "khǎaw-thôot khâ, mâi khâo-jai",
+        tokens: [
+          { thai: "ขอโทษ", roman: "khǎaw-thôot", zh: "對不起、不好意思" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+          { thai: "ไม่เข้าใจ", roman: "mâi khâo-jai", zh: "不懂" },
+        ],
+      },
+      {
+        zh: "可以再說一次嗎？",
+        thai: "พูดอีกครั้งได้ไหมคะ",
+        roman: "phûut ìik khráng dâai mǎi khá",
+        tokens: [
+          { thai: "พูดอีกครั้ง", roman: "phûut ìik khráng", zh: "再說一次" },
+          { thai: "ได้ไหม", roman: "dâai mǎi", zh: "可以嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "聽不懂時，先說 ไม่เข้าใจ 讓對方知道，再搭配「可以再說一次嗎」通常就能順利溝通。",
+  },
+  {
+    day: 31,
+    date: "2026.08.21",
+    thai: "พูดไทยได้นิดหน่อย",
+    roman: "phûut thai dâai nít nòi",
+    zh: "會說一點點泰文",
+    category: "閒聊",
+    pattern: "พูด + [語言] + ได้ + [程度]",
+    examples: [
+      {
+        zh: "我會說一點點泰文",
+        thai: "พูดไทยได้นิดหน่อยค่ะ",
+        roman: "phûut thai dâai nít nòi khâ",
+        tokens: [
+          { thai: "พูดไทยได้", roman: "phûut thai dâai", zh: "會說泰文" },
+          { thai: "นิดหน่อย", roman: "nít nòi", zh: "一點點" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "你會說英文嗎？",
+        thai: "พูดอังกฤษได้ไหมคะ",
+        roman: "phûut ang-krìt dâai mǎi khá",
+        tokens: [
+          { thai: "พูดอังกฤษได้ไหม", roman: "phûut ang-krìt dâai mǎi", zh: "會不會說英文" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "พูด + 語言 + ได้ + 程度 是描述語言能力最基本的句型，換掉語言或程度就能套用在各種場合，也很適合鋪陳接下來要說 ไม่เข้าใจ／ฟังไม่รู้เรื่อง。",
+  },
+  {
     day: 30,
     date: "2026.08.20",
     thai: "ซื้อเยอะลดได้ไหม",
