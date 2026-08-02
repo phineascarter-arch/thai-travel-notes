@@ -1017,28 +1017,20 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   .content-grid { padding-bottom: 50px; }
   .note-modal { padding: 32px 24px; }
   .word-heading h2 { font-size: 50px; }
-  /* 唱片牆：3 張封套 140px + 2 個 56px 間距 = 532px。.record-wall 左右
-     padding 各 24px，寬度介於 561px~579px 之間時可用寬度會落到
-     532px 以下（例：570px 時可用寬度只有 522px），若不縮小這裡會在
-     還沒進到 560px 斷點前就先擠出換行。縮到 116/100/40 之後
-     3*116+2*40=428px，涵蓋這個斷點內所有寬度都還能一行排下。
-     .vinyl 的 bottom 從 -18px 改成 -22px，是為了讓「靜止時黑膠露出
-     封套頂端的距離」（= sleeve高 - vinyl高 + |bottom|）維持在跟桌面版
-     一樣的 38px（116 - 100 + 22 = 38），這樣拿起來後上冒的距離也
-     維持在 38 - 96 = -58px，跟桌面版一致，不會讓上面 .record-wall-hint
-     的間距在這個斷點失準。 */
-  /* .record-wall 前綴不是裝飾——這個「Responsive」區塊在檔案裡排在
-     「Record wall」那個區塊（.record-row/.record-sleeve/.vinyl 的
-     無條件基礎規則）前面，兩者 specificity 一樣的話，後面出現的基礎規則
-     會贏（CSS 同 specificity 比的是原始碼順序，跟是否包在 @media 裡無關），
-     這裡加的縮小規則就會被完全蓋掉、白寫。加 .record-wall 前綴把
-     specificity 墊高，才能確保無論原始碼順序如何，這裡的斷點規則
-     都贏得過後面的基礎規則。 */
-  .record-wall .record-row { gap: 40px; }
-  .record-wall .record-sleeve { width: 116px; height: 116px; }
-  .record-wall .vinyl { width: 100px; height: 100px; bottom: -22px; margin-left: -50px; }
-  .record-wall .vinyl-label { width: 38px; height: 38px; }
-  .record-wall .vinyl-lifted .vinyl-label { width: 65px; height: 65px; }
+  /* 唱片牆改成撥放器 + 底部一排唱片後，對接位置是即時量測算出來的
+     （見 VinylRecord 的 getDockTarget/computeDockOffset），不需要再
+     像舊版那樣為了固定位移量精算每個斷點的像素數字。這裡只是讓撥放器
+     跟唱片架在較窄的螢幕上不會太擠。 */
+  /* 加 .record-wall 前綴：這個 Responsive 區塊在檔案裡排在下面
+     「Record wall」/「Record player」區塊（.record-player/.vinyl/
+     .record-row 的無條件基礎規則）前面，specificity 一樣時後面的
+     基礎規則會贏，不加前綴這裡會被完全蓋掉、白寫（實測驗證過：不加
+     前綴時 700px 寬度下 .record-player 算出來的 computed width 仍是
+     基礎規則的寬度，不是這裡覆寫的值）。 */
+  .record-wall .record-player { width: 242px; }
+  .record-wall .record-player-body { height: 188px; }
+  .record-wall .record-player-platter { width: 127px; height: 127px; }
+  .record-wall .vinyl { width: 80px; height: 80px; }
 }
 
 @media (width <= 560px) {
@@ -1067,23 +1059,14 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   footer { flex-direction: column; align-items: flex-start; }
   .polaroid { flex-basis: 200px; }
   .wall-scroll { gap: 24px; }
-  /* 唱片牆：手機寬度下 3 張封套一定擠不進一行，改用直排讓「一排一張」
-     的結果不用再賭寬度剛好落在哪裡。真正要顧的是垂直間距：拿起唱片的
-     位移量寫死在 useDraggableLift 的 liftOffset（translate(0, -96px)，
-     跟斷點無關、CSS 改不到），加上 .vinyl-replay 固定 bottom:-40px，
-     兩者都不會因為斷點縮小而跟著變小。把 .vinyl 的 bottom 調到 -24px，
-     讓這個斷點下「靜止時黑膠露出封套頂端的距離」還是 38px
-     （104 - 90 + 24 = 38），拿起來後一樣上冒 38 - 96 = -58px（跟桌面版
-     一致）。同一排相鄰兩張唱片都被拿起的最壞情況需要的垂直間距是
-     「上冒 58px ＋ 下面重播按鈕垂到封套下緣外 40px」= 98px，
-     這裡給 120px（多留 22px 緩衝），確保不會疊到。 */
-  /* 同上面 850px 斷點的理由：加 .record-wall 前綴確保 specificity 贏過
-     後面「Record wall」區塊裡的無條件基礎規則。 */
-  .record-wall .record-row { flex-direction: column; align-items: center; flex-wrap: nowrap; gap: 120px; }
-  .record-wall .record-sleeve { width: 104px; height: 104px; }
-  .record-wall .vinyl { width: 90px; height: 90px; bottom: -24px; margin-left: -45px; }
-  .record-wall .vinyl-label { width: 35px; height: 35px; }
-  .record-wall .vinyl-lifted .vinyl-label { width: 59px; height: 59px; }
+  /* 同上面 850px 斷點：加 .record-wall 前綴確保 specificity 贏過後面
+     「Record wall」/「Record player」區塊裡的無條件基礎規則。 */
+  .record-wall .record-player { width: 204px; }
+  .record-wall .record-player-body { height: 160px; }
+  .record-wall .record-player-platter { width: 110px; height: 110px; left: 31px; top: 25px; }
+  .record-wall .record-player-arm { height: 92px; }
+  .record-wall .vinyl { width: 68px; height: 68px; }
+  .record-wall .record-row { gap: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1094,7 +1077,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 /* ---------- Record wall ---------- */
 .record-wall {
   background: var(--night);
-  padding: 8px 24px 64px;
+  padding: 32px 24px 56px;
   text-align: center;
 }
 
@@ -1102,43 +1085,16 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   color: var(--night-dim);
   font-size: 14px;
   letter-spacing: 0.04em;
-  /* 一顆拿起來的唱片會從封套頂端往上冒出約 58px（見下方 .vinyl 的算法：
-     靜止時 top = 140 - (-18) - 120 = 38px，拿起時再位移 -96px，
-     38 - 96 = -58px），40px 的間距不夠、蓋到這句提示文字。
-     80px 留出約 22px 緩衝，唱片牆三個斷點都刻意讓這個上冒距離維持
-     58px（見 .vinyl 在兩個 media query 裡的 bottom 值），所以這裡不用
-     另外針對斷點加規則。 */
-  margin: 0 0 80px;
+  margin: 0 0 4px;
 }
 
 .record-row {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 56px;
+  align-items: center;
+  gap: 40px;
   flex-wrap: wrap;
-}
-
-.record-sleeve {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-.record-tilt-1 {
-  transform: rotate(-4deg);
-}
-
-.record-tilt-2 {
-  transform: rotate(3deg);
-}
-
-.record-tilt-3 {
-  transform: rotate(-2deg);
+  margin-top: 24px;
 }
 
 .accent-rust .vinyl-label {
@@ -1153,13 +1109,37 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   background: var(--gold);
 }
 
+/* z-index:2 是刻意的簡化：讓對接中／已對接的唱片一律蓋在整台撥放器
+   （z-index:1，見 Task 1 的 .record-player）上面，包含唱臂。真實世界
+   唱臂應該要蓋在唱片上面才對，但唱片元素跟撥放器元素是兩棵不同的
+   DOM 子樹（分別在 .record-row / .record-player 底下），要讓唱臂單獨
+   蓋在唱片上面、唱片又蓋在轉盤上面，需要把唱臂拆成獨立的第三層或用
+   React portal 重新掛載唱片節點，對這個規模的個人專案不划算。目前的
+   簡化結果：唱臂角度設計成從撥放器右上角斜插進來、只碰到轉盤邊緣，
+   跟唱片主要蓋住的中心區域重疊不多，視覺上還可以接受。 */
 .vinyl {
-  position: absolute;
-  left: 50%;
-  bottom: -18px;
-  width: 120px;
-  height: 120px;
-  margin-left: -60px;
+  position: relative;
+  z-index: 2;
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  cursor: grab;
+  touch-action: none;
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.vinyl-dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+.vinyl-docked {
+  cursor: default;
+}
+
+.vinyl-disc {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   background: repeating-radial-gradient(
     circle at center,
@@ -1169,65 +1149,167 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
     #1a1a1a 4px
   );
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
-  cursor: grab;
-  touch-action: none;
-  transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.vinyl-dragging {
-  transition: none;
-  cursor: grabbing;
+.vinyl-docked .vinyl-disc {
+  animation: record-spin 1.8s linear infinite;
 }
 
-.vinyl-lifted {
-  cursor: pointer;
+@keyframes record-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .vinyl-label {
-  width: 46px;
-  height: 46px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
-  color: var(--ink);
-  font-size: 9px;
-  line-height: 1.3;
-  text-align: center;
-  padding: 4px;
-}
-
-.vinyl-lifted .vinyl-label {
-  width: 78px;
-  height: 78px;
-  font-size: 10px;
-}
-
-.vinyl-label strong {
-  display: block;
-  font-size: 13px;
 }
 
 .vinyl-mystery {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--night);
 }
 
-.vinyl-replay {
+@media (prefers-reduced-motion: reduce) {
+  .vinyl {
+    transition: none;
+  }
+
+  .vinyl-docked .vinyl-disc {
+    animation: none;
+  }
+}
+
+/* ---------- Record player ---------- */
+.record-player {
+  position: relative;
+  z-index: 1;
+  width: 280px;
+  margin: 0 auto 26px;
+}
+
+.record-player-body {
+  position: relative;
+  width: 100%;
+  height: 216px;
+  background: linear-gradient(160deg, #d8cfbc, #a89878);
+  border-radius: 12px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.record-player-platter {
   position: absolute;
-  bottom: -40px;
+  left: 38px;
+  top: 33px;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    #1a1a1a 0px,
+    #1a1a1a 2px,
+    #262626 3px,
+    #1a1a1a 4px
+  );
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 0 0 7px #3a3a3a;
+}
+
+.record-player-platter::after {
+  content: "";
+  position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  width: 43px;
+  height: 43px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
+.record-player-arm {
+  position: absolute;
+  top: 23px;
+  right: 38px;
+  width: 10px;
+  height: 112px;
+  background: linear-gradient(180deg, #c7cee0, #8b96ad);
+  border-radius: 4px;
+  transform: rotate(34deg);
+  transform-origin: top center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 480ms ease;
+}
+
+.record-player-arm::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: -10px;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: #465272;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.record-player-arm-down {
+  transform: rotate(9deg);
+}
+
+.record-player-knob {
+  position: absolute;
+  bottom: 18px;
+  left: 23px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #465272;
+}
+
+.record-player-caption {
+  min-height: 64px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--night-dim);
+  font-size: 13px;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 320ms ease;
+}
+
+.record-player-caption-visible {
+  opacity: 1;
+}
+
+.record-player-caption strong {
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.record-player-caption em {
+  color: var(--cream);
+  font-style: normal;
+}
+
+.record-player-caption b {
+  color: var(--night-dim);
+  font-weight: 600;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vinyl {
+  .record-player-arm {
     transition: none;
   }
 }

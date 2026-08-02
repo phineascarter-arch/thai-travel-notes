@@ -62,5 +62,12 @@ export function useSpeech() {
     [supported, thaiVoice]
   );
 
-  return { speak, supported, hasThaiVoice: !!thaiVoice, voiceName: thaiVoice?.name ?? null };
+  // 讓呼叫端可以主動打斷還在播放的語音（例如使用者手動把唱片從撥放器
+  // 上拿下來，不想等它自然播完）。
+  const stop = useCallback(() => {
+    if (!supported) return;
+    window.speechSynthesis.cancel();
+  }, [supported]);
+
+  return { speak, stop, supported, hasThaiVoice: !!thaiVoice, voiceName: thaiVoice?.name ?? null };
 }
