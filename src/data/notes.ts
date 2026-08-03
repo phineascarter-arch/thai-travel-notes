@@ -684,7 +684,8 @@ export const notes: Note[] = [
         roman: "mii sái yài gwàa níi mǎi khá",
         tokens: [
           { thai: "มี", roman: "mii", zh: "有" },
-          { thai: "ไซส์ใหญ่กว่านี้", roman: "sái yài gwàa níi", zh: "更大的尺寸" },
+          { thai: "ไซส์", roman: "sái", zh: "尺寸" },
+          { thai: "ใหญ่กว่านี้", roman: "yài gwàa níi", zh: "比這個大、更大" },
           { thai: "ไหม", roman: "mǎi", zh: "嗎" },
           { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
         ],
