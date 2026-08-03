@@ -60,7 +60,8 @@ export const notes: Note[] = [
         thai: "พูดไทยได้แค่พื้นฐานค่ะ",
         roman: "phûut thai dâai khɛ̂ɛ pʉ́ʉn-thǎan khâ",
         tokens: [
-          { thai: "พูดไทยได้แค่", roman: "phûut thai dâai khɛ̂ɛ", zh: "泰文只會說" },
+          { thai: "พูดไทย", roman: "phûut thai", zh: "說泰文" },
+          { thai: "ได้แค่", roman: "dâai khɛ̂ɛ", zh: "只能、只會" },
           { thai: "พื้นฐาน", roman: "pʉ́ʉn-thǎan", zh: "基礎、基本" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
@@ -157,7 +158,8 @@ export const notes: Note[] = [
         thai: "พูดไทยได้นิดหน่อยค่ะ",
         roman: "phûut thai dâai nít nòi khâ",
         tokens: [
-          { thai: "พูดไทยได้", roman: "phûut thai dâai", zh: "會說泰文" },
+          { thai: "พูดไทย", roman: "phûut thai", zh: "說泰文" },
+          { thai: "ได้", roman: "dâai", zh: "會、能" },
           { thai: "นิดหน่อย", roman: "nít nòi", zh: "一點點" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
@@ -167,7 +169,8 @@ export const notes: Note[] = [
         thai: "พูดอังกฤษได้ไหมคะ",
         roman: "phûut ang-krìt dâai mǎi khá",
         tokens: [
-          { thai: "พูดอังกฤษได้ไหม", roman: "phûut ang-krìt dâai mǎi", zh: "會不會說英文" },
+          { thai: "พูดอังกฤษ", roman: "phûut ang-krìt", zh: "說英文" },
+          { thai: "ได้ไหม", roman: "dâai mǎi", zh: "會不會、可以嗎" },
           { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
         ],
       },
