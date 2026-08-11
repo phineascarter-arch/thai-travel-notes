@@ -47,38 +47,6 @@ export interface Note {
 
 export const notes: Note[] = [
   {
-    day: 41,
-    date: "2026.08.31",
-    thai: "ขอแยกบิล",
-    roman: "khǎaw yɛ̂ɛk bin",
-    zh: "請分開結帳",
-    category: "餐廳點餐",
-    pattern: "ขอแยก + [名詞]",
-    examples: [
-      {
-        zh: "請分開結帳",
-        thai: "ขอแยกบิลค่ะ",
-        roman: "khǎaw yɛ̂ɛk bin khâ",
-        tokens: [
-          { thai: "ขอแยก", roman: "khǎaw yɛ̂ɛk", zh: "請分開" },
-          { thai: "บิล", roman: "bin", zh: "帳單" },
-          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
-        ],
-      },
-      {
-        zh: "一起結帳就好",
-        thai: "รวมบิลก็ได้ค่ะ",
-        roman: "ruam bin gôr dâai khâ",
-        tokens: [
-          { thai: "รวมบิล", roman: "ruam bin", zh: "合併帳單" },
-          { thai: "ก็ได้", roman: "gôr dâai", zh: "也可以、就好" },
-          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
-        ],
-      },
-    ],
-    note: "跟朋友聚餐常用得到，ขอแยกบิล（分開付）和 รวมบิล（一起付）剛好是一組相反詞。",
-  },
-  {
     day: 40,
     date: "2026.08.30",
     thai: "สวัสดีตอนค่ำ",
@@ -463,8 +431,28 @@ export const notes: Note[] = [
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
+      {
+        zh: "（補充）請分開結帳",
+        thai: "ขอแยกบิลค่ะ",
+        roman: "khǎaw yɛ̂ɛk bin khâ",
+        tokens: [
+          { thai: "ขอแยก", roman: "khǎaw yɛ̂ɛk", zh: "請分開" },
+          { thai: "บิล", roman: "bin", zh: "帳單" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "（補充）一起結帳就好",
+        thai: "รวมบิลก็ได้ค่ะ",
+        roman: "ruam bin gôr dâai khâ",
+        tokens: [
+          { thai: "รวมบิล", roman: "ruam bin", zh: "合併帳單" },
+          { thai: "ก็ได้", roman: "gôr dâai", zh: "也可以、就好" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
     ],
-    note: "跟 Day 8 的 ขอเช็คบิล 意思很像，但這裡的 เช็คบิล／เก็บเงิน 更口語直接，常用在小吃攤、路邊攤這種比較隨興的場合，不一定要加 ขอ 也聽得懂。",
+    note: "跟 Day 8 的 ขอเช็คบิล 意思很像，但這裡的 เช็คบิล／เก็บเงิน 更口語直接，常用在小吃攤、路邊攤這種比較隨興的場合，不一定要加 ขอ 也聽得懂。補充：跟朋友聚餐想指定付款方式的話，可以用 ขอแยกบิล（分開付）或 รวมบิลก็ได้（一起付），這兩句剛好是一組相反詞。",
   },
   {
     day: 28,
