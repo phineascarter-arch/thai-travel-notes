@@ -47,6 +47,39 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 42,
+    date: "2026.09.01",
+    thai: "สั่งอาหารหน่อยค่ะ",
+    roman: "sàng aa-hǎan nòi khâ",
+    zh: "麻煩，我要點餐了",
+    category: "餐廳點餐",
+    pattern: "สั่งอาหารหน่อยค่ะ／พร้อมสั่งแล้ว（開口點餐／回覆已準備好點餐）",
+    examples: [
+      {
+        zh: "麻煩，我要點餐了",
+        thai: "สั่งอาหารหน่อยค่ะ",
+        roman: "sàng aa-hǎan nòi khâ",
+        tokens: [
+          { thai: "สั่ง", roman: "sàng", zh: "點、下訂" },
+          { thai: "อาหาร", roman: "aa-hǎan", zh: "食物、餐點" },
+          { thai: "หน่อย", roman: "nòi", zh: "一點、麻煩" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "已經準備好可以點餐了",
+        thai: "พร้อมสั่งแล้ว",
+        roman: "phráawm sàng láaeo",
+        tokens: [
+          { thai: "พร้อม", roman: "phráawm", zh: "準備好" },
+          { thai: "สั่ง", roman: "sàng", zh: "點、下訂" },
+          { thai: "แล้ว", roman: "láaeo", zh: "了、已經" },
+        ],
+      },
+    ],
+    note: "สั่งอาหารหน่อยค่ะ 是主動招手跟服務生說要點餐時用；服務生問「พร้อมสั่งหรือยังคะ」（準備好點餐了嗎）時，就直接回 พร้อมสั่งแล้ว（已經準備好了）即可，兩句剛好是點餐開場常見的一組對話。",
+  },
+  {
     day: 41,
     date: "2026.08.31",
     thai: "แค่นี้ก่อน",
