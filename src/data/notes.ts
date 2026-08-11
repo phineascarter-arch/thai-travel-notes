@@ -47,34 +47,96 @@ export interface Note {
 
 export const notes: Note[] = [
   {
-    day: 38,
-    date: "2026.08.28",
-    thai: "ราตรีสวัสดิ์",
-    roman: "raa-dtrii sà-wàt",
-    zh: "晚安",
+    day: 40,
+    date: "2026.08.30",
+    thai: "สวัสดีตอนค่ำ",
+    roman: "sà-wàt-dii dtaawn khâm",
+    zh: "晚上好（入夜問候）",
     category: "閒聊",
-    pattern: "ราตรีสวัสดิ์／ฝันดี（固定用語，睡前道別用）",
+    pattern: "สวัสดีตอน + [時段]",
     examples: [
       {
-        zh: "晚安（正式）",
-        thai: "ราตรีสวัสดิ์ค่ะ",
-        roman: "raa-dtrii sà-wàt khâ",
+        zh: "晚上好",
+        thai: "สวัสดีตอนค่ำค่ะ",
+        roman: "sà-wàt-dii dtaawn khâm khâ",
         tokens: [
-          { thai: "ราตรีสวัสดิ์", roman: "raa-dtrii sà-wàt", zh: "晚安" },
+          { thai: "สวัสดีตอนค่ำ", roman: "sà-wàt-dii dtaawn khâm", zh: "晚上好" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
       {
-        zh: "晚安，祝你好夢（親近說法）",
-        thai: "ฝันดีนะคะ",
-        roman: "fǎn-dii ná khá",
+        zh: "要去逛夜市嗎？",
+        thai: "จะไปเดินตลาดกลางคืนไหมคะ",
+        roman: "jà bpai dəən dtà-làat glaang-khʉʉn mǎi khá",
         tokens: [
-          { thai: "ฝันดี", roman: "fǎn-dii", zh: "祝你有個好夢、晚安（親近的說法）" },
-          { thai: "นะคะ", roman: "ná khá", zh: "（女性語氣詞＋禮貌詞尾）" },
+          { thai: "จะไปเดินตลาดกลางคืน", roman: "jà bpai dəən dtà-làat glaang-khʉʉn", zh: "要去逛夜市" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
         ],
       },
     ],
-    note: "ราตรีสวัสดิ์ 比較正式，跟長輩、不熟的人道別用；朋友、家人之間睡前更常直接說 ฝันดี，語氣親近很多。",
+    note: "跟前面幾個時段問候是同一組句型，但 ตอนค่ำ 比 Day 39 的 ตอนเย็น 更晚一點、天完全黑之後才用，去逛夜市、吃消夜的時間點說這句剛好。",
+  },
+  {
+    day: 39,
+    date: "2026.08.29",
+    thai: "สวัสดีตอนเย็น",
+    roman: "sà-wàt-dii dtaawn yen",
+    zh: "晚上好",
+    category: "閒聊",
+    pattern: "สวัสดีตอน + [時段]",
+    examples: [
+      {
+        zh: "晚上好",
+        thai: "สวัสดีตอนเย็นค่ะ",
+        roman: "sà-wàt-dii dtaawn yen khâ",
+        tokens: [
+          { thai: "สวัสดีตอนเย็น", roman: "sà-wàt-dii dtaawn yen", zh: "晚上好" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "晚上好，吃晚餐了嗎？",
+        thai: "ทานข้าวเย็นหรือยังคะ",
+        roman: "thaan khâao yen rʉ̌ʉ yang khá",
+        tokens: [
+          { thai: "ทานข้าวเย็น", roman: "thaan khâao yen", zh: "吃晚餐" },
+          { thai: "หรือยัง", roman: "rʉ̌ʉ yang", zh: "了沒" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "跟 สวัสดีตอนเช้า／สวัสดีตอนบ่าย 是同一組句型，是「見面問候」用的，跟 Day 38 的 ราตรีสวัสดิ์／ฝันดี（睡前道別用）意思不一樣——中文的「晚安」常常兩種情境都用，但泰文分得很清楚，別搞混了。",
+  },
+  {
+    day: 38,
+    date: "2026.08.28",
+    thai: "ฝันดี",
+    roman: "fǎn-dii",
+    zh: "晚安（睡前道別）",
+    category: "閒聊",
+    pattern: "ฝันดี（固定用語，睡前道別用）",
+    examples: [
+      {
+        zh: "晚安，祝你有個好夢",
+        thai: "ฝันดีนะคะ",
+        roman: "fǎn-dii ná khá",
+        tokens: [
+          { thai: "ฝันดี", roman: "fǎn-dii", zh: "祝你有個好夢、晚安" },
+          { thai: "นะคะ", roman: "ná khá", zh: "（女性語氣詞＋禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我要去睡了",
+        thai: "จะไปนอนแล้วค่ะ",
+        roman: "jà bpai naawn láaeo khâ",
+        tokens: [
+          { thai: "จะไปนอนแล้ว", roman: "jà bpai naawn láaeo", zh: "我要去睡了" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "ฝันดี 是朋友、家人之間睡前最常說的道別語，語氣親近。正式一點還有 ราตรีสวัสดิ์ 這個說法，但日常生活很少有人真的這樣說，比較常出現在賀卡、正式書信裡，聽得懂就好。",
   },
   {
     day: 37,
