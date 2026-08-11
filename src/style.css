@@ -17,6 +17,8 @@
   --green-bg: #e9f5ed;
   --red: #b94e3f;
   --red-bg: #fff0ed;
+  --river: #1f7a72;
+  --river-deep: #0f4a45;
 }
 
 * {
@@ -1311,5 +1313,158 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 @media (prefers-reduced-motion: reduce) {
   .record-player-arm {
     transition: none;
+  }
+}
+
+/* ---------- Floating market ---------- */
+.floating-market {
+  padding: 56px 24px 64px;
+  text-align: center;
+  background: var(--paper);
+}
+
+.floating-market-hint {
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  margin: 0 0 20px;
+}
+
+.market-river {
+  position: relative;
+  overflow: hidden;
+  max-width: 900px;
+  height: 360px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    var(--gold) 0%,
+    var(--orange) 34%,
+    var(--river) 40%,
+    var(--river-deep) 100%
+  );
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
+}
+
+.boat {
+  position: absolute;
+  left: -160px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 999px 999px 6px 6px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  animation-name: boat-drift;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.boat-cargo {
+  font-size: 18px;
+}
+
+.boat-hull {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@keyframes boat-drift {
+  from {
+    left: -160px;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.word-card {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 10px));
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 16px 12px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
+  min-width: 130px;
+  text-align: center;
+  z-index: 3;
+}
+
+.word-card-close {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.word-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.word-card strong {
+  display: block;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.word-card em {
+  display: block;
+  font-style: normal;
+  color: var(--rust);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.word-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+@media (width <= 560px) {
+  .market-river {
+    height: 260px;
+  }
+  .boat {
+    padding: 6px 10px;
+    gap: 6px;
+  }
+  .boat-hull {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .market-river {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 12px;
+    padding: 16px;
+    height: auto;
+    min-height: 200px;
+  }
+  .boat {
+    position: static;
+    left: auto;
+    top: auto;
+    animation: none;
   }
 }
