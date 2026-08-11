@@ -47,6 +47,129 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 38,
+    date: "2026.08.28",
+    thai: "ราตรีสวัสดิ์",
+    roman: "raa-dtrii sà-wàt",
+    zh: "晚安",
+    category: "閒聊",
+    pattern: "ราตรีสวัสดิ์／ฝันดี（固定用語，睡前道別用）",
+    examples: [
+      {
+        zh: "晚安（正式）",
+        thai: "ราตรีสวัสดิ์ค่ะ",
+        roman: "raa-dtrii sà-wàt khâ",
+        tokens: [
+          { thai: "ราตรีสวัสดิ์", roman: "raa-dtrii sà-wàt", zh: "晚安" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "晚安，祝你好夢（親近說法）",
+        thai: "ฝันดีนะคะ",
+        roman: "fǎn-dii ná khá",
+        tokens: [
+          { thai: "ฝันดี", roman: "fǎn-dii", zh: "祝你有個好夢、晚安（親近的說法）" },
+          { thai: "นะคะ", roman: "ná khá", zh: "（女性語氣詞＋禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "ราตรีสวัสดิ์ 比較正式，跟長輩、不熟的人道別用；朋友、家人之間睡前更常直接說 ฝันดี，語氣親近很多。",
+  },
+  {
+    day: 37,
+    date: "2026.08.27",
+    thai: "สวัสดีตอนบ่าย",
+    roman: "sà-wàt-dii dtaawn bàai",
+    zh: "午安",
+    category: "閒聊",
+    pattern: "สวัสดีตอน + [時段]",
+    examples: [
+      {
+        zh: "午安",
+        thai: "สวัสดีตอนบ่ายค่ะ",
+        roman: "sà-wàt-dii dtaawn bàai khâ",
+        tokens: [
+          { thai: "สวัสดีตอนบ่าย", roman: "sà-wàt-dii dtaawn bàai", zh: "午安" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "午安，吃午餐了嗎？",
+        thai: "ทานข้าวเที่ยงหรือยังคะ",
+        roman: "thaan khâao thîiang rʉ̌ʉ yang khá",
+        tokens: [
+          { thai: "ทานข้าวเที่ยง", roman: "thaan khâao thîiang", zh: "吃午餐" },
+          { thai: "หรือยัง", roman: "rʉ̌ʉ yang", zh: "了沒" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "跟 สวัสดีตอนเช้า 是同一組句型，只換時段字——晚上想打招呼則是 สวัสดีตอนเย็น，三個換著用就能涵蓋一天。",
+  },
+  {
+    day: 36,
+    date: "2026.08.26",
+    thai: "สวัสดีตอนเช้า",
+    roman: "sà-wàt-dii dtaawn cháo",
+    zh: "早安",
+    category: "閒聊",
+    pattern: "สวัสดีตอน + [時段]",
+    examples: [
+      {
+        zh: "早安",
+        thai: "สวัสดีตอนเช้าค่ะ",
+        roman: "sà-wàt-dii dtaawn cháo khâ",
+        tokens: [
+          { thai: "สวัสดีตอนเช้า", roman: "sà-wàt-dii dtaawn cháo", zh: "早安" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "早安，吃早餐了嗎？",
+        thai: "ทานข้าวเช้าหรือยังคะ",
+        roman: "thaan khâao cháo rʉ̌ʉ yang khá",
+        tokens: [
+          { thai: "ทานข้าวเช้า", roman: "thaan khâao cháo", zh: "吃早餐" },
+          { thai: "หรือยัง", roman: "rʉ̌ʉ yang", zh: "了沒" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰國人日常打招呼其實常常就直接說 สวัสดี，不特別分時段；但 ตอนเช้า／ตอนบ่าย／ตอนเย็น 這幾個時段字加上去，對方也完全聽得懂，遇到想特別強調的場合（卡片、正式問候）很好用。",
+  },
+  {
+    day: 35,
+    date: "2026.08.25",
+    thai: "แล้วเจอกัน",
+    roman: "láaeo jəə gan",
+    zh: "那就再見、待會見",
+    category: "閒聊",
+    pattern: "แล้วเจอกัน（固定用語，道別用）",
+    examples: [
+      {
+        zh: "那就待會見",
+        thai: "แล้วเจอกันค่ะ",
+        roman: "láaeo jəə gan khâ",
+        tokens: [
+          { thai: "แล้วเจอกัน", roman: "láaeo jəə gan", zh: "那就再見、待會見" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "明天見",
+        thai: "เจอกันพรุ่งนี้ค่ะ",
+        roman: "jəə gan phrûng-níi khâ",
+        tokens: [
+          { thai: "เจอกัน", roman: "jəə gan", zh: "見面、碰面" },
+          { thai: "พรุ่งนี้", roman: "phrûng-níi", zh: "明天" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "เจอกัน 單獨用是「見面」，前面加 แล้ว（那就）變成 แล้วเจอกัน 就是最常用的道別語，後面還能接時間（像 พรุ่งนี้ 明天）指定下次見面的時候。",
+  },
+  {
     day: 34,
     date: "2026.08.24",
     thai: "พูดได้แค่พื้นฐาน",
