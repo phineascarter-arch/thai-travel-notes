@@ -292,7 +292,9 @@ export const notes: Note[] = [
         roman: "phûut reo bpai, fang mâi rúu-rʉ̂ang khâ",
         tokens: [
           { thai: "พูดเร็วไป", roman: "phûut reo bpai", zh: "說太快了" },
-          { thai: "ฟังไม่รู้เรื่อง", roman: "fang mâi rúu-rʉ̂ang", zh: "聽不懂" },
+          { thai: "ฟัง", roman: "fang", zh: "聽" },
+          { thai: "ไม่", roman: "mâi", zh: "不" },
+          { thai: "รู้เรื่อง", roman: "rúu-rʉ̂ang", zh: "懂、明白事情" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
@@ -405,58 +407,6 @@ export const notes: Note[] = [
       },
     ],
     note: "市場、批發店很吃這句，買越多通常越好談價錢，比單件殺價更有效。",
-  },
-  {
-    day: 29,
-    date: "2026.08.19",
-    thai: "เช็คบิล",
-    roman: "chek-bin",
-    zh: "結帳、買單",
-    category: "餐廳點餐",
-    pattern: "เช็คบิล／เก็บเงิน（結帳相關用語）",
-    examples: [
-      {
-        zh: "麻煩結帳",
-        thai: "เช็คบิลค่ะ",
-        roman: "chek-bin khâ",
-        tokens: [
-          { thai: "เช็คบิล", roman: "chek-bin", zh: "結帳、買單" },
-          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
-        ],
-      },
-      {
-        zh: "麻煩收一下錢",
-        thai: "เก็บเงินด้วยค่ะ",
-        roman: "gèp ngən dûai khâ",
-        tokens: [
-          { thai: "เก็บ", roman: "gèp", zh: "收、收集" },
-          { thai: "เงิน", roman: "ngən", zh: "錢、銀子" },
-          { thai: "ด้วย", roman: "dûai", zh: "麻煩、請…一下" },
-          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
-        ],
-      },
-      {
-        zh: "（補充）請分開結帳",
-        thai: "ขอแยกบิลค่ะ",
-        roman: "khǎaw yɛ̂ɛk bin khâ",
-        tokens: [
-          { thai: "ขอแยก", roman: "khǎaw yɛ̂ɛk", zh: "請分開" },
-          { thai: "บิล", roman: "bin", zh: "帳單" },
-          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
-        ],
-      },
-      {
-        zh: "（補充）一起結帳就好",
-        thai: "รวมบิลก็ได้ค่ะ",
-        roman: "ruam bin gôr dâai khâ",
-        tokens: [
-          { thai: "รวมบิล", roman: "ruam bin", zh: "合併帳單" },
-          { thai: "ก็ได้", roman: "gôr dâai", zh: "也可以、就好" },
-          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
-        ],
-      },
-    ],
-    note: "跟 Day 8 的 ขอเช็คบิล 意思很像，但這裡的 เช็คบิล／เก็บเงิน 更口語直接，常用在小吃攤、路邊攤這種比較隨興的場合，不一定要加 ขอ 也聽得懂。補充：跟朋友聚餐想指定付款方式的話，可以用 ขอแยกบิล（分開付）或 รวมบิลก็ได้（一起付），這兩句剛好是一組相反詞。",
   },
   {
     day: 28,
@@ -1136,7 +1086,7 @@ export const notes: Note[] = [
     roman: "khǎaw chek-bin",
     zh: "請結帳、買單",
     category: "餐廳點餐",
-    pattern: "ขอ + เช็คบิล",
+    pattern: "ขอเช็คบิล／เช็คบิล／เก็บเงิน（結帳相關用語）",
     examples: [
       {
         zh: "請幫我結帳",
@@ -1157,8 +1107,48 @@ export const notes: Note[] = [
           { thai: "เท่าไหร่", roman: "thâo-rài", zh: "多少（錢）" },
         ],
       },
+      {
+        zh: "（補充）麻煩結帳",
+        thai: "เช็คบิลค่ะ",
+        roman: "chek-bin khâ",
+        tokens: [
+          { thai: "เช็คบิล", roman: "chek-bin", zh: "結帳、買單" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "（補充）麻煩收一下錢",
+        thai: "เก็บเงินด้วยค่ะ",
+        roman: "gèp ngən dûai khâ",
+        tokens: [
+          { thai: "เก็บ", roman: "gèp", zh: "收、收集" },
+          { thai: "เงิน", roman: "ngən", zh: "錢、銀子" },
+          { thai: "ด้วย", roman: "dûai", zh: "麻煩、請…一下" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "（補充）請分開結帳",
+        thai: "ขอแยกบิลค่ะ",
+        roman: "khǎaw yɛ̂ɛk bin khâ",
+        tokens: [
+          { thai: "ขอแยก", roman: "khǎaw yɛ̂ɛk", zh: "請分開" },
+          { thai: "บิล", roman: "bin", zh: "帳單" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "（補充）一起結帳就好",
+        thai: "รวมบิลก็ได้ค่ะ",
+        roman: "ruam bin gôr dâai khâ",
+        tokens: [
+          { thai: "รวมบิล", roman: "ruam bin", zh: "合併帳單" },
+          { thai: "ก็ได้", roman: "gôr dâai", zh: "也可以、就好" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
     ],
-    note: "เช็คบิล 是英文 check bill 的音譯，泰國餐廳結帳幾乎通用這句，比 คิดเงิน 更常聽到。",
+    note: "เช็คบิล 是英文 check bill 的音譯，泰國餐廳結帳幾乎通用這句，比 คิดเงิน 更常聽到；正式一點會說 ขอเช็คบิล，小吃攤、路邊攤這種隨興場合則常直接說 เช็คบิล 或 เก็บเงิน（收錢），不一定要加 ขอ。跟朋友聚餐想指定付款方式的話，可以用 ขอแยกบิล（分開付）或 รวมบิลก็ได้（一起付），這兩句剛好是一組相反詞。",
   },
   {
     day: 7,
