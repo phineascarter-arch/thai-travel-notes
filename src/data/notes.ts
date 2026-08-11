@@ -409,6 +409,66 @@ export const notes: Note[] = [
     note: "市場、批發店很吃這句，買越多通常越好談價錢，比單件殺價更有效。",
   },
   {
+    day: 29,
+    date: "2026.08.19",
+    thai: "กินที่นี่หรือกลับบ้าน",
+    roman: "gin thîi-nîi rʉ̌ʉ glàp bâan",
+    zh: "內用還是外帶",
+    category: "餐廳點餐",
+    pattern: "กินที่นี่／กลับบ้าน（內用／外帶）；กี่ท่าน／กี่คน（詢問人數）",
+    examples: [
+      {
+        zh: "內用還是外帶？",
+        thai: "กินที่นี่หรือกลับบ้านคะ",
+        roman: "gin thîi-nîi rʉ̌ʉ glàp bâan khá",
+        tokens: [
+          { thai: "กิน", roman: "gin", zh: "吃" },
+          { thai: "ที่นี่", roman: "thîi-nîi", zh: "這裡" },
+          { thai: "หรือ", roman: "rʉ̌ʉ", zh: "還是、或者" },
+          { thai: "กลับบ้าน", roman: "glàp bâan", zh: "回家（帶走）" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "內用，謝謝",
+        thai: "กินที่นี่ค่ะ",
+        roman: "gin thîi-nîi khâ",
+        tokens: [
+          { thai: "กินที่นี่", roman: "gin thîi-nîi", zh: "在這裡吃、內用" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "請問幾位？（正式）",
+        thai: "กี่ท่านคะ",
+        roman: "gìi thâan khá",
+        tokens: [
+          { thai: "กี่ท่าน", roman: "gìi thâan", zh: "幾位（正式）" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "幾個人？（普通）",
+        thai: "กี่คนคะ",
+        roman: "gìi khon khá",
+        tokens: [
+          { thai: "กี่คน", roman: "gìi khon", zh: "幾個人（普通）" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "兩位",
+        thai: "สองคนค่ะ",
+        roman: "sǎawng khon khâ",
+        tokens: [
+          { thai: "สองคน", roman: "sǎawng khon", zh: "兩個人" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "กี่ท่าน 比 กี่คน 更正式有禮貌，高級一點的餐廳服務生會用 ท่าน；一般路邊攤、小吃店講 กี่คน 就很自然。回答人數直接說「數字＋คน」，兩位就是 สองคน。",
+  },
+  {
     day: 28,
     date: "2026.08.18",
     thai: "ขอเปลี่ยนห้อง",
