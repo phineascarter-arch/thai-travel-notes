@@ -71,7 +71,9 @@ export const notes: Note[] = [
         thai: "จะไปเดินตลาดกลางคืนไหมคะ",
         roman: "jà bpai dəən dtà-làat glaang-khʉʉn mǎi khá",
         tokens: [
-          { thai: "จะไปเดินตลาดกลางคืน", roman: "jà bpai dəən dtà-làat glaang-khʉʉn", zh: "要去逛夜市" },
+          { thai: "จะ", roman: "jà", zh: "將要" },
+          { thai: "ไปเดิน", roman: "bpai dəən", zh: "去逛、去走" },
+          { thai: "ตลาดกลางคืน", roman: "dtà-làat glaang-khʉʉn", zh: "夜市" },
           { thai: "ไหม", roman: "mǎi", zh: "嗎" },
           { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
         ],
@@ -135,7 +137,8 @@ export const notes: Note[] = [
         thai: "จะไปนอนแล้วค่ะ",
         roman: "jà bpai naawn láaeo khâ",
         tokens: [
-          { thai: "จะไปนอนแล้ว", roman: "jà bpai naawn láaeo", zh: "我要去睡了" },
+          { thai: "จะไป", roman: "jà bpai", zh: "要去" },
+          { thai: "นอนแล้ว", roman: "naawn láaeo", zh: "睡了、要睡了" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
