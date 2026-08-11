@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { QuizExample, Token } from "../data/notes";
 import SpeakButton from "./SpeakButton";
 import { recordAnswer, weightOf } from "../lib/progress";
+import { dedupeByThai } from "../lib/tokens";
 
 type Mode = "roman-zh" | "zh-roman" | "cloze";
 
@@ -31,10 +32,6 @@ function wordKey(example: QuizExample): string {
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
-}
-
-function dedupeByThai(tokens: Token[]): Token[] {
-  return Array.from(new Map(tokens.map((t) => [t.thai, t])).values());
 }
 
 // 依權重抽樣、不放回。答錯次數多的例句權重較高，更容易被抽到。
