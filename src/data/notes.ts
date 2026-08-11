@@ -1219,7 +1219,7 @@ export const notes: Note[] = [
     roman: "mâi phèt",
     zh: "不辣",
     category: "餐廳點餐",
-    pattern: "ขอ + ไม่ + [形容詞]",
+    pattern: "ขอ + เผ็ด／ไม่ + [程度]；พริก + [數字] + เม็ด",
     examples: [
       {
         zh: "請不要辣",
@@ -1242,8 +1242,63 @@ export const notes: Note[] = [
           { thai: "มาก", roman: "mâak", zh: "很、非常" },
         ],
       },
+      {
+        zh: "我要一點點辣（微辣）",
+        thai: "ขอเผ็ดนิดหน่อยค่ะ",
+        roman: "khǎaw phèt nít-nòi khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我、我要" },
+          { thai: "เผ็ด", roman: "phèt", zh: "辣" },
+          { thai: "นิดหน่อย", roman: "nít-nòi", zh: "一點點" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我要少辣",
+        thai: "ขอเผ็ดน้อยค่ะ",
+        roman: "khǎaw phèt nói khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我、我要" },
+          { thai: "เผ็ด", roman: "phèt", zh: "辣" },
+          { thai: "น้อย", roman: "nói", zh: "少、一點" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我要中辣",
+        thai: "ขอเผ็ดกลางค่ะ",
+        roman: "khǎaw phèt glaang khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我、我要" },
+          { thai: "เผ็ด", roman: "phèt", zh: "辣" },
+          { thai: "กลาง", roman: "glaang", zh: "中等、中間" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "麻煩放一顆辣椒就好",
+        thai: "ขอใส่พริกนึงเม็ดค่ะ",
+        roman: "khǎaw sài phrík nʉng mét khâ",
+        tokens: [
+          { thai: "ขอใส่", roman: "khǎaw sài", zh: "請放、麻煩加" },
+          { thai: "พริก", roman: "phrík", zh: "辣椒" },
+          { thai: "นึง", roman: "nʉng", zh: "一（數字，口語）" },
+          { thai: "เม็ด", roman: "mét", zh: "顆（量詞）" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "給我泰國人吃的口味（辣度比照當地人）",
+        thai: "เอาแบบคนไทยค่ะ",
+        roman: "ao bɛ̀ɛp khon-thai khâ",
+        tokens: [
+          { thai: "เอาแบบ", roman: "ao bɛ̀ɛp", zh: "要…的樣子、比照" },
+          { thai: "คนไทย", roman: "khon-thai", zh: "泰國人" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
     ],
-    note: "點餐先說 ขอ（要／請給我）再接需求，是泰式點餐最常見的句型，換掉後面的形容詞就能表達各種要求。",
+    note: "點餐先說 ขอ（要／請給我）再接需求，是泰式點餐最常見的句型，換掉後面的形容詞就能表達各種要求。辣度可以用 ไม่เผ็ด（不辣）、เผ็ดนิดหน่อย（微辣）、เผ็ดน้อย（少辣）、เผ็ดกลาง（中辣）這幾級回答；想更精準，也可以直接指定辣椒顆數（พริก + 數字 + เม็ด）。想挑戰道地辣度可以說 เอาแบบคนไทย，但要有心理準備真的會很辣。",
   },
   {
     day: 3,
