@@ -47,6 +47,39 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 41,
+    date: "2026.08.31",
+    thai: "แค่นี้ก่อน",
+    roman: "khɛ̂ɛ níi gàwn",
+    zh: "先這樣就好、就這些了",
+    category: "購物殺價",
+    pattern: "แค่นี้ก่อน（固定用語，選購／點餐／聊天想收尾時用）",
+    examples: [
+      {
+        zh: "先這樣就好",
+        thai: "แค่นี้ก่อนค่ะ",
+        roman: "khɛ̂ɛ níi gàwn khâ",
+        tokens: [
+          { thai: "แค่นี้", roman: "khɛ̂ɛ níi", zh: "就這麼多、這樣就好" },
+          { thai: "ก่อน", roman: "gàwn", zh: "先、暫時" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "不用了，先這樣就好",
+        thai: "ไม่ต้องแล้ว แค่นี้ก่อนค่ะ",
+        roman: "mâi dtâwng láaeo, khɛ̂ɛ níi gàwn khâ",
+        tokens: [
+          { thai: "ไม่ต้องแล้ว", roman: "mâi dtâwng láaeo", zh: "不用了" },
+          { thai: "แค่นี้", roman: "khɛ̂ɛ níi", zh: "就這麼多" },
+          { thai: "ก่อน", roman: "gàwn", zh: "先、暫時" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "แค่นี้ก่อน 是很萬用的收尾句，逛街選夠了、點餐點夠了、聊天想告一段落都能用，語氣輕鬆不生硬；ก่อน 在這裡不是「之前」而是「先這樣」的語氣詞，暗示之後可能還會再繼續。",
+  },
+  {
     day: 40,
     date: "2026.08.30",
     thai: "สวัสดีตอนค่ำ",
