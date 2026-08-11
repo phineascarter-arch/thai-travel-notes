@@ -268,7 +268,8 @@ export const notes: Note[] = [
         roman: "tɛ̀ɛ fang khâo-jai nít-nòi khâ",
         tokens: [
           { thai: "แต่", roman: "tɛ̀ɛ", zh: "但是" },
-          { thai: "ฟังเข้าใจ", roman: "fang khâo-jai", zh: "聽得懂" },
+          { thai: "ฟัง", roman: "fang", zh: "聽" },
+          { thai: "เข้าใจ", roman: "khâo-jai", zh: "懂、明白" },
           { thai: "นิดหน่อย", roman: "nít-nòi", zh: "一點點" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
