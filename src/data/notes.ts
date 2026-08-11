@@ -53,14 +53,16 @@ export const notes: Note[] = [
     roman: "sà-wàt-dii dtaawn khâm",
     zh: "晚上好（入夜問候）",
     category: "閒聊",
-    pattern: "สวัสดีตอน + [時段]",
+    pattern: "สวัสดี + ตอน（時段）+ [เช้า／บ่าย／เย็น／ค่ำ]",
     examples: [
       {
         zh: "晚上好",
         thai: "สวัสดีตอนค่ำค่ะ",
         roman: "sà-wàt-dii dtaawn khâm khâ",
         tokens: [
-          { thai: "สวัสดีตอนค่ำ", roman: "sà-wàt-dii dtaawn khâm", zh: "晚上好" },
+          { thai: "สวัสดี", roman: "sà-wàt-dii", zh: "你好" },
+          { thai: "ตอน", roman: "dtaawn", zh: "階段、時段、期間" },
+          { thai: "ค่ำ", roman: "khâm", zh: "天黑、入夜" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
@@ -84,14 +86,16 @@ export const notes: Note[] = [
     roman: "sà-wàt-dii dtaawn yen",
     zh: "晚上好",
     category: "閒聊",
-    pattern: "สวัสดีตอน + [時段]",
+    pattern: "สวัสดี + ตอน（時段）+ [เช้า／บ่าย／เย็น／ค่ำ]",
     examples: [
       {
         zh: "晚上好",
         thai: "สวัสดีตอนเย็นค่ะ",
         roman: "sà-wàt-dii dtaawn yen khâ",
         tokens: [
-          { thai: "สวัสดีตอนเย็น", roman: "sà-wàt-dii dtaawn yen", zh: "晚上好" },
+          { thai: "สวัสดี", roman: "sà-wàt-dii", zh: "你好" },
+          { thai: "ตอน", roman: "dtaawn", zh: "階段、時段、期間" },
+          { thai: "เย็น", roman: "yen", zh: "傍晚（原意是「涼、冷」）" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
@@ -145,14 +149,16 @@ export const notes: Note[] = [
     roman: "sà-wàt-dii dtaawn bàai",
     zh: "午安",
     category: "閒聊",
-    pattern: "สวัสดีตอน + [時段]",
+    pattern: "สวัสดี + ตอน（時段）+ [เช้า／บ่าย／เย็น／ค่ำ]",
     examples: [
       {
         zh: "午安",
         thai: "สวัสดีตอนบ่ายค่ะ",
         roman: "sà-wàt-dii dtaawn bàai khâ",
         tokens: [
-          { thai: "สวัสดีตอนบ่าย", roman: "sà-wàt-dii dtaawn bàai", zh: "午安" },
+          { thai: "สวัสดี", roman: "sà-wàt-dii", zh: "你好" },
+          { thai: "ตอน", roman: "dtaawn", zh: "階段、時段、期間" },
+          { thai: "บ่าย", roman: "bàai", zh: "下午" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
@@ -176,14 +182,16 @@ export const notes: Note[] = [
     roman: "sà-wàt-dii dtaawn cháo",
     zh: "早安",
     category: "閒聊",
-    pattern: "สวัสดีตอน + [時段]",
+    pattern: "สวัสดี + ตอน（時段）+ [เช้า／บ่าย／เย็น／ค่ำ]",
     examples: [
       {
         zh: "早安",
         thai: "สวัสดีตอนเช้าค่ะ",
         roman: "sà-wàt-dii dtaawn cháo khâ",
         tokens: [
-          { thai: "สวัสดีตอนเช้า", roman: "sà-wàt-dii dtaawn cháo", zh: "早安" },
+          { thai: "สวัสดี", roman: "sà-wàt-dii", zh: "你好" },
+          { thai: "ตอน", roman: "dtaawn", zh: "階段、時段、期間" },
+          { thai: "เช้า", roman: "cháo", zh: "早上" },
           { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
         ],
       },
