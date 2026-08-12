@@ -17,7 +17,7 @@ let latestRequestId = 0;
 // 音質取決於裝置系統內建的泰文語音包（iPhone 需在
 // 設定 > 輔助使用 > 語音內容 > 聲音 > 泰文 先下載一次）。
 export function useSpeech() {
-  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+  const supported = typeof window !== "undefined" && !!window.speechSynthesis;
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   useEffect(() => {
