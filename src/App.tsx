@@ -4,6 +4,7 @@ import ReviewQuiz from "./components/ReviewQuiz";
 import NoteModal from "./components/NoteModal";
 import RecordWall from "./components/RecordWall";
 import SpeakButton from "./components/SpeakButton";
+import FloatingMarket from "./components/FloatingMarket";
 import { recordVisitToday, getStreak } from "./lib/progress";
 
 const GOAL_DAYS = 100;
@@ -62,6 +63,7 @@ function App() {
           <a href="#timeline">時間軸</a>
           <a href="#topics">主題</a>
           <a href="#review-quiz">複習測驗</a>
+          <a href="#floating-market">水上市場</a>
         </nav>
       </header>
 
@@ -139,6 +141,8 @@ function App() {
       </section>
 
       <ReviewQuiz pool={quizPool} maxDay={maxDay} />
+
+      <FloatingMarket />
 
       <section className="content-grid" id="timeline">
         <div className="timeline-list">
