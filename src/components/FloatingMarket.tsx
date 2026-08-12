@@ -4,8 +4,8 @@ import { pickRandom } from "../lib/random";
 import Boat from "./Boat";
 
 const SLOT_COUNT = 6;
-const MIN_DURATION = 16;
-const MAX_DURATION = 26;
+const MIN_DURATION = 28;
+const MAX_DURATION = 44;
 
 interface BoatState {
   id: number;

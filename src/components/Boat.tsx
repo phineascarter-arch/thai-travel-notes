@@ -92,10 +92,11 @@ export default function Boat({ word, lane, duration, delay, riverRef, onExpire }
         }}
         onAnimationEnd={onExpire}
       >
+        <span className="boat-hull" aria-hidden="true" />
         <span className="boat-cargo" aria-hidden="true">
           {CARGO_ICON[word.category]}
         </span>
-        <span className="boat-hull" lang="th">
+        <span className="boat-label" lang="th">
           {word.thai}
         </span>
       </div>
