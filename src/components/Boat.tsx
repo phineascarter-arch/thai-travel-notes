@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties, type RefObject } from "react";
 import type { Category } from "../data/notes";
 import type { PoolWord } from "../lib/wordPool";
 import { useSpeech } from "../hooks/useSpeech";
@@ -36,6 +36,7 @@ export default function Boat({ word, lane, duration, delay, riverRef, onExpire }
   const boatRef = useRef<HTMLDivElement>(null);
   const [card, setCard] = useState<{ x: number; y: number; below: boolean } | null>(null);
   const { speak } = useSpeech();
+  const hullGradientId = useId();
 
   useEffect(() => {
     if (!card) return;
@@ -69,7 +70,7 @@ export default function Boat({ word, lane, duration, delay, riverRef, onExpire }
   };
 
   const style: CSSProperties = {
-    top: `calc(8% + ${lane} * 14%)`,
+    top: `calc(4% + ${lane} * 16%)`,
     animationDuration: `${duration}s`,
     animationDelay: `${delay}s`,
   };
@@ -92,10 +93,23 @@ export default function Boat({ word, lane, duration, delay, riverRef, onExpire }
         }}
         onAnimationEnd={onExpire}
       >
-        <span className="boat-hull" aria-hidden="true" />
         <span className="boat-cargo" aria-hidden="true">
           {CARGO_ICON[word.category]}
         </span>
+        <svg className="boat-hull" viewBox="0 0 100 30" aria-hidden="true">
+          <defs>
+            <linearGradient id={hullGradientId} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#c68a4e" />
+              <stop offset="55%" stopColor="#8a5a2c" />
+              <stop offset="100%" stopColor="#5c3d20" />
+            </linearGradient>
+          </defs>
+          <line x1="88" y1="11" x2="98" y2="0" stroke="#5c3d20" strokeWidth="2.5" strokeLinecap="round" />
+          <path
+            d="M2,17 C15,10 32,8 50,8 C68,8 85,10 98,17 C85,22 68,24 50,24 C32,24 15,22 2,17 Z"
+            fill={`url(#${hullGradientId})`}
+          />
+        </svg>
         <span className="boat-label" lang="th">
           {word.thai}
         </span>

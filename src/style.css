@@ -1355,60 +1355,42 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 .boat {
   position: absolute;
   left: -160px;
-  width: 104px;
-  height: 48px;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
   animation-name: boat-drift;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
-/* 船身：兩端尖翹的獨木舟輪廓，用 clip-path 切出來，不是圖片。 */
-.boat-hull {
-  position: absolute;
-  bottom: 16px;
-  left: 0;
-  width: 100%;
-  height: 22px;
-  background: linear-gradient(180deg, #b9793f 0%, #8a5a2c 55%, #6b4420 100%);
-  clip-path: polygon(9% 0%, 91% 0%, 100% 55%, 80% 100%, 20% 100%, 0% 55%);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* 槳：斜插在船尾的一根小木棍。 */
-.boat-hull::after {
-  content: "";
-  position: absolute;
-  right: 8px;
-  top: -18px;
-  width: 3px;
-  height: 26px;
-  background: #5c3d20;
-  border-radius: 2px;
-  transform: rotate(26deg);
-  transform-origin: bottom center;
-}
-
 .boat-cargo {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1;
+  margin-bottom: -4px;
+  z-index: 1;
   filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.3));
 }
 
+/* 船身：兩端尖翹的獨木舟輪廓，SVG 畫的圓滑曲線（不是 clip-path 直角切法），
+   含斜插在船尾的一支槳。viewBox 100:30 是刻意壓扁的比例，讓船身看起來
+   低矮修長，貼近真實水上市場小船的比例，不是圓滾滾的橢圓。 */
+.boat-hull {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.3));
+}
+
 .boat-label {
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 11px;
+  margin-top: 2px;
+  font-size: 9px;
+  line-height: 1.4;
   font-weight: 700;
   color: var(--ink);
   background: var(--cream);
-  padding: 1px 9px;
+  padding: 0 6px;
   border-radius: 999px;
   border: 1px solid var(--line);
   white-space: nowrap;
@@ -1483,23 +1465,21 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 }
 
 @media (width <= 560px) {
+  /* 船身改成直立堆疊（貨物＋船身＋標籤）之後比原本的單排小卡片高很多，
+     河道維持 260px 會讓 6 個船位在窄螢幕上疊在一起，所以加高到 340px，
+     跟桌面版一樣的 4% + lane*16% 排法才有足夠空間。 */
   .market-river {
-    height: 260px;
+    height: 340px;
   }
   .boat {
-    width: 86px;
-    height: 42px;
-  }
-  .boat-hull {
-    height: 18px;
-    bottom: 14px;
+    width: 70px;
   }
   .boat-cargo {
-    bottom: 26px;
-    font-size: 17px;
+    font-size: 15px;
   }
   .boat-label {
-    font-size: 10px;
+    font-size: 9px;
+    padding: 0 6px;
   }
 }
 
