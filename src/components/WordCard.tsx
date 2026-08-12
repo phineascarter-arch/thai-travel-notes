@@ -5,14 +5,15 @@ interface Props {
   word: PoolWord;
   x: number;
   y: number;
+  below: boolean;
   onClose: () => void;
 }
 
 // 純展示元件：位置由呼叫端（Boat）算好的 x/y（相對於河道容器左上角的
 // 像素座標）決定，本身不知道自己在哪艘船旁邊、也不知道船還在不在動。
-export default function WordCard({ word, x, y, onClose }: Props) {
+export default function WordCard({ word, x, y, below, onClose }: Props) {
   return (
-    <div className="word-card" style={{ left: x, top: y }} role="status">
+    <div className={`word-card ${below ? "word-card-below" : ""}`} style={{ left: x, top: y }}>
       <button type="button" className="word-card-close" aria-label="關閉" onClick={onClose}>
         ×
       </button>

@@ -57,6 +57,7 @@ export default function FloatingMarket() {
 
   return (
     <section className="floating-market" id="floating-market" aria-label="水上市場">
+      <h2 className="floating-market-title">水上市場</h2>
       <p className="floating-market-hint">划過來的船上都有一個泰文詞，點下去聽聽看、看看意思 🚤</p>
       <div className="market-river" ref={riverRef}>
         {boats.map((boat) => (

@@ -1323,6 +1323,11 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   background: var(--paper);
 }
 
+.floating-market-title {
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+
 .floating-market-hint {
   color: var(--muted);
   font-size: 14px;
@@ -1395,6 +1400,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   min-width: 130px;
   text-align: center;
   z-index: 3;
+}
+
+.word-card-below {
+  transform: translate(-50%, 10px);
 }
 
 .word-card-close {
