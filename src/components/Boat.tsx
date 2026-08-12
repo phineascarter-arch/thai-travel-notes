@@ -13,6 +13,9 @@ const CARGO_ICON: Record<Category, string> = {
 };
 
 const CARD_DISMISS_MS = 5000;
+const CARD_WIDTH = 130; // matches src/style.css .word-card min-width
+const CARD_HEIGHT_WITH_GAP = 105; // approx card height (~95px) + 10px gap
+const CARD_EDGE_MARGIN = 8;
 
 interface Props {
   word: PoolWord;
@@ -31,7 +34,7 @@ interface Props {
 // Global Constraints，這是刻意接受的邊界情況)。
 export default function Boat({ word, lane, duration, delay, riverRef, onExpire }: Props) {
   const boatRef = useRef<HTMLDivElement>(null);
-  const [card, setCard] = useState<{ x: number; y: number } | null>(null);
+  const [card, setCard] = useState<{ x: number; y: number; below: boolean } | null>(null);
   const { speak } = useSpeech();
 
   useEffect(() => {
@@ -50,11 +53,19 @@ export default function Boat({ word, lane, duration, delay, riverRef, onExpire }
     if (!boatEl || !riverEl) return;
     const boatRect = boatEl.getBoundingClientRect();
     const riverRect = riverEl.getBoundingClientRect();
+    const topRel = boatRect.top - riverRect.top;
+    const below = topRel < CARD_HEIGHT_WITH_GAP;
+    const halfCard = CARD_WIDTH / 2;
+    const rawX = boatRect.left - riverRect.left + boatRect.width / 2;
+    const minX = halfCard + CARD_EDGE_MARGIN;
+    const maxX = riverRect.width - halfCard - CARD_EDGE_MARGIN;
+    const x = Math.min(Math.max(rawX, minX), maxX);
     setCard({
-      x: boatRect.left - riverRect.left + boatRect.width / 2,
-      y: boatRect.top - riverRect.top,
+      x,
+      y: below ? boatRect.bottom - riverRect.top : topRel,
+      below,
     });
-    speak(word.thai);
+    speak(word.thai, 0.82);
   };
 
   const style: CSSProperties = {
@@ -88,7 +99,9 @@ export default function Boat({ word, lane, duration, delay, riverRef, onExpire }
           {word.thai}
         </span>
       </div>
-      {card && <WordCard word={word} x={card.x} y={card.y} onClose={() => setCard(null)} />}
+      {card && (
+        <WordCard word={word} x={card.x} y={card.y} below={card.below} onClose={() => setCard(null)} />
+      )}
     </>
   );
 }
