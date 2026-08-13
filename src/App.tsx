@@ -63,7 +63,7 @@ function App() {
           <a href="#timeline">時間軸</a>
           <a href="#topics">主題</a>
           <a href="#review-quiz">複習測驗</a>
-          <a href="#ayutthaya-canal">大城運河</a>
+          <a href="#ayutthaya-canal">AYUTTHAYA</a>
         </nav>
       </header>
 
