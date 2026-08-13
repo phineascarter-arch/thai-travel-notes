@@ -1321,15 +1321,16 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   background: var(--paper);
 }
 
-.ayutthaya-canal-title {
-  font-size: 26px;
-  margin: 0 0 8px;
+.ayutthaya-canal-eyebrow {
+  color: var(--rust);
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 800;
+  margin: 0 0 4px;
 }
 
-.ayutthaya-canal-hint {
-  color: var(--muted);
-  font-size: 14px;
-  letter-spacing: 0.04em;
+.ayutthaya-canal-title {
+  font-size: 30px;
   margin: 0 0 20px;
 }
 
@@ -1367,11 +1368,15 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 
 /* 用百分比寬度(相對於 .canal 自己的寬度)取代固定 px，讓大象跟著運河
    等比例縮放——這樣不管螢幕多寬，大象佔運河的比例都一致，才能保證永遠
-   落在量測出來的那段空白帶裡，不用再為手機斷點另外寫死一個尺寸。 */
+   落在量測出來的那段空白帶裡，不用再為手機斷點另外寫死一個尺寸。
+   縮小到 8%、lane 間距壓到 1%，是因為運河的空白帶本身只佔運河高度的
+   20.4%——4 隻大象要疊出彼此不重疊的車道，尺寸必須先夠小，這個寬度是
+   實測(桌面版跟手機版都量過大象各自的 top/bottom)抓出來、確定不會互相
+   重疊也不會超出量測到的分隔線範圍的結果。 */
 .elephant {
   position: absolute;
   left: -160px;
-  width: 14.4%;
+  width: 8%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1386,6 +1391,13 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   height: auto;
   display: block;
   filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+  transition: filter 200ms ease;
+}
+
+/* 卡牌固定顯示在運河上方天空，不再貼著被點的那隻大象，所以用這個金色
+   光暈標示「現在是哪隻大象在講話」，把兩者的視覺關聯找回來。 */
+.elephant-active .elephant-figure {
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 8px rgba(212, 175, 55, 0.95));
 }
 
 /* 戰象背上的小旗子，顏色對應分類——歷史上戰象確實會插旗標示。 */
@@ -1422,30 +1434,35 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   }
 }
 
+/* 高級貴族風格的卡牌：深酒紅漸層底＋金色雙層描邊，取代原本的米白小卡。
+   固定顯示在運河上方天空(不再貼著大象算位置)，用金色調呼應戰象／
+   大城王朝的皇家配色，跟哪隻大象在講話則靠 .elephant-active 的光暈
+   對應。 */
 .word-card {
   position: absolute;
-  transform: translate(-50%, calc(-100% - 10px));
-  background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 10px 16px 12px;
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
-  min-width: 130px;
+  top: 16%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: linear-gradient(160deg, #4a1420 0%, #2c0c14 100%);
+  border: 1px solid #c9a24b;
+  border-radius: 12px;
+  padding: 14px 22px 16px;
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 3px rgba(44, 12, 20, 0.9),
+    inset 0 0 0 4px rgba(201, 162, 75, 0.55);
+  min-width: 150px;
   text-align: center;
   z-index: 3;
 }
 
-.word-card-below {
-  transform: translate(-50%, 10px);
-}
-
 .word-card-close {
   position: absolute;
-  top: 2px;
-  right: 6px;
+  top: 4px;
+  right: 8px;
   border: none;
   background: none;
-  color: var(--muted);
+  color: #c9a24b;
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
@@ -1456,28 +1473,42 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .word-card strong {
   display: block;
-  font-size: 20px;
-  color: var(--ink);
+  font-size: 22px;
+  color: #e8c766;
 }
 
 .word-card em {
   display: block;
   font-style: normal;
-  color: var(--rust);
+  color: #c9a24b;
   font-size: 13px;
-  margin-top: 2px;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(201, 162, 75, 0.35);
 }
 
 .word-card span {
   display: block;
-  color: var(--muted);
+  color: #e9dcc0;
   font-size: 13px;
   margin-top: 2px;
+}
+
+.word-card .speak-btn {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: #c9a24b;
+  color: #e8c766;
+}
+
+.word-card .speak-btn:hover {
+  background: #c9a24b;
+  color: #2c0c14;
+  border-color: #c9a24b;
 }
 
 @media (prefers-reduced-motion: reduce) {

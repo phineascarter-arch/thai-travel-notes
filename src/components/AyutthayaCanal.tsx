@@ -1,12 +1,15 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { wordPool, type PoolWord } from "../lib/wordPool";
 import { pickRandom } from "../lib/random";
+import { useSpeech } from "../hooks/useSpeech";
 import Elephant from "./Elephant";
+import WordCard from "./WordCard";
 import templeImg from "../assets/ayutthaya-canal.png";
 
 const SLOT_COUNT = 4;
 const MIN_DURATION = 28;
 const MAX_DURATION = 44;
+const CARD_DISMISS_MS = 5000;
 
 interface ElephantState {
   id: number;
@@ -14,6 +17,11 @@ interface ElephantState {
   word: PoolWord;
   duration: number;
   delay: number;
+}
+
+interface ActiveCard {
+  id: number;
+  word: PoolWord;
 }
 
 function randomDuration(): number {
@@ -31,8 +39,8 @@ function makeElephant(id: number, slot: number, word: PoolWord, startMidway: boo
 }
 
 export default function AyutthayaCanal() {
-  const canalRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(0);
+  const { speak } = useSpeech();
 
   const [elephants, setElephants] = useState<ElephantState[]>(() => {
     const slotCount = Math.min(SLOT_COUNT, wordPool.length);
@@ -43,6 +51,23 @@ export default function AyutthayaCanal() {
       return elephant;
     });
   });
+
+  // 卡牌現在固定顯示在運河上方天空(見 style.css 的 .word-card-stage)，
+  // 一次只顯示一張——換點別隻大象會直接換掉，跟原本黑膠撥放器「新的
+  // 唱片對接就打斷上一張」是同一種互動邏輯，不是每隻大象各自彈自己
+  // 的卡牌。
+  const [activeCard, setActiveCard] = useState<ActiveCard | null>(null);
+
+  const handleElephantClick = useCallback((id: number, word: PoolWord) => {
+    setActiveCard((prev) => (prev?.id === id ? null : { id, word }));
+  }, []);
+
+  useEffect(() => {
+    if (!activeCard) return;
+    speak(activeCard.word.thai, 0.82);
+    const timer = setTimeout(() => setActiveCard(null), CARD_DISMISS_MS);
+    return () => clearTimeout(timer);
+  }, [activeCard, speak]);
 
   const handleExpire = useCallback((id: number, slot: number) => {
     setElephants((prev) => {
@@ -57,10 +82,12 @@ export default function AyutthayaCanal() {
   if (elephants.length === 0) return null;
 
   return (
-    <section className="ayutthaya-canal" id="ayutthaya-canal" aria-label="大城運河">
-      <h2 className="ayutthaya-canal-title">大城運河</h2>
-      <p className="ayutthaya-canal-hint">戰象沿著古運河走過，點下去聽聽牠帶著哪句話 🐘</p>
-      <div className="canal" ref={canalRef}>
+    <section className="ayutthaya-canal" id="ayutthaya-canal" aria-label="Ayutthaya อยุธยา">
+      <p className="ayutthaya-canal-eyebrow">AYUTTHAYA</p>
+      <h2 className="ayutthaya-canal-title" lang="th">
+        อยุธยา
+      </h2>
+      <div className="canal">
         <img className="canal-temple-bg" src={templeImg} alt="" aria-hidden="true" />
         {elephants.map((elephant) => (
           <Elephant
@@ -69,10 +96,12 @@ export default function AyutthayaCanal() {
             lane={elephant.slot}
             duration={elephant.duration}
             delay={elephant.delay}
-            canalRef={canalRef}
+            isActive={activeCard?.id === elephant.id}
+            onToggle={() => handleElephantClick(elephant.id, elephant.word)}
             onExpire={() => handleExpire(elephant.id, elephant.slot)}
           />
         ))}
+        {activeCard && <WordCard word={activeCard.word} onClose={() => setActiveCard(null)} />}
       </div>
     </section>
   );

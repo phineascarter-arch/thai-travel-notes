@@ -3,17 +3,15 @@ import SpeakButton from "./SpeakButton";
 
 interface Props {
   word: PoolWord;
-  x: number;
-  y: number;
-  below: boolean;
   onClose: () => void;
 }
 
-// 純展示元件：位置由呼叫端（Boat）算好的 x/y（相對於河道容器左上角的
-// 像素座標）決定，本身不知道自己在哪艘船旁邊、也不知道船還在不在動。
-export default function WordCard({ word, x, y, below, onClose }: Props) {
+// 純展示元件：固定顯示在運河上方天空的位置(見 style.css 的
+// .word-card)，不用再算自己該疊在哪隻大象旁邊——AyutthayaCanal
+// 一次只會顯示一張。
+export default function WordCard({ word, onClose }: Props) {
   return (
-    <div className={`word-card ${below ? "word-card-below" : ""}`} style={{ left: x, top: y }}>
+    <div className="word-card">
       <button type="button" className="word-card-close" aria-label="關閉" onClick={onClose}>
         ×
       </button>
