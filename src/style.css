@@ -17,8 +17,6 @@
   --green-bg: #e9f5ed;
   --red: #b94e3f;
   --red-bg: #fff0ed;
-  --river: #1f7a72;
-  --river-deep: #0f4a45;
 }
 
 * {
@@ -1316,74 +1314,92 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   }
 }
 
-/* ---------- Floating market ---------- */
-.floating-market {
+/* ---------- Ayutthaya canal ---------- */
+.ayutthaya-canal {
   padding: 56px 24px 64px;
   text-align: center;
   background: var(--paper);
 }
 
-.floating-market-title {
+.ayutthaya-canal-title {
   font-size: 26px;
   margin: 0 0 8px;
 }
 
-.floating-market-hint {
+.ayutthaya-canal-hint {
   color: var(--muted);
   font-size: 14px;
   letter-spacing: 0.04em;
   margin: 0 0 20px;
 }
 
-.market-river {
+/* aspect-ratio 鎖定成背景圖(canal-temple-bg)本身 900:652 的比例，這樣不管
+   螢幕多寬，兩條分隔線(38.0%／59.4%，量測得出，不是用猜的)永遠對得上大象
+   移動的那條空白運河帶，不用像舊版船隻那樣另外為手機斷點寫死高度。 */
+.canal {
   position: relative;
   overflow: hidden;
   max-width: 900px;
-  height: 360px;
+  aspect-ratio: 900 / 652;
   margin: 0 auto;
   border-radius: 20px;
   background: linear-gradient(
     180deg,
-    var(--gold) 0%,
-    var(--orange) 34%,
-    var(--river) 40%,
-    var(--river-deep) 100%
+    #ffd77a 0%,
+    #f7a94a 22%,
+    #e07a3a 42%,
+    #b6502e 62%,
+    #7a2f2a 82%,
+    #4a1f28 100%
   );
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
 }
 
-.boat {
+.canal-temple-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* 用百分比寬度(相對於 .canal 自己的寬度)取代固定 px，讓大象跟著運河
+   等比例縮放——這樣不管螢幕多寬，大象佔運河的比例都一致，才能保證永遠
+   落在量測出來的那段空白帶裡，不用再為手機斷點另外寫死一個尺寸。 */
+.elephant {
   position: absolute;
   left: -160px;
-  width: 76px;
+  width: 14.4%;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  animation-name: boat-drift;
+  animation-name: elephant-drift;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
-.boat-cargo {
-  font-size: 16px;
-  line-height: 1;
-  margin-bottom: -4px;
-  z-index: 1;
-  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.3));
-}
-
-/* 船身：兩端尖翹的獨木舟輪廓，SVG 畫的圓滑曲線（不是 clip-path 直角切法），
-   含斜插在船尾的一支槳。viewBox 100:30 是刻意壓扁的比例，讓船身看起來
-   低矮修長，貼近真實水上市場小船的比例，不是圓滾滾的橢圓。 */
-.boat-hull {
+.elephant-figure {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
 }
 
-.boat-label {
+/* 戰象背上的小旗子，顏色對應分類——歷史上戰象確實會插旗標示。 */
+.elephant-flag {
+  position: absolute;
+  top: -12px;
+  left: 60%;
+  width: 15px;
+  height: 20px;
+  clip-path: polygon(0 0, 100% 15%, 0 30%);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.elephant-label {
   margin-top: 2px;
   font-size: 9px;
   line-height: 1.4;
@@ -1397,7 +1413,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-@keyframes boat-drift {
+@keyframes elephant-drift {
   from {
     left: -160px;
   }
@@ -1464,39 +1480,12 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   margin-top: 2px;
 }
 
-@media (width <= 560px) {
-  /* 船身改成直立堆疊（貨物＋船身＋標籤）之後比原本的單排小卡片高很多，
-     河道維持 260px 會讓 6 個船位在窄螢幕上疊在一起，所以加高到 340px，
-     跟桌面版一樣的 4% + lane*16% 排法才有足夠空間。 */
-  .market-river {
-    height: 340px;
-  }
-  .boat {
-    width: 70px;
-  }
-  .boat-cargo {
-    font-size: 15px;
-  }
-  .boat-label {
-    font-size: 9px;
-    padding: 0 6px;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .market-river {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    gap: 12px;
-    padding: 16px;
-    height: auto;
-    min-height: 200px;
-  }
-  .boat {
-    position: relative;
-    left: auto;
-    top: auto;
+  /* 運河本身(含背景圖跟長寬比)維持不變，只停用大象的漂移動畫，改成
+     用 --static-left（在 Elephant.tsx 依 lane 算好）固定分散在河道上，
+     不會像單純 animation:none 那樣全部疊在 left:-160px 的畫面外。 */
+  .elephant {
     animation: none;
+    left: var(--static-left, 8%);
   }
 }
