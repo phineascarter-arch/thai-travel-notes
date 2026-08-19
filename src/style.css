@@ -60,6 +60,26 @@ a,
   -webkit-tap-highlight-color: transparent;
 }
 
+/* 這份 CSS 之前完全沒有 :focus 樣式，鍵盤操作者選到哪個按鈕/卡片
+   完全看不出來。用 :focus-visible（不是 :focus）才不會滑鼠點擊時也
+   跳出外框，只有鍵盤導覽才會顯示。預設用 --rust，因為多數互動元素
+   都在米色紙感區塊上；深色區塊（頂欄、水上市場卡片牆、大城運河的
+   戰象）改用 --gold，米色系的 rust 疊在深藍／深栗色背景上對比不夠。 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
+
+.topbar a:focus-visible,
+.wall-cta:focus-visible,
+.elephant:focus-visible {
+  outline-color: var(--gold);
+}
+
 /* ---------- Topbar ---------- */
 .topbar {
   position: sticky;
@@ -326,7 +346,6 @@ nav a:hover {
   width: 100%;
   padding: 14px 0;
   border: 0;
-  outline: 0;
   background: transparent;
   color: var(--ink);
 }
