@@ -47,6 +47,115 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 55,
+    date: "2026.09.14",
+    thai: "เวฟไหม",
+    roman: "wêf mǎi",
+    zh: "要微波加熱嗎",
+    category: "購物殺價",
+    pattern: "เวฟ／อุ่นให้／รับแบบร้อน + ไหมคะ（店員常見的三種加熱問法）",
+    examples: [
+      {
+        zh: "要微波加熱嗎？",
+        thai: "เวฟไหมคะ",
+        roman: "wêf mǎi khá",
+        tokens: [
+          { thai: "เวฟ", roman: "wêf", zh: "微波加熱（口語）" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "要幫你加熱嗎？",
+        thai: "อุ่นให้ไหมคะ",
+        roman: "ùn hâi mǎi khá",
+        tokens: [
+          { thai: "อุ่น", roman: "ùn", zh: "加熱、熱一下" },
+          { thai: "ให้", roman: "hâi", zh: "幫（你）、為（你）" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "要熱的嗎？",
+        thai: "รับแบบร้อนไหมคะ",
+        roman: "ráp bɛ̀ɛp ráawn mǎi khá",
+        tokens: [
+          { thai: "รับ", roman: "ráp", zh: "要、收" },
+          { thai: "แบบร้อน", roman: "bɛ̀ɛp ráawn", zh: "熱的版本" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "เวฟ、อุ่นให้、รับแบบร้อน 三句意思差不多，都是結帳時問要不要加熱，只是店員習慣講法不同，聽到任一句都可以回 เอาค่ะ（好，要）或 ไม่ต้องค่ะ（不用）。",
+  },
+  {
+    day: 54,
+    date: "2026.09.13",
+    thai: "รับถุงไหม",
+    roman: "ráp thǔng mǎi",
+    zh: "需要袋子嗎",
+    category: "購物殺價",
+    pattern: "รับ + [物品] + ไหม（店員詢問）；มี + [物品] + มาเอง（表示自備）",
+    examples: [
+      {
+        zh: "需要袋子嗎？",
+        thai: "รับถุงไหมคะ",
+        roman: "ráp thǔng mǎi khá",
+        tokens: [
+          { thai: "รับ", roman: "ráp", zh: "要、收" },
+          { thai: "ถุง", roman: "thǔng", zh: "袋子" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我自己有帶袋子",
+        thai: "มีถุงมาเองค่ะ",
+        roman: "mii thǔng maa-eeng khâ",
+        tokens: [
+          { thai: "มีถุง", roman: "mii thǔng", zh: "有袋子" },
+          { thai: "มาเอง", roman: "maa-eeng", zh: "自己帶來的" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "跟 Day 25 的 ขอถุง（主動要袋子）相反，這句是結帳時店員先問你要不要袋子；泰國環保意識抬頭，超商、超市袋子常態要另外收費，帶環保袋直接回 มีถุงมาเองค่ะ 既省錢又減塑。",
+  },
+  {
+    day: 53,
+    date: "2026.09.12",
+    thai: "มีออลเมมเบอร์ไหม",
+    roman: "mii aawn-mem-bəə mǎi",
+    zh: "有ALL Member卡嗎",
+    category: "購物殺價",
+    pattern: "มี + [名詞] + ไหม",
+    examples: [
+      {
+        zh: "有ALL Member卡嗎？",
+        thai: "มีออลเมมเบอร์ไหมคะ",
+        roman: "mii aawn-mem-bəə mǎi khá",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "ออลเมมเบอร์", roman: "aawn-mem-bəə", zh: "ALL Member（會員卡）" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "沒有",
+        thai: "ไม่มีค่ะ",
+        roman: "mâi mii khâ",
+        tokens: [
+          { thai: "ไม่มี", roman: "mâi mii", zh: "沒有" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "ALL Member 是 7-Eleven 泰國自己的會員集點卡，結帳時店員幾乎每次都會問，觀光客通常沒有這張卡，直接說 ไม่มีค่ะ 就好，不用緊張。",
+  },
+  {
     day: 52,
     date: "2026.09.11",
     thai: "ยังอยากกินอีก",
