@@ -47,6 +47,110 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 58,
+    date: "2026.09.17",
+    thai: "ขอพริกเกลือหน่อยค่ะ",
+    roman: "khǎaw phrík-glʉa nòi khâ",
+    zh: "請給我一點辣椒糖鹽粉",
+    category: "購物殺價",
+    pattern: "ขอ + [調味料] + หน่อย",
+    examples: [
+      {
+        zh: "請給我一點辣椒糖鹽粉",
+        thai: "ขอพริกเกลือหน่อยค่ะ",
+        roman: "khǎaw phrík-glʉa nòi khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我" },
+          { thai: "พริกเกลือ", roman: "phrík-glʉa", zh: "辣椒糖鹽粉" },
+          { thai: "หน่อย", roman: "nòi", zh: "一點" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "沾芭樂很好吃",
+        thai: "จิ้มกับฝรั่งอร่อยมาก",
+        roman: "jîm gàp fà-ràng àròi mâak",
+        tokens: [
+          { thai: "จิ้มกับ", roman: "jîm gàp", zh: "沾、配" },
+          { thai: "ฝรั่ง", roman: "fà-ràng", zh: "芭樂" },
+          { thai: "อร่อยมาก", roman: "àròi mâak", zh: "很好吃" },
+        ],
+      },
+    ],
+    note: "พริกเกลือ（Prik kluea）字面是「辣椒＋鹽」，但實際上一定會加糖調成又辣又鹹又甜的沾粉，是路邊水果攤的招牌沾醬，沾著吃酸的水果（芭樂、鳳梨、還沒熟的芒果，見 Day 56）特別對味，很道地的吃法，不好意思開口就吃不到這味。",
+  },
+  {
+    day: 57,
+    date: "2026.09.16",
+    thai: "หั่นให้หน่อยค่ะ",
+    roman: "hàn hâi nòi khâ",
+    zh: "麻煩幫我切一下",
+    category: "購物殺價",
+    pattern: "[動詞] + ให้หน่อย（請對方幫忙做某事）",
+    examples: [
+      {
+        zh: "麻煩幫我切一下",
+        thai: "หั่นให้หน่อยค่ะ",
+        roman: "hàn hâi nòi khâ",
+        tokens: [
+          { thai: "หั่น", roman: "hàn", zh: "切、切片" },
+          { thai: "ให้", roman: "hâi", zh: "幫、為（我）" },
+          { thai: "หน่อย", roman: "nòi", zh: "一點、麻煩" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "也請給我一根水果籤",
+        thai: "ขอไม้จิ้มด้วยค่ะ",
+        roman: "khǎaw mái-jîm dûai khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我" },
+          { thai: "ไม้จิ้ม", roman: "mái-jîm", zh: "水果籤、竹籤" },
+          { thai: "ด้วย", roman: "dûai", zh: "也、順便" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "路邊水果攤買整顆水果（見 Day 56）時，老闆通常會問要不要幫忙削皮切塊，直接說這句最快；切好的水果通常會附一根 ไม้จิ้ม（竹籤）方便直接吃，沒附的話也可以像例句 2 一樣主動要。",
+  },
+  {
+    day: 56,
+    date: "2026.09.15",
+    thai: "เอามะม่วงถุงนึงค่ะ",
+    roman: "ao má-mûang thǔng nʉng khâ",
+    zh: "我要一袋芒果",
+    category: "購物殺價",
+    pattern: "เอา + [水果] + ถุงนึง（水果攤點貨句型）",
+    examples: [
+      {
+        zh: "我要一袋芒果",
+        thai: "เอามะม่วงถุงนึงค่ะ",
+        roman: "ao má-mûang thǔng nʉng khâ",
+        tokens: [
+          { thai: "เอา", roman: "ao", zh: "要、拿" },
+          { thai: "มะม่วง", roman: "má-mûang", zh: "芒果" },
+          { thai: "ถุงนึง", roman: "thǔng nʉng", zh: "一袋" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "還有芭樂、木瓜、西瓜、鳳梨",
+        thai: "ยังมีฝรั่ง มะละกอ แตงโม สับปะรดด้วยค่ะ",
+        roman: "yang mii fà-ràng, má-lá-gɔɔ, dtɛɛng-moo, sàp-bpà-rót dûai khâ",
+        tokens: [
+          { thai: "ยังมี", roman: "yang mii", zh: "還有" },
+          { thai: "ฝรั่ง", roman: "fà-ràng", zh: "芭樂" },
+          { thai: "มะละกอ", roman: "má-lá-gɔɔ", zh: "木瓜" },
+          { thai: "แตงโม", roman: "dtɛɛng-moo", zh: "西瓜" },
+          { thai: "สับปะรด", roman: "sàp-bpà-rót", zh: "鳳梨" },
+          { thai: "ด้วย", roman: "dûai", zh: "也、還" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "เอา + 水果 + ถุงนึง 換掉水果就能點別的，路邊水果攤（รถเข็นผลไม้）常見的還有芭樂(ฝรั่ง)、木瓜(มะละกอ)、西瓜(แตงโม)、鳳梨(สับปะรด)；買整顆水果常會被問要不要幫忙切塊（見 Day 57）、要不要沾粉（見 Day 58）。",
+  },
+  {
     day: 55,
     date: "2026.09.14",
     thai: "เวฟไหม",
