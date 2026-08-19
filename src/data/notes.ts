@@ -47,6 +47,75 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 60,
+    date: "2026.09.19",
+    thai: "ลองได้ไหมคะ",
+    roman: "laawng dâai-mǎi khá",
+    zh: "可以試試看嗎",
+    category: "購物殺價",
+    pattern: "ลอง／ขอ + [動詞] + ได้ไหม（比 Day 20 更泛用的「可以試試看嗎」問法）",
+    examples: [
+      {
+        zh: "可以試試看嗎？",
+        thai: "ลองได้ไหมคะ",
+        roman: "laawng dâai-mǎi khá",
+        tokens: [
+          { thai: "ลอง", roman: "laawng", zh: "試、嘗試" },
+          { thai: "ได้ไหม", roman: "dâai-mǎi", zh: "可以嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "可以試吃看看嗎？",
+        thai: "ขอชิมได้ไหมคะ",
+        roman: "khǎaw chim dâai-mǎi khá",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請、我要" },
+          { thai: "ชิม", roman: "chim", zh: "試吃、嚐" },
+          { thai: "ได้ไหม", roman: "dâai-mǎi", zh: "可以嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "ลองได้ไหม 比 Day 20 學過的 ขอลองใส่ 更泛用——ขอลองใส่ 專指穿戴（衣服、鞋子），這裡的「[動詞]＋ได้ไหม」問句框架則什麼場合都能套，像市場試吃、體驗器材都通用。",
+  },
+  {
+    day: 59,
+    date: "2026.09.18",
+    thai: "มีไซส์ L ไหมคะ",
+    roman: "mii sái L mǎi khá",
+    zh: "有L號嗎",
+    category: "購物殺價",
+    pattern: "มี + ไซส์ + [尺寸] + ไหม",
+    examples: [
+      {
+        zh: "有L號嗎？",
+        thai: "มีไซส์ L ไหมคะ",
+        roman: "mii sái L mǎi khá",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "ไซส์", roman: "sái", zh: "尺寸" },
+          { thai: "L", roman: "L", zh: "L號（尺寸代號，直接說英文字母）" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "有小一點的尺寸嗎？",
+        thai: "มีไซส์เล็กกว่านี้ไหมคะ",
+        roman: "mii sái lék gwàa níi mǎi khá",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "ไซส์", roman: "sái", zh: "尺寸" },
+          { thai: "เล็กกว่านี้", roman: "lék gwàa níi", zh: "比這個小、更小" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰國服飾店尺寸多半直接講英文字母 S／M／L／XL，講「L」店員就聽得懂，不用刻意找泰文講法；尺寸不合的話，比這個大一點、小一點分別是 Day 15 學過的 ใหญ่กว่านี้ 和這裡的 เล็กกว่านี้，三句搭配起來就能應付大部分尺寸溝通。",
+  },
+  {
     day: 58,
     date: "2026.09.17",
     thai: "ขอพริกเกลือหน่อยค่ะ",
@@ -1539,8 +1608,21 @@ export const notes: Note[] = [
           { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
         ],
       },
+      {
+        zh: "這裡有黑、白、紅、藍色",
+        thai: "มีสีดำ สีขาว สีแดง สีน้ำเงินค่ะ",
+        roman: "mii sǐi-dam, sǐi-khǎao, sǐi-dɛɛng, sǐi-náam-ngəən khâ",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "สีดำ", roman: "sǐi-dam", zh: "黑色" },
+          { thai: "สีขาว", roman: "sǐi-khǎao", zh: "白色" },
+          { thai: "สีแดง", roman: "sǐi-dɛɛng", zh: "紅色" },
+          { thai: "สีน้ำเงิน", roman: "sǐi-náam-ngəən", zh: "藍色" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
     ],
-    note: "มี...ไหม 是問「有沒有」最基本的句型，殺價前先確認有沒有想要的款式、尺寸再開口。",
+    note: "มี...ไหม 是問「有沒有」最基本的句型，殺價前先確認有沒有想要的款式、尺寸再開口；黑白紅藍之外，黃色是 สีเหลือง（sǐi lʉ̌ang），顏色字前面加 สี 都能套用同一個句型問。",
   },
   {
     day: 14,
