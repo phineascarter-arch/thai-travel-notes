@@ -17,6 +17,18 @@
   --green-bg: #e9f5ed;
   --red: #b94e3f;
   --red-bg: #fff0ed;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  --shadow-sm: 0 8px 24px #302b2411;
+  --shadow-md: 0 12px 35px #302b240d;
+  --shadow-lg: 0 14px 30px #0008;
+  --shadow-xl: 0 28px 80px #0008;
 }
 
 * {
@@ -163,10 +175,10 @@ nav a:hover {
   cursor: pointer;
   text-align: left;
   border: 0;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   padding: 38px 18px 23px;
   position: relative;
-  box-shadow: 0 14px 30px #0008;
+  box-shadow: var(--shadow-lg);
   transition: all 0.2s;
 }
 
@@ -248,7 +260,7 @@ nav a:hover {
   display: inline-block;
   color: var(--night-text);
   border: 1px solid var(--night-line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 11px 24px;
   text-decoration: none;
 }
@@ -299,7 +311,7 @@ nav a:hover {
   padding: 0 16px;
   background: var(--cream);
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
 }
 
 .search-box span {
@@ -329,7 +341,7 @@ nav a:hover {
 
 .topics button {
   padding: 8px 17px;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--line);
   background: var(--cream);
   color: #5d554a;
@@ -349,10 +361,10 @@ nav a:hover {
   margin: 34px auto 0;
   padding: 28px 30px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   background: var(--cream) linear-gradient(#7a6e5a0b 1px, transparent 1px);
   background-size: 100% 32px;
-  box-shadow: 0 12px 35px #302b240d;
+  box-shadow: var(--shadow-md);
 }
 
 .review-heading {
@@ -385,7 +397,7 @@ nav a:hover {
 .review-heading > b {
   white-space: nowrap;
   padding: 8px 13px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: #f4efe2;
   color: var(--rust);
   font-size: 13px;
@@ -416,7 +428,7 @@ nav a:hover {
 .review-result button {
   margin: 0 7px 7px 0;
   padding: 9px 13px;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--line);
   background: #fffaf1;
   color: #5d554a;
@@ -452,7 +464,7 @@ nav a:hover {
   width: 58px;
   padding: 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: #fff;
 }
 
@@ -465,7 +477,7 @@ nav a:hover {
   grid-column: 1 / -1;
   padding: 13px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--ink);
   color: #fff;
   font-weight: 900;
@@ -479,7 +491,7 @@ nav a:hover {
 .review-progress {
   height: 7px;
   margin-bottom: 22px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: #eee7da;
   overflow: hidden;
 }
@@ -528,7 +540,7 @@ nav a:hover {
   min-height: 58px;
   padding: 12px 16px;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: #fffaf1;
   color: var(--ink);
   font-weight: 750;
@@ -558,7 +570,7 @@ nav a:hover {
   width: 100%;
   padding: 14px;
   border: 2px solid var(--rust);
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: #fffaf1;
   color: var(--rust);
   font-weight: 900;
@@ -571,7 +583,7 @@ nav a:hover {
   margin-top: 18px;
   padding: 18px 20px;
   border-left: 4px solid var(--green);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--green-bg);
 }
 
@@ -594,7 +606,7 @@ nav a:hover {
   min-width: 70px;
   padding: 6px 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: #fffaf1;
   text-align: center;
   font-style: normal;
@@ -621,7 +633,7 @@ nav a:hover {
 .self-grade button {
   padding: 8px 12px;
   border: 1px solid var(--line);
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   background: #fff;
   cursor: pointer;
 }
@@ -639,7 +651,7 @@ nav a:hover {
 
 .review-actions button {
   padding: 10px 17px;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
 }
 
@@ -692,7 +704,7 @@ nav a:hover {
   margin-bottom: 15px;
   padding: 23px 25px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: var(--cream);
   color: inherit;
   text-align: left;
@@ -703,7 +715,7 @@ nav a:hover {
 .note-row:hover {
   border-color: #baaa8e;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px #302b2411;
+  box-shadow: var(--shadow-sm);
 }
 
 .note-row.latest { border-left: 5px solid var(--rust); }
@@ -711,7 +723,7 @@ nav a:hover {
 .note-meta { display: flex; align-items: center; gap: 12px; }
 .note-meta span {
   padding: 4px 10px;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   background: #dcd5c6;
   color: #7a6e5a;
   font-size: 12px;
@@ -735,7 +747,7 @@ nav a:hover {
 .note-foot span {
   padding: 3px 9px;
   border: 1px solid var(--rust);
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   color: var(--rust);
   font-size: 11px;
 }
@@ -744,7 +756,7 @@ nav a:hover {
 .empty {
   padding: 50px;
   border: 1px dashed var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: var(--cream);
   color: var(--muted);
   text-align: center;
@@ -760,7 +772,7 @@ nav a:hover {
 
 .progress-card {
   padding: 28px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--ink);
   color: var(--cream);
   transform: rotate(1deg);
@@ -769,7 +781,7 @@ nav a:hover {
 .progress-card > span { color: #9a8f7c; letter-spacing: 0.1em; font-size: 13px; }
 .progress-card b { color: #e8a04c; font-size: 58px; }
 .progress-card small { color: #cfc6b4; font-size: 17px; }
-.progress-track { height: 8px; border-radius: 8px; background: #ffffff1d; overflow: hidden; }
+.progress-track { height: 8px; border-radius: var(--radius-sm); background: #ffffff1d; overflow: hidden; }
 .progress-track i { display: block; height: 100%; background: #e8a04c; }
 .progress-card p { display: flex; justify-content: space-between; color: #9a8f7c; font-size: 13px; }
 .progress-card q {
@@ -781,7 +793,7 @@ nav a:hover {
   line-height: 1.6;
 }
 
-.side-card { padding: 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--cream); }
+.side-card { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--cream); }
 .side-title { margin: 0 0 5px; font-weight: 800; }
 
 .popular-row {
@@ -801,7 +813,7 @@ nav a:hover {
 
 .tip-card {
   padding: 20px;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: #e9e3d6;
   color: #6b6151;
   font-family: cursive;
@@ -840,11 +852,11 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   width: min(760px, 100%);
   max-height: calc(100vh - 44px);
   padding: 40px;
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   background: var(--cream) linear-gradient(#7a6e5a0c 1px, transparent 1px);
   background-size: 100% 32px;
   overflow: auto;
-  box-shadow: 0 28px 80px #0008;
+  box-shadow: var(--shadow-xl);
 }
 
 .close {
@@ -885,7 +897,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   align-items: center;
   gap: 12px;
   padding: 18px 20px;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: #f4efe2;
 }
 .meaning span { color: #9a8f7c; font-size: 12px; }
@@ -894,7 +906,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   margin-left: auto;
   padding: 4px 10px;
   border: 1px solid var(--rust);
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   color: var(--rust);
   font-size: 11px;
   font-style: normal;
@@ -904,7 +916,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   margin-top: 22px;
   padding: 22px;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: #fffefa;
 }
 .pattern span, .example > span {
@@ -926,7 +938,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   max-width: 155px;
   padding: 7px 9px 8px;
   border: 1px solid #ded5c3;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   background: #fffaf1;
   text-align: center;
 }
@@ -945,7 +957,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 .supplement {
   margin-top: 28px;
   padding: 17px 22px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: #f4efe2;
   color: #6b6151;
   font-size: 13px;
@@ -1225,7 +1237,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   width: 100%;
   height: 216px;
   background: linear-gradient(160deg, #d8cfbc, #a89878);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
@@ -1265,7 +1277,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   width: 10px;
   height: 112px;
   background: linear-gradient(180deg, #c7cee0, #8b96ad);
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   transform: rotate(34deg);
   transform-origin: top center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
@@ -1366,7 +1378,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   max-width: 900px;
   aspect-ratio: 900 / 652;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: var(--radius-xl);
   background: linear-gradient(
     180deg,
     #ffd77a 0%,
@@ -1447,7 +1459,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   color: var(--ink);
   background: var(--cream);
   padding: 0 6px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   border: 1px solid var(--line);
   white-space: nowrap;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
@@ -1473,7 +1485,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   transform: translate(-50%, 0);
   background: linear-gradient(160deg, #4a1420 0%, #2c0c14 100%);
   border: 1px solid #c9a24b;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 14px 22px 16px;
   box-shadow:
     0 16px 30px rgba(0, 0, 0, 0.45),
