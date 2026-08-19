@@ -16,6 +16,7 @@ export const CATEGORIES = [
   "住宿",
   "餐廳點餐",
   "購物殺價",
+  "按摩",
 ] as const;
 
 export type Category = (typeof CATEGORIES)[number];
@@ -46,6 +47,139 @@ export interface Note {
 }
 
 export const notes: Note[] = [
+  {
+    day: 64,
+    date: "2026.09.23",
+    thai: "สบายมากค่ะ",
+    roman: "sà-baai mâak khâ",
+    zh: "好舒服、好放鬆",
+    category: "按摩",
+    pattern: "สบาย + มาก（表達放鬆滿意）／พอแล้ว（喊停用語）",
+    examples: [
+      {
+        zh: "好舒服、好放鬆",
+        thai: "สบายมากค่ะ",
+        roman: "sà-baai mâak khâ",
+        tokens: [
+          { thai: "สบาย", roman: "sà-baai", zh: "舒服、放鬆" },
+          { thai: "มาก", roman: "mâak", zh: "很、非常" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "這樣就好了，謝謝",
+        thai: "พอแล้วค่ะ ขอบคุณค่ะ",
+        roman: "phɔɔ láaeo khâ, khɔ̀ɔp-khun khâ",
+        tokens: [
+          { thai: "พอแล้ว", roman: "phɔɔ láaeo", zh: "夠了、這樣就好" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+          { thai: "ขอบคุณ", roman: "khɔ̀ɔp-khun", zh: "謝謝" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "สบาย 是泰文很核心的字，「สบายๆ」（sabai sabai）幾乎是泰國生活態度的代名詞，按摩途中覺得舒服直接說這句師傅會很開心；力道夠了、想結束就說 พอแล้วค่ะ，跟 Day 41 學過的 แค่นี้ก่อน 是同一種「喊停」語感，看當下哪句更順口就用哪句。",
+  },
+  {
+    day: 63,
+    date: "2026.09.22",
+    thai: "ขอนวดไทยชั่วโมงนึงค่ะ",
+    roman: "khǎaw nûat-thai chûa-moong nʉng khâ",
+    zh: "我要泰式按摩一小時",
+    category: "按摩",
+    pattern: "ขอนวด + [種類] + [時長]（預約按摩句型）",
+    examples: [
+      {
+        zh: "我要泰式按摩一小時",
+        thai: "ขอนวดไทยชั่วโมงนึงค่ะ",
+        roman: "khǎaw nûat-thai chûa-moong nʉng khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "我要" },
+          { thai: "นวดไทย", roman: "nûat-thai", zh: "泰式按摩" },
+          { thai: "ชั่วโมงนึง", roman: "chûa-moong nʉng", zh: "一小時" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "現在有空位嗎？",
+        thai: "มีคิวว่างตอนนี้ไหมคะ",
+        roman: "mii khiu wâang dtaawn-níi mǎi khá",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "คิวว่าง", roman: "khiu wâang", zh: "空位、空檔" },
+          { thai: "ตอนนี้", roman: "dtaawn-níi", zh: "現在" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰式按摩常見時長是 1 小時、1.5 小時、2 小時，價目表通常會列出來對照著點；除了 นวดไทย（泰式按摩），還有 นวดน้ำมัน（精油按摩）、นวดเท้า（腳底按摩）可以換著說。",
+  },
+  {
+    day: 62,
+    date: "2026.09.21",
+    thai: "ตรงนี้เจ็บค่ะ",
+    roman: "dtrong-níi jèp khâ",
+    zh: "這裡會痛",
+    category: "按摩",
+    pattern: "[部位] + เจ็บ／ไม่ต้องนวด + [部位]",
+    examples: [
+      {
+        zh: "這裡會痛",
+        thai: "ตรงนี้เจ็บค่ะ",
+        roman: "dtrong-níi jèp khâ",
+        tokens: [
+          { thai: "ตรงนี้", roman: "dtrong-níi", zh: "這裡" },
+          { thai: "เจ็บ", roman: "jèp", zh: "痛、疼" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "這裡不用按",
+        thai: "ไม่ต้องนวดตรงนี้ค่ะ",
+        roman: "mâi dtâwng nûat dtrong-níi khâ",
+        tokens: [
+          { thai: "ไม่ต้อง", roman: "mâi dtâwng", zh: "不用、不需要" },
+          { thai: "นวด", roman: "nûat", zh: "按摩" },
+          { thai: "ตรงนี้", roman: "dtrong-níi", zh: "這裡" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "按摩過程中如果有舊傷、不舒服的地方，或單純不想按某個部位（像頭、肚子），主動說出來師傅都會配合調整；ตรงนี้ 可以換成任何指的部位，不用特別學泰文的身體部位單字也能溝通。",
+  },
+  {
+    day: 61,
+    date: "2026.09.20",
+    thai: "แรงกว่านี้ได้ไหมคะ",
+    roman: "rɛɛng gwàa níi dâai-mǎi khá",
+    zh: "可以再大力一點嗎",
+    category: "按摩",
+    pattern: "แรง／เบา + กว่านี้／ๆ + ได้ไหม／หน่อย（要求力道大小）",
+    examples: [
+      {
+        zh: "可以再大力一點嗎？",
+        thai: "แรงกว่านี้ได้ไหมคะ",
+        roman: "rɛɛng gwàa níi dâai-mǎi khá",
+        tokens: [
+          { thai: "แรงกว่านี้", roman: "rɛɛng gwàa níi", zh: "比這個更用力" },
+          { thai: "ได้ไหม", roman: "dâai-mǎi", zh: "可以嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "輕一點",
+        thai: "เบาๆ หน่อยค่ะ",
+        roman: "bao-bao nòi khâ",
+        tokens: [
+          { thai: "เบาๆ", roman: "bao-bao", zh: "輕輕地" },
+          { thai: "หน่อย", roman: "nòi", zh: "一點" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰式按摩師開始按之前常會先問力道，按到一半覺得不對勁也隨時能開口調整；一時想不起「大力」「輕一點」對應的字，直接說 แรงไป（太用力了）或 เบาไป（太輕了）也很好懂。",
+  },
   {
     day: 60,
     date: "2026.09.19",
