@@ -32,6 +32,8 @@
   --shadow-md: 0 12px 35px #302b240d;
   --shadow-lg: 0 14px 30px #0008;
   --shadow-xl: 0 28px 80px #0008;
+
+  --transition-fast: 200ms ease;
 }
 
 * {
@@ -202,7 +204,7 @@ nav a:hover {
   padding: 38px 18px 23px;
   position: relative;
   box-shadow: var(--shadow-lg);
-  transition: all 0.2s;
+  transition: all var(--transition-fast);
 }
 
 .polaroid:hover {
@@ -522,7 +524,7 @@ nav a:hover {
   display: block;
   height: 100%;
   background: var(--rust);
-  transition: width 0.25s;
+  transition: width var(--transition-fast);
 }
 
 .review-playing > small {
@@ -731,7 +733,7 @@ nav a:hover {
   color: inherit;
   text-align: left;
   cursor: pointer;
-  transition: all 0.18s;
+  transition: all var(--transition-fast);
 }
 
 .note-row:hover {
