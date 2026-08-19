@@ -1005,8 +1005,23 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 
 /* ---------- Responsive ---------- */
 @media (width <= 850px) {
-  .brand small, nav > a:not(.social) { display: none; }
-  .topbar { padding: 14px 20px; }
+  .topbar { padding: 14px 20px; gap: 16px; }
+  .brand { flex-shrink: 0; }
+  .brand small { display: none; }
+  /* 窄螢幕放不下四個導覽連結，之前的做法是整組隱藏，結果手機版完全沒有
+     導覽可用。改成讓 nav 自己橫向捲動（跟 .wall-scroll/.record-row 同一種
+     手法），連結還是都點得到，只是要滑一下。.brand 加 flex-shrink:0──
+     不然空間不夠時 flexbox 預設兩個都會被壓縮，logo 文字會被擠到換行，
+     擠壓應該只讓 nav 自己用內部捲動吸收。 */
+  nav {
+    min-width: 0;
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a { flex-shrink: 0; }
   .intro-grid, .content-grid { grid-template-columns: 1fr; }
   .intro-grid { gap: 34px; padding-top: 48px; }
   .review-quiz { margin-left: 28px; margin-right: 28px; }
@@ -1367,12 +1382,17 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 }
 
 /* 用百分比寬度(相對於 .canal 自己的寬度)取代固定 px，讓大象跟著運河
-   等比例縮放——這樣不管螢幕多寬，大象佔運河的比例都一致，才能保證永遠
-   落在量測出來的那段空白帶裡，不用再為手機斷點另外寫死一個尺寸。
-   縮小到 8%、lane 間距壓到 1%，是因為運河的空白帶本身只佔運河高度的
-   20.4%——4 隻大象要疊出彼此不重疊的車道，尺寸必須先夠小，這個寬度是
-   實測(桌面版跟手機版都量過大象各自的 top/bottom)抓出來、確定不會互相
-   重疊也不會超出量測到的分隔線範圍的結果。 */
+   等比例縮放——這樣不管螢幕多寬，大象佔運河的比例都一致，落在量測出來的
+   那段空白帶裡，不用再為手機斷點另外寫死一個尺寸。
+   實測發現：.elephant-label 的字級是固定 px（不隨 .canal 縮放），運河
+   越窄，文字label佔單隻大象總高度的比例就越高——手機版量到單隻大象
+   （圖片+文字牌）高達運河高度的 13.7%，但空白帶總共只有 20.4%，
+   車道再怎麼調都無法讓多隻大象完全不重疊（3 隻要完全不重疊得疊出
+   超過 27% 高，塞不進 20.4% 的帶子裡）。目前的 lane 間距（見
+   AyutthayaCanal.tsx 的 SLOT_COUNT／這裡的 top 算式）是折衷：減少同時
+   出現的大象數量＋拉開車道間距，大幅降低大象交會時文字牌互相蓋到看不清
+   的機率，但不是數學上保證零重疊——真的要做到零重疊，得犧牲文字牌
+   可讀性或大象可點擊的尺寸，兩者都不划算。 */
 .elephant {
   position: absolute;
   left: -160px;

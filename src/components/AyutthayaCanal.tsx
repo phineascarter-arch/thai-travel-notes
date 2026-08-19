@@ -6,7 +6,7 @@ import Elephant from "./Elephant";
 import WordCard from "./WordCard";
 import templeImg from "../assets/ayutthaya-canal.png";
 
-const SLOT_COUNT = 4;
+const SLOT_COUNT = 3;
 const MIN_DURATION = 28;
 const MAX_DURATION = 44;
 const CARD_DISMISS_MS = 5000;

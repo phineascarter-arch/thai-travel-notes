@@ -30,11 +30,11 @@ interface Props {
 // AyutthayaCanal 換掉 key），所以這裡不需要自己清動畫狀態。
 export default function Elephant({ word, lane, duration, delay, isActive, onToggle, onExpire }: Props) {
   const style = {
-    top: `calc(44% + ${lane} * 1%)`,
+    top: `calc(44% + ${lane} * 2%)`,
     animationDuration: `${duration}s`,
     animationDelay: `${delay}s`,
     // reduced-motion 停用動畫時的靜態備援位置，見 style.css 對應規則。
-    "--static-left": `${8 + lane * 22}%`,
+    "--static-left": `${8 + lane * 32}%`,
   };
 
   return (
