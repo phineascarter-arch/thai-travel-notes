@@ -13,6 +13,9 @@
   --orange: #e8674c;
   --gold: #ffd966;
   --muted: #867b69;
+  --text-faint: #9a8f7c;
+  --text-secondary: #6b6151;
+  --text-strong: #5d554a;
   --green: #2f8055;
   --green-bg: #e9f5ed;
   --red: #b94e3f;
@@ -188,7 +191,7 @@ nav a:hover {
 
 .polaroid-day {
   display: block;
-  color: #9a8f7c;
+  color: var(--text-faint);
   letter-spacing: 0.1em;
   font-size: 12px;
 }
@@ -250,7 +253,7 @@ nav a:hover {
 .wall-scroll blockquote small {
   display: block;
   margin-top: 10px;
-  color: #8a7f6b;
+  color: var(--text-faint);
   font-family: "Caveat", cursive;
 }
 
@@ -299,7 +302,7 @@ nav a:hover {
 }
 
 .intro-grid p.lead {
-  color: #5d554a;
+  color: var(--text-strong);
   line-height: 1.8;
 }
 
@@ -344,7 +347,7 @@ nav a:hover {
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
   background: var(--cream);
-  color: #5d554a;
+  color: var(--text-strong);
   cursor: pointer;
 }
 
@@ -419,7 +422,7 @@ nav a:hover {
 
 .review-setup legend {
   margin-bottom: 10px;
-  color: #6b6151;
+  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 900;
 }
@@ -431,7 +434,7 @@ nav a:hover {
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
   background: #fffaf1;
-  color: #5d554a;
+  color: var(--text-strong);
   cursor: pointer;
 }
 
@@ -725,12 +728,12 @@ nav a:hover {
   padding: 4px 10px;
   border-radius: var(--radius-xs);
   background: #dcd5c6;
-  color: #7a6e5a;
+  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 800;
 }
 .latest .note-meta span { background: var(--rust); color: #fff; }
-.note-meta time { color: #9a8f7c; font-size: 12px; }
+.note-meta time { color: var(--text-faint); font-size: 12px; }
 
 .note-main {
   display: flex;
@@ -751,7 +754,7 @@ nav a:hover {
   color: var(--rust);
   font-size: 11px;
 }
-.note-foot i { color: #9a8f7c; font-size: 12px; font-style: normal; }
+.note-foot i { color: var(--text-faint); font-size: 12px; font-style: normal; }
 
 .empty {
   padding: 50px;
@@ -778,12 +781,12 @@ nav a:hover {
   transform: rotate(1deg);
   box-shadow: 5px 5px #2e2a2422;
 }
-.progress-card > span { color: #9a8f7c; letter-spacing: 0.1em; font-size: 13px; }
+.progress-card > span { color: var(--text-faint); letter-spacing: 0.1em; font-size: 13px; }
 .progress-card b { color: #e8a04c; font-size: 58px; }
 .progress-card small { color: #cfc6b4; font-size: 17px; }
 .progress-track { height: 8px; border-radius: var(--radius-sm); background: #ffffff1d; overflow: hidden; }
 .progress-track i { display: block; height: 100%; background: #e8a04c; }
-.progress-card p { display: flex; justify-content: space-between; color: #9a8f7c; font-size: 13px; }
+.progress-card p { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 13px; }
 .progress-card q {
   display: block;
   padding-top: 15px;
@@ -808,14 +811,14 @@ nav a:hover {
 }
 .popular-row:last-child { border: 0; }
 .popular b { font-size: 17px; }
-.popular-meta { color: #9a8f7c; font-size: 11px; }
+.popular-meta { color: var(--text-faint); font-size: 11px; }
 .popular-word-row { display: flex; align-items: center; gap: 6px; }
 
 .tip-card {
   padding: 20px;
   border-radius: var(--radius-sm);
   background: #e9e3d6;
-  color: #6b6151;
+  color: var(--text-secondary);
   font-family: "Caveat", cursive;
   line-height: 1.8;
   transform: rotate(-1deg);
@@ -876,7 +879,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 .modal-label {
   padding-bottom: 18px;
   border-bottom: 3px double var(--line);
-  color: #9a8f7c;
+  color: var(--text-faint);
   letter-spacing: 0.1em;
   font-size: 12px;
 }
@@ -900,7 +903,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   border-radius: var(--radius-sm);
   background: #f4efe2;
 }
-.meaning span { color: #9a8f7c; font-size: 12px; }
+.meaning span { color: var(--text-faint); font-size: 12px; }
 .meaning strong { font-size: 21px; }
 .meaning i {
   margin-left: auto;
@@ -927,7 +930,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   font-size: 12px;
   font-weight: 800;
 }
-.pattern code { color: #6b6151; }
+.pattern code { color: var(--text-secondary); }
 .example h3 { margin: 0 0 10px; font-size: 22px; }
 .example p[lang="th"] { margin: 0; font-size: 28px; font-weight: 800; }
 .example em { display: block; margin: 4px 0 18px; color: var(--rust); }
@@ -959,7 +962,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   padding: 17px 22px;
   border-radius: var(--radius-sm);
   background: #f4efe2;
-  color: #6b6151;
+  color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.8;
 }
