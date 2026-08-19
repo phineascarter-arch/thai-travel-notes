@@ -31,7 +31,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  font-family: "Noto Sans TC", "Noto Sans Thai", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
 }
 
 button,
