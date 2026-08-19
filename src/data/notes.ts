@@ -17,6 +17,7 @@ export const CATEGORIES = [
   "餐廳點餐",
   "購物殺價",
   "按摩",
+  "緊急狀況",
 ] as const;
 
 export type Category = (typeof CATEGORIES)[number];
@@ -47,6 +48,166 @@ export interface Note {
 }
 
 export const notes: Note[] = [
+  {
+    day: 69,
+    date: "2026.09.28",
+    thai: "ต้องไปโรงพยาบาลค่ะ",
+    roman: "dtâwng bpai roong-pá-yaa-baan khâ",
+    zh: "我需要去醫院",
+    category: "緊急狀況",
+    pattern: "ต้องไป + โรงพยาบาล／เรียกรถพยาบาล（醫療緊急狀況）",
+    examples: [
+      {
+        zh: "我需要去醫院",
+        thai: "ต้องไปโรงพยาบาลค่ะ",
+        roman: "dtâwng bpai roong-pá-yaa-baan khâ",
+        tokens: [
+          { thai: "ต้องไป", roman: "dtâwng bpai", zh: "必須去" },
+          { thai: "โรงพยาบาล", roman: "roong-pá-yaa-baan", zh: "醫院" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "請幫忙叫救護車",
+        thai: "เรียกรถพยาบาลด้วยค่ะ",
+        roman: "rîiak rót-pá-yaa-baan dûai khâ",
+        tokens: [
+          { thai: "เรียก", roman: "rîiak", zh: "叫、呼叫" },
+          { thai: "รถพยาบาล", roman: "rót-pá-yaa-baan", zh: "救護車" },
+          { thai: "ด้วย", roman: "dûai", zh: "請…一下" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "救護車叫車熱線是 1669（跟 Day 65 的 191 是不同支專線），語言不通時直接跟旁人說 เรียกรถพยาบาลด้วยค่ะ 請人幫忙叫車最快；有買旅遊保險的話，先確認保單上的緊急聯絡電話，很多保險公司會直接協助處理醫療費用。",
+  },
+  {
+    day: 68,
+    date: "2026.09.27",
+    thai: "สถานีตำรวจอยู่ที่ไหน",
+    roman: "sà-thǎa-nii dtam-rùat yùu thîi-nǎi",
+    zh: "警察局在哪裡",
+    category: "緊急狀況",
+    pattern: "สถานีตำรวจ + อยู่ที่ไหน／ขอใบแจ้งความ（找警局、申請報案證明）",
+    examples: [
+      {
+        zh: "警察局在哪裡？",
+        thai: "สถานีตำรวจอยู่ที่ไหนคะ",
+        roman: "sà-thǎa-nii dtam-rùat yùu thîi-nǎi khá",
+        tokens: [
+          { thai: "สถานีตำรวจ", roman: "sà-thǎa-nii dtam-rùat", zh: "警察局" },
+          { thai: "อยู่ที่ไหน", roman: "yùu thîi-nǎi", zh: "在哪裡" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我要一份報案證明",
+        thai: "ขอใบแจ้งความค่ะ",
+        roman: "khǎaw bai-jɛɛng-khwaam khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我" },
+          { thai: "ใบแจ้งความ", roman: "bai-jɛɛng-khwaam", zh: "報案證明" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "東西被偷、護照遺失（見 Day 66、67）都需要先到警局做筆錄拿 ใบแจ้งความ（報案證明），申請補發證件、跟保險公司理賠都用得到，記得申請前先確認內容正確、留一份副本。",
+  },
+  {
+    day: 67,
+    date: "2026.09.26",
+    thai: "ของถูกขโมยค่ะ",
+    roman: "khɔ̌ɔng thùuk khà-mooi khâ",
+    zh: "東西被偷了",
+    category: "緊急狀況",
+    pattern: "ของ + ถูก + ขโมย（被動式：東西被偷了）",
+    examples: [
+      {
+        zh: "東西被偷了",
+        thai: "ของถูกขโมยค่ะ",
+        roman: "khɔ̌ɔng thùuk khà-mooi khâ",
+        tokens: [
+          { thai: "ของ", roman: "khɔ̌ɔng", zh: "東西" },
+          { thai: "ถูกขโมย", roman: "thùuk khà-mooi", zh: "被偷" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我的錢包不見了",
+        thai: "กระเป๋าตังค์หายค่ะ",
+        roman: "grà-bpǎo-dtang hǎai khâ",
+        tokens: [
+          { thai: "กระเป๋าตังค์", roman: "grà-bpǎo-dtang", zh: "錢包" },
+          { thai: "หาย", roman: "hǎai", zh: "不見、遺失" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "財物被偷或搞丟，第一時間先確認是「弄丟」還是「被偷」，去警局報案時講法會不太一樣；ถูก 是被動式標記，「ถูก + 動詞」＝「被……」，這個句型很好用，換掉動詞還能表達其他被動情境。",
+  },
+  {
+    day: 66,
+    date: "2026.09.25",
+    thai: "พาสปอร์ตหายค่ะ",
+    roman: "pháat-sà-bpɔɔt hǎai khâ",
+    zh: "我的護照不見了",
+    category: "緊急狀況",
+    pattern: "[物品] + หาย（東西不見了）",
+    examples: [
+      {
+        zh: "我的護照不見了",
+        thai: "พาสปอร์ตหายค่ะ",
+        roman: "pháat-sà-bpɔɔt hǎai khâ",
+        tokens: [
+          { thai: "พาสปอร์ต", roman: "pháat-sà-bpɔɔt", zh: "護照" },
+          { thai: "หาย", roman: "hǎai", zh: "不見、遺失" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "需要去大使館",
+        thai: "ต้องไปสถานทูตค่ะ",
+        roman: "dtâwng bpai sà-thǎan-thûut khâ",
+        tokens: [
+          { thai: "ต้องไป", roman: "dtâwng bpai", zh: "必須去" },
+          { thai: "สถานทูต", roman: "sà-thǎan-thûut", zh: "大使館" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "護照遺失要盡快到當地警局報案取得報案證明（見 Day 68），再帶著證明去大使館／辦事處申請臨時證件；隨身備份護照影本或手機拍照存檔，能省下不少麻煩。",
+  },
+  {
+    day: 65,
+    date: "2026.09.24",
+    thai: "ช่วยด้วย",
+    roman: "chûai dûai",
+    zh: "救命啊、幫幫我",
+    category: "緊急狀況",
+    pattern: "ช่วยด้วย（固定用語，緊急呼救）",
+    examples: [
+      {
+        zh: "救命啊！",
+        thai: "ช่วยด้วย",
+        roman: "chûai dûai",
+        tokens: [
+          { thai: "ช่วยด้วย", roman: "chûai dûai", zh: "救命、幫幫我" },
+        ],
+      },
+      {
+        zh: "請幫忙打191報案",
+        thai: "โทรแจ้ง 191 ด้วยค่ะ",
+        roman: "thoo-jɛɛng nʉ̀ng-gâo-nʉ̀ng dûai khâ",
+        tokens: [
+          { thai: "โทรแจ้ง", roman: "thoo-jɛɛng", zh: "打電話報告、報案" },
+          { thai: "191", roman: "nʉ̀ng-gâo-nʉ̀ng", zh: "一九一（泰國警察報案專線）" },
+          { thai: "ด้วย", roman: "dûai", zh: "請…一下" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "ช่วยด้วย 是最直接的求救喊聲，情況危急時可以省略禮貌詞尾直接喊；泰國報案電話是 191（警察）、1669（救護車，見 Day 69）、199（消防），數字要一個一個唸，記不住的話直接說 โทรแจ้ง 191 ด้วยค่ะ 請旁人幫忙報案也可以。",
+  },
   {
     day: 64,
     date: "2026.09.23",

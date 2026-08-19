@@ -11,6 +11,7 @@ const FLAG_COLOR: Record<Category, string> = {
   "餐廳點餐": "#e0473a",
   "購物殺價": "#f2b23a",
   "按摩": "#8a5fc4",
+  "緊急狀況": "#d1365c",
 };
 
 interface Props {
