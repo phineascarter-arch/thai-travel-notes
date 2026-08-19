@@ -81,7 +81,7 @@ a,
 }
 
 .brand span {
-  font-family: cursive;
+  font-family: "Caveat", cursive;
   font-size: 22px;
   font-weight: 800;
 }
@@ -126,7 +126,7 @@ nav a:hover {
 .hero h1 {
   color: var(--gold);
   margin: 14px 0 3px;
-  font-family: cursive;
+  font-family: "Caveat", cursive;
   font-size: clamp(40px, 6vw, 72px);
   transform: rotate(-1deg);
 }
@@ -251,7 +251,7 @@ nav a:hover {
   display: block;
   margin-top: 10px;
   color: #8a7f6b;
-  font-family: cursive;
+  font-family: "Caveat", cursive;
 }
 
 .wall-cta {
@@ -789,7 +789,7 @@ nav a:hover {
   padding-top: 15px;
   border-top: 1px dashed #ffffff2b;
   color: #cfc6b4;
-  font-family: cursive;
+  font-family: "Caveat", cursive;
   line-height: 1.6;
 }
 
@@ -816,7 +816,7 @@ nav a:hover {
   border-radius: var(--radius-sm);
   background: #e9e3d6;
   color: #6b6151;
-  font-family: cursive;
+  font-family: "Caveat", cursive;
   line-height: 1.8;
   transform: rotate(-1deg);
 }
@@ -831,7 +831,7 @@ footer {
   color: var(--night-text);
 }
 footer div { display: flex; flex-direction: column; gap: 4px; }
-footer b { color: var(--cream); font-family: cursive; font-size: 20px; }
+footer b { color: var(--cream); font-family: "Caveat", cursive; font-size: 20px; }
 footer span, footer p { color: var(--night-faint); font-size: 12px; }
 
 /* ---------- Modal ---------- */
