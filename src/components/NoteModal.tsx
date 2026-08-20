@@ -1,17 +1,29 @@
 import { useEffect } from "react";
 import type { Note } from "../data/notes";
 import SpeakButton from "./SpeakButton";
+import BookmarkButton from "./BookmarkButton";
 
 interface Props {
   note: Note;
   hasPrev: boolean;
   hasNext: boolean;
+  isBookmarked: boolean;
+  onToggleBookmark: () => void;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
 }
 
-export default function NoteModal({ note, hasPrev, hasNext, onClose, onPrev, onNext }: Props) {
+export default function NoteModal({
+  note,
+  hasPrev,
+  hasNext,
+  isBookmarked,
+  onToggleBookmark,
+  onClose,
+  onPrev,
+  onNext,
+}: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -26,9 +38,12 @@ export default function NoteModal({ note, hasPrev, hasNext, onClose, onPrev, onN
         <button className="close" onClick={onClose} aria-label="關閉">
           ×
         </button>
-        <p className="modal-label">
-          DAY {note.day} · {note.date}
-        </p>
+        <div className="modal-label-row">
+          <p className="modal-label">
+            DAY {note.day} · {note.date}
+          </p>
+          <BookmarkButton active={isBookmarked} onToggle={onToggleBookmark} />
+        </div>
 
         <div className="word-heading">
           <div className="word-heading-row">

@@ -92,14 +92,16 @@ function buildQuestions(pool: QuizExample[], mode: Mode, count: number): Questio
 interface Props {
   pool: QuizExample[];
   maxDay: number;
+  bookmarkedDays: Set<number>;
 }
 
-export default function ReviewQuiz({ pool, maxDay }: Props) {
+export default function ReviewQuiz({ pool, maxDay, bookmarkedDays }: Props) {
   const [phase, setPhase] = useState<"setup" | "playing" | "result">("setup");
   const [mode, setMode] = useState<Mode>("roman-zh");
   const [count, setCount] = useState(5);
   const [dayFrom, setDayFrom] = useState(1);
   const [dayTo, setDayTo] = useState(maxDay);
+  const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
 
   // activeItem 是「畫面上正在顯示、使用者正在作答／看解答」的題目，
   // 只有按下「下一題」才會換下一個，答題當下不會變——這樣答對/答錯的
@@ -117,7 +119,9 @@ export default function ReviewQuiz({ pool, maxDay }: Props) {
   const [selfGrade, setSelfGrade] = useState<"correct" | "wrong" | null>(null);
   const [best, setBest] = useState<number>(() => Number(localStorage.getItem("thai-quiz-best") || 0));
 
-  const rangePool = pool.filter((q) => q.day >= dayFrom && q.day <= dayTo);
+  const rangePool = pool.filter(
+    (q) => q.day >= dayFrom && q.day <= dayTo && (!bookmarkedOnly || bookmarkedDays.has(q.day))
+  );
   const current = activeItem?.question;
 
   const startQuiz = () => {
@@ -244,6 +248,16 @@ export default function ReviewQuiz({ pool, maxDay }: Props) {
             </label>
             <small>共 {rangePool.length} 個例句</small>
           </fieldset>
+          {bookmarkedDays.size > 0 && (
+            <label className="review-bookmark-only">
+              <input
+                type="checkbox"
+                checked={bookmarkedOnly}
+                onChange={(e) => setBookmarkedOnly(e.target.checked)}
+              />
+              只考收藏的（{bookmarkedDays.size} 天）
+            </label>
+          )}
           <button className="review-start" disabled={rangePool.length === 0} onClick={startQuiz}>
             開始測驗 →
           </button>

@@ -566,6 +566,23 @@ nav a:hover {
   color: var(--rust);
 }
 
+.review-bookmark-only {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.review-bookmark-only input {
+  accent-color: var(--rust);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 .review-start {
   grid-column: 1 / -1;
   padding: 13px;
@@ -966,9 +983,16 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   cursor: pointer;
 }
 
-.modal-label {
+.modal-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
   padding-bottom: 18px;
   border-bottom: 3px double var(--line);
+}
+
+.modal-label {
   color: var(--text-faint);
   letter-spacing: 0.1em;
   font-size: 12px;
@@ -1082,6 +1106,75 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   width: 22px;
   height: 22px;
   font-size: 11px;
+}
+
+/* ---------- Bookmark button ---------- */
+/* 這裡刻意不加 transition：border-color／color 兩個屬性的值本身
+   （--rust、--text-faint）會隨深色模式切換而變，實測發現如果同時有
+   transition，瀏覽器在「class 加上 active」跟「--rust 這個變數本身的值
+   換了」兩件事幾乎同時發生時，過渡動畫會卡在算錯的中間值出不來（顏色
+   永遠停在淺色模式的 --rust，深色模式也一樣），SpeakButton 沒有這個
+   transition 就完全沒事，拿掉就正常了。 */
+.bookmark-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--text-faint);
+  cursor: pointer;
+}
+
+/* 用 --rust 不是 --gold：實測 --gold 疊在卡片米色底（--cream）上對比只有
+   1.34:1，幾乎看不見；--rust 在淺色模式對比 4.79，深色模式底下這個
+   token 本身會自動變成 --orange（見 :root 的深色模式區塊），對比 3.49，
+   都過得了圖示用的 WCAG 門檻（非文字內容 3:1）。 */
+.bookmark-btn:hover {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+
+.bookmark-btn-active {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+
+.bookmark-btn-sm {
+  width: 24px;
+  height: 24px;
+}
+
+.bookmark-btn-sm svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* .topics 那排原本都是彼此互斥的分類篩選（一次只能選一個），這顆是
+   獨立的開關，用 margin-left:auto 推到最右邊，視覺上跟分類鈕分開，
+   才不會讓人誤以為「收藏」也是分類的一種、選了就會取消其他分類。 */
+.topics-bookmark-filter {
+  margin-left: auto;
+  padding: 8px 17px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* --gold 本身在深色模式底下沒有變（兩種模式都是同一個亮黃色），文字
+   固定用深色，不能用 --ink——--ink 深色模式會變成淺色文字，疊在同樣
+   很亮的金色底上對比會不夠。 */
+.topics-bookmark-filter.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #2e2a24;
+  font-weight: 800;
 }
 
 .word-heading-row {

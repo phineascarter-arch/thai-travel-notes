@@ -6,7 +6,9 @@ import RecordWall from "./components/RecordWall";
 import SpeakButton from "./components/SpeakButton";
 import AyutthayaCanal from "./components/AyutthayaCanal";
 import ThemeToggle from "./components/ThemeToggle";
+import BookmarkButton from "./components/BookmarkButton";
 import { recordVisitToday, getStreak } from "./lib/progress";
+import { useBookmarks } from "./hooks/useBookmarks";
 
 const GOAL_DAYS = 100;
 
@@ -25,6 +27,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<"全部" | Category>("全部");
   const [openDay, setOpenDay] = useState<number | null>(null);
+  const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
+  const { bookmarks, toggle: toggleBookmark } = useBookmarks();
 
   const maxDay = sortedNotes[0]?.day ?? 0;
 
@@ -39,6 +43,7 @@ function App() {
     return sortedNotes.filter((n) => {
       const matchesCategory = activeCategory === "全部" || n.category === activeCategory;
       if (!matchesCategory) return false;
+      if (bookmarkedOnly && !bookmarks.has(n.day)) return false;
       if (!q) return true;
       return (
         n.thai.toLowerCase().includes(q) ||
@@ -46,7 +51,7 @@ function App() {
         n.zh.toLowerCase().includes(q)
       );
     });
-  }, [query, activeCategory]);
+  }, [query, activeCategory, bookmarkedOnly, bookmarks]);
 
   const featured = sortedNotes.slice(0, 4);
   const recent = sortedNotes.slice(0, 3);
@@ -140,9 +145,16 @@ function App() {
             {c}
           </button>
         ))}
+        <button
+          className={`topics-bookmark-filter ${bookmarkedOnly ? "active" : ""}`}
+          aria-pressed={bookmarkedOnly}
+          onClick={() => setBookmarkedOnly((v) => !v)}
+        >
+          ★ 只看收藏{bookmarks.size > 0 ? `（${bookmarks.size}）` : ""}
+        </button>
       </section>
 
-      <ReviewQuiz pool={quizPool} maxDay={maxDay} />
+      <ReviewQuiz pool={quizPool} maxDay={maxDay} bookmarkedDays={bookmarks} />
 
       <AyutthayaCanal />
 
@@ -171,6 +183,11 @@ function App() {
               <div className="note-meta">
                 <span>Day {n.day}</span>
                 <time>{n.date}</time>
+                <BookmarkButton
+                  active={bookmarks.has(n.day)}
+                  onToggle={() => toggleBookmark(n.day)}
+                  size="sm"
+                />
               </div>
               <div className="note-main">
                 <strong lang="th">{n.thai}</strong>
@@ -247,6 +264,8 @@ function App() {
           note={openNote}
           hasPrev={openIndex < sortedNotes.length - 1}
           hasNext={openIndex > 0}
+          isBookmarked={bookmarks.has(openNote.day)}
+          onToggleBookmark={() => toggleBookmark(openNote.day)}
           onClose={() => setOpenDay(null)}
           onPrev={() => setOpenDay(sortedNotes[openIndex + 1].day)}
           onNext={() => setOpenDay(sortedNotes[openIndex - 1].day)}
