@@ -18,8 +18,10 @@
   --text-strong: #5d554a;
   --green: #2f8055;
   --green-bg: #e9f5ed;
+  --green-fg: #195f3a;
   --red: #b94e3f;
   --red-bg: #fff0ed;
+  --red-fg: #9c382b;
 
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -34,6 +36,49 @@
   --shadow-xl: 0 28px 80px #0008;
 
   --transition-fast: 200ms ease;
+}
+
+/* 深色模式：把原本米色紙感區塊（.intro-grid／.review-quiz／.content-grid／
+   .note-modal 等）改用跟頂欄/Hero/footer 同一套已經設計好的 --night 深藍
+   色系，而不是另外發明一組新的深色調——這樣切換深色模式後，全站會是
+   同一種「深藍」而不是兩種深色互相打架。三態邏輯（跟 Artifact 的做法
+   一致）：使用者沒手動選過時跟系統設定走（media query），選過之後
+   用 [data-theme] 蓋過去，且要蓋兩個方向（淺色蓋掉系統深色偏好、
+   深色蓋掉系統淺色偏好）。
+   .canal／.word-card／唱片機／戰象旗這些本來就是深色主題的裝飾性
+   插畫，維持原樣不受這裡影響——它們不是「UI 底色」，是固定畫面內容。 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: var(--night-text);
+    --paper: var(--night);
+    --cream: var(--night-border);
+    --line: var(--night-line);
+    --muted: var(--night-dim);
+    --text-faint: var(--night-dim);
+    --text-secondary: var(--night-dim);
+    --text-strong: var(--night-text);
+    --rust: var(--orange);
+    --green-bg: #17392a;
+    --green-fg: #7fd9a8;
+    --red-bg: #3a1f1c;
+    --red-fg: #ffab9b;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ink: var(--night-text);
+  --paper: var(--night);
+  --cream: var(--night-border);
+  --line: var(--night-line);
+  --muted: var(--night-dim);
+  --text-faint: var(--night-dim);
+  --text-secondary: var(--night-dim);
+  --text-strong: var(--night-text);
+  --rust: var(--orange);
+  --green-bg: #17392a;
+  --green-fg: #7fd9a8;
+  --red-bg: #3a1f1c;
+  --red-fg: #ffab9b;
 }
 
 * {
@@ -131,6 +176,30 @@ nav a {
 
 nav a:hover {
   color: var(--cream);
+}
+
+/* .topbar 本身固定是深色（不受深色模式切換影響，見 :root 的說明），
+   所以按鈕顏色直接用 --night-text／--night-line，不用會隨模式變動的
+   --ink／--line。 */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--night-line);
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--night-text);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 /* ---------- Hero ---------- */
@@ -579,13 +648,13 @@ nav a:hover {
 .review-options button.correct {
   background: var(--green-bg);
   border-color: var(--green);
-  color: #195f3a;
+  color: var(--green-fg);
 }
 
 .review-options button.wrong {
   background: var(--red-bg);
   border-color: var(--red);
-  color: #9c382b;
+  color: var(--red-fg);
 }
 
 .review-options button.muted { opacity: 0.48; }
@@ -662,8 +731,8 @@ nav a:hover {
   cursor: pointer;
 }
 
-.self-grade button.active.correct { background: #dcefe2; border-color: var(--green); color: #195f3a; }
-.self-grade button.active.wrong { background: #ffe1dc; border-color: var(--red); color: #9c382b; }
+.self-grade button.active.correct { background: var(--green-bg); border-color: var(--green); color: var(--green-fg); }
+.self-grade button.active.wrong { background: var(--red-bg); border-color: var(--red); color: var(--red-fg); }
 .self-grade button:disabled:not(.active) { opacity: 0.4; }
 
 .review-actions {

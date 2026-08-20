@@ -5,6 +5,7 @@ import NoteModal from "./components/NoteModal";
 import RecordWall from "./components/RecordWall";
 import SpeakButton from "./components/SpeakButton";
 import AyutthayaCanal from "./components/AyutthayaCanal";
+import ThemeToggle from "./components/ThemeToggle";
 import { recordVisitToday, getStreak } from "./lib/progress";
 
 const GOAL_DAYS = 100;
@@ -65,6 +66,7 @@ function App() {
           <a href="#review-quiz">複習測驗</a>
           <a href="#ayutthaya-canal">AYUTTHAYA</a>
         </nav>
+        <ThemeToggle />
       </header>
 
       <section className="hero" id="top">
