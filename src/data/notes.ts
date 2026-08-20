@@ -49,6 +49,139 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    day: 73,
+    date: "2026.10.02",
+    thai: "ว่างไปเที่ยวด้วยกันไหม",
+    roman: "wâang bpai-thîiao dûai-gan mǎi",
+    zh: "有空一起出去玩嗎",
+    category: "閒聊",
+    pattern: "ว่าง + ไปเที่ยว + ด้วยกัน + ไหม（邀約用語）",
+    examples: [
+      {
+        zh: "有空一起出去玩嗎？",
+        thai: "ว่างไปเที่ยวด้วยกันไหมคะ",
+        roman: "wâang bpai-thîiao dûai-gan mǎi khá",
+        tokens: [
+          { thai: "ว่าง", roman: "wâang", zh: "有空" },
+          { thai: "ไปเที่ยว", roman: "bpai-thîiao", zh: "去玩、出遊" },
+          { thai: "ด้วยกัน", roman: "dûai-gan", zh: "一起" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "可以給我聯絡方式嗎？",
+        thai: "ขอเบอร์ติดต่อได้ไหมคะ",
+        roman: "khǎaw bəə-dtìt-dtàw dâai-mǎi khá",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我" },
+          { thai: "เบอร์ติดต่อ", roman: "bəə-dtìt-dtàw", zh: "聯絡方式" },
+          { thai: "ได้ไหม", roman: "dâai-mǎi", zh: "可以嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "交到新朋友後，想約下次見面或交換聯絡方式都可以用這句；ไปเที่ยว 泛指出去玩、觀光、逛街都算，是很生活化的邀約用語，比直接說「約會」輕鬆自然。",
+  },
+  {
+    day: 72,
+    date: "2026.10.01",
+    thai: "ขอไลน์ได้ไหม",
+    roman: "khǎaw lai dâai-mǎi",
+    zh: "可以加LINE嗎",
+    category: "閒聊",
+    pattern: "ขอ + [聯絡方式] + ได้ไหม",
+    examples: [
+      {
+        zh: "可以加LINE嗎？",
+        thai: "ขอไลน์ได้ไหมคะ",
+        roman: "khǎaw lai dâai-mǎi khá",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我" },
+          { thai: "ไลน์", roman: "lai", zh: "LINE" },
+          { thai: "ได้ไหม", roman: "dâai-mǎi", zh: "可以嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "你有LINE嗎？",
+        thai: "มีไลน์ไหมคะ",
+        roman: "mii lai mǎi khá",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "ไลน์", roman: "lai", zh: "LINE" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "LINE 是泰國人最常用的通訊軟體，比WhatsApp、Messenger都普及，交換聯絡方式幾乎都問「有沒有LINE」而不是問手機號碼；ไลน์ 直接是英文 LINE 的音譯，講出來對方都聽得懂。",
+  },
+  {
+    day: 71,
+    date: "2026.09.30",
+    thai: "เวลาว่างชอบทำอะไร",
+    roman: "wee-laa wâang chɔ̂p tam à-rai",
+    zh: "空閒時間喜歡做什麼",
+    category: "閒聊",
+    pattern: "เวลาว่าง + ชอบทำอะไร",
+    examples: [
+      {
+        zh: "空閒時間喜歡做什麼？",
+        thai: "เวลาว่างชอบทำอะไรคะ",
+        roman: "wee-laa wâang chɔ̂p tam à-rai khá",
+        tokens: [
+          { thai: "เวลาว่าง", roman: "wee-laa wâang", zh: "空閒時間" },
+          { thai: "ชอบทำอะไร", roman: "chɔ̂p tam à-rai", zh: "喜歡做什麼" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我喜歡看電影",
+        thai: "ชอบดูหนังค่ะ",
+        roman: "chɔ̂p duu-nǎng khâ",
+        tokens: [
+          { thai: "ชอบ", roman: "chɔ̂p", zh: "喜歡" },
+          { thai: "ดูหนัง", roman: "duu-nǎng", zh: "看電影" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "這句是認識新朋友很自然的延伸話題，回答完後通常對方也會反問你，可以順便練習用同一句型問回去；興趣除了 ดูหนัง（看電影），也可以換成其他喜歡做的事。",
+  },
+  {
+    day: 70,
+    date: "2026.09.29",
+    thai: "คุณมาจากไหน",
+    roman: "khun maa-jàak nǎi",
+    zh: "你從哪裡來",
+    category: "閒聊",
+    pattern: "คุณ + มาจาก + ไหน",
+    examples: [
+      {
+        zh: "你從哪裡來？",
+        thai: "คุณมาจากไหนคะ",
+        roman: "khun maa-jàak nǎi khá",
+        tokens: [
+          { thai: "คุณ", roman: "khun", zh: "你" },
+          { thai: "มาจากไหน", roman: "maa-jàak nǎi", zh: "從哪裡來" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "我從台灣來的",
+        thai: "มาจากไต้หวันค่ะ",
+        roman: "maa-jàak dtâi-wǎn khâ",
+        tokens: [
+          { thai: "มาจาก", roman: "maa-jàak", zh: "從……來" },
+          { thai: "ไต้หวัน", roman: "dtâi-wǎn", zh: "台灣" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰國人很愛跟外國朋友聊「你從哪裡來」，回答時前面加國家名字＋มาจาก 就好，台灣是 ไต้หวัน，很多泰國人對台灣有印象（手搖飲、夜市），常常會多聊幾句。",
+  },
+  {
     day: 69,
     date: "2026.09.28",
     thai: "ต้องไปโรงพยาบาลค่ะ",
