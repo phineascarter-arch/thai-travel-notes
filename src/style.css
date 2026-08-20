@@ -13,6 +13,20 @@
   --orange: #e8674c;
   --gold: #ffd966;
   --amber: #e8a04c;
+  --surface: #fffaf1;
+  --surface-alt: #f4efe2;
+  --accent-blue: #1f5f8b;
+  /* 固定不隨主題切換的白：給頂欄／Hero／footer 這些「本來就一律深色」
+     的區塊當文字色──它們原本借用會隨主題換色的 --cream，淺色模式剛好
+     是白的所以沒事，但深色模式下 --cream 會變成跟這些區塊底色很接近的
+     深藍，文字幾乎消失。這些區塊的底色本身也是寫死的 --night／深色，不
+     隨主題變，文字理當跟著固定，不該借用會變色的 token。 */
+  --on-dark: #fffdf8;
+  /* 疊在 --rust 這個「會隨主題變色」的強調色上要用的文字色：淺色模式
+     --rust 偏暗（適合白字），深色模式 --rust 指向 --amber 偏亮（白字對比
+     不夠，改深字）。跟 --rust 本身的深淺方向相反，所以不能共用同一個
+     token，需要獨立宣告。 */
+  --on-accent: #fff;
   --muted: #867b69;
   --text-faint: #9a8f7c;
   --text-secondary: #6b6151;
@@ -59,6 +73,10 @@
     --text-secondary: var(--night-dim);
     --text-strong: var(--night-text);
     --rust: var(--amber);
+    --surface: var(--night-border);
+    --surface-alt: var(--night-border);
+    --accent-blue: #7db8e0;
+    --on-accent: #2e2a24;
     --green-bg: #17392a;
     --green-fg: #7fd9a8;
     --red-bg: #3a1f1c;
@@ -76,6 +94,10 @@
   --text-secondary: var(--night-dim);
   --text-strong: var(--night-text);
   --rust: var(--amber);
+  --surface: var(--night-border);
+  --surface-alt: var(--night-border);
+  --accent-blue: #7db8e0;
+  --on-accent: #2e2a24;
   --green-bg: #17392a;
   --green-fg: #7fd9a8;
   --red-bg: #3a1f1c;
@@ -138,7 +160,7 @@ input:focus-visible,
   align-items: center;
   padding: 17px max(24px, 50vw - 590px);
   background: #1b2438f5;
-  color: var(--cream);
+  color: var(--on-dark);
   border-bottom: 1px solid var(--night-border);
   backdrop-filter: blur(12px);
 }
@@ -176,7 +198,7 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--cream);
+  color: var(--on-dark);
 }
 
 /* .topbar 本身固定是深色（不受深色模式切換影響，見 :root 的說明），
@@ -207,7 +229,7 @@ nav a:hover {
 .hero {
   text-align: center;
   background: var(--night);
-  color: var(--cream);
+  color: var(--on-dark);
   padding: 68px 24px 46px;
 }
 
@@ -349,7 +371,12 @@ nav a:hover {
 .wall-scroll blockquote small {
   display: block;
   margin-top: 10px;
-  color: var(--text-faint);
+  /* 固定色，不用會隨主題變的 --text-faint：這張卡本身背景是寫死的
+     #e8ddc8（見上面 .wall-scroll blockquote），不隨深色模式變，配色
+     理當跟著固定。原本的 --text-faint 淺色模式值（#9a8f7c）疊在這張卡
+     上實測對比只有 2.37:1，這其實是換色前就存在的問題，不是深色模式
+     造成的；改用這個較深的棕色，對比 4.70:1。 */
+  color: #6b5d47;
   font-family: "Caveat", cursive;
 }
 
@@ -449,7 +476,7 @@ nav a:hover {
 .topics button.active {
   background: var(--rust);
   border-color: var(--rust);
-  color: #fff;
+  color: var(--on-accent);
   font-weight: 800;
 }
 
@@ -496,7 +523,7 @@ nav a:hover {
   white-space: nowrap;
   padding: 8px 13px;
   border-radius: var(--radius-sm);
-  background: #f4efe2;
+  background: var(--surface-alt);
   color: var(--rust);
   font-size: 13px;
 }
@@ -528,7 +555,7 @@ nav a:hover {
   padding: 9px 13px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
-  background: #fffaf1;
+  background: var(--surface);
   color: var(--text-strong);
   cursor: pointer;
 }
@@ -537,7 +564,7 @@ nav a:hover {
 .review-result button.active {
   border-color: var(--rust);
   background: var(--rust);
-  color: #fff;
+  color: var(--on-accent);
   font-weight: 800;
 }
 
@@ -563,7 +590,7 @@ nav a:hover {
   padding: 8px;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fff;
+  background: var(--surface);
 }
 
 .day-range small {
@@ -593,8 +620,8 @@ nav a:hover {
   padding: 13px;
   border: 0;
   border-radius: var(--radius-sm);
-  background: var(--ink);
-  color: #fff;
+  background: var(--night);
+  color: var(--on-dark);
   font-weight: 900;
   cursor: pointer;
 }
@@ -607,7 +634,7 @@ nav a:hover {
   height: 7px;
   margin-bottom: 22px;
   border-radius: var(--radius-sm);
-  background: #eee7da;
+  background: var(--surface-alt);
   overflow: hidden;
 }
 
@@ -656,7 +683,7 @@ nav a:hover {
   padding: 12px 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fffaf1;
+  background: var(--surface);
   color: var(--ink);
   font-weight: 750;
   cursor: pointer;
@@ -686,13 +713,13 @@ nav a:hover {
   padding: 14px;
   border: 2px solid var(--rust);
   border-radius: var(--radius-sm);
-  background: #fffaf1;
+  background: var(--surface);
   color: var(--rust);
   font-weight: 900;
   cursor: pointer;
 }
 
-.review-reveal:hover { background: var(--rust); color: #fff; }
+.review-reveal:hover { background: var(--rust); color: var(--on-accent); }
 
 .review-feedback {
   margin-top: 18px;
@@ -722,7 +749,7 @@ nav a:hover {
   padding: 6px 8px;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fffaf1;
+  background: var(--surface);
   text-align: center;
   font-style: normal;
 }
@@ -749,7 +776,7 @@ nav a:hover {
   padding: 8px 12px;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
 }
 
@@ -771,7 +798,7 @@ nav a:hover {
 }
 
 .review-quit { background: none; border: 1px solid var(--line); color: var(--muted); }
-.review-next { background: var(--ink); color: #fff; border: 0; font-weight: 900; }
+.review-next { background: var(--night); color: var(--on-dark); border: 0; font-weight: 900; }
 .review-next:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .review-result { text-align: center; padding: 32px 0 10px; }
@@ -842,12 +869,12 @@ nav a:hover {
 .note-meta span {
   padding: 4px 10px;
   border-radius: var(--radius-xs);
-  background: #dcd5c6;
-  color: var(--text-secondary);
+  background: var(--surface-alt);
+  color: var(--text-strong);
   font-size: 12px;
   font-weight: 800;
 }
-.latest .note-meta span { background: var(--rust); color: #fff; }
+.latest .note-meta span { background: var(--rust); color: var(--on-accent); }
 .note-meta time { color: var(--text-faint); font-size: 12px; }
 
 .note-main {
@@ -891,8 +918,8 @@ nav a:hover {
 .progress-card {
   padding: 28px;
   border-radius: var(--radius-md);
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--night);
+  color: var(--on-dark);
   transform: rotate(1deg);
   box-shadow: 5px 5px #2e2a2422;
 }
@@ -949,7 +976,7 @@ footer {
   color: var(--night-text);
 }
 footer div { display: flex; flex-direction: column; gap: 4px; }
-footer b { color: var(--cream); font-family: "Caveat", cursive; font-size: 20px; }
+footer b { color: var(--on-dark); font-family: "Caveat", cursive; font-size: 20px; }
 footer span, footer p { color: var(--night-faint); font-size: 12px; }
 
 /* ---------- Modal ---------- */
@@ -985,7 +1012,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   height: 36px;
   border: 0;
   border-radius: 50%;
-  background: #eee7da;
+  background: var(--surface-alt);
   color: var(--ink);
   font-size: 25px;
   cursor: pointer;
@@ -1023,7 +1050,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   gap: 12px;
   padding: 18px 20px;
   border-radius: var(--radius-sm);
-  background: #f4efe2;
+  background: var(--surface-alt);
 }
 .meaning span { color: var(--text-faint); font-size: 12px; }
 .meaning strong { font-size: 21px; }
@@ -1042,7 +1069,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   padding: 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fffefa;
+  background: var(--surface);
 }
 .pattern span, .example > span {
   display: block;
@@ -1062,9 +1089,9 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   min-width: 75px;
   max-width: 155px;
   padding: 7px 9px 8px;
-  border: 1px solid #ded5c3;
+  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #fffaf1;
+  background: var(--surface);
   text-align: center;
 }
 .token-card b { display: block; font-size: 16px; }
@@ -1072,8 +1099,8 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   display: block;
   margin: 1px 0 4px;
   padding-bottom: 3px;
-  border-bottom: 2px solid #1f5f8b;
-  color: #1f5f8b;
+  border-bottom: 2px solid var(--accent-blue);
+  color: var(--accent-blue);
   font-size: 10px;
   font-weight: 800;
 }
@@ -1083,7 +1110,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   margin-top: 28px;
   padding: 17px 22px;
   border-radius: var(--radius-sm);
-  background: #f4efe2;
+  background: var(--surface-alt);
   color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.8;
@@ -1102,13 +1129,13 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   padding: 0;
   border: 1px solid var(--line);
   border-radius: 50%;
-  background: #fffaf1;
+  background: var(--surface);
   color: var(--rust);
   font-size: 17px;
   cursor: pointer;
 }
 
-.speak-btn:hover { background: var(--rust); color: #fff; border-color: var(--rust); }
+.speak-btn:hover { background: var(--rust); color: var(--on-accent); border-color: var(--rust); }
 .speak-btn:active { transform: scale(0.94); }
 
 /* 可點擊範圍用 ::before 往外擴到接近 44px（觸控建議的最小尺寸），
@@ -1558,7 +1585,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 }
 
 .record-player-caption em {
-  color: var(--cream);
+  color: var(--on-dark);
   font-style: normal;
 }
 
