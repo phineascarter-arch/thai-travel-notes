@@ -12,6 +12,7 @@
   --rust: #b3572a;
   --orange: #e8674c;
   --gold: #ffd966;
+  --amber: #e8a04c;
   --muted: #867b69;
   --text-faint: #9a8f7c;
   --text-secondary: #6b6151;
@@ -57,7 +58,7 @@
     --text-faint: var(--night-dim);
     --text-secondary: var(--night-dim);
     --text-strong: var(--night-text);
-    --rust: var(--gold);
+    --rust: var(--amber);
     --green-bg: #17392a;
     --green-fg: #7fd9a8;
     --red-bg: #3a1f1c;
@@ -74,7 +75,7 @@
   --text-faint: var(--night-dim);
   --text-secondary: var(--night-dim);
   --text-strong: var(--night-text);
-  --rust: var(--gold);
+  --rust: var(--amber);
   --green-bg: #17392a;
   --green-fg: #7fd9a8;
   --red-bg: #3a1f1c;
@@ -896,10 +897,10 @@ nav a:hover {
   box-shadow: 5px 5px #2e2a2422;
 }
 .progress-card > span { color: var(--text-faint); letter-spacing: 0.1em; font-size: 13px; }
-.progress-card b { color: #e8a04c; font-size: 58px; }
+.progress-card b { color: var(--amber); font-size: 58px; }
 .progress-card small { color: #cfc6b4; font-size: 17px; }
 .progress-track { height: 8px; border-radius: var(--radius-sm); background: #ffffff1d; overflow: hidden; }
-.progress-track i { display: block; height: 100%; background: #e8a04c; }
+.progress-track i { display: block; height: 100%; background: var(--amber); }
 .progress-card p { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 13px; }
 .progress-card q {
   display: block;
@@ -1160,13 +1161,13 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   inset: -6px;
 }
 
-/* 用 --rust 不是直接寫死 --gold：這裡要的是「淺色模式用 --rust、深色模式
-   自動換一個在深色底也好看的顏色」，--rust 這個 token 本身就是為此設計的
-   （見 :root 的深色模式區塊，深色模式下它現在指向 --gold）。如果元件自己
-   直接寫 var(--gold)，淺色模式下疊在卡片米色底（--cream）上實測對比只有
-   1.34:1，幾乎看不見；--rust 淺色模式對比 4.79，深色模式下指向的 --gold
-   疊在深色卡片底上對比 8.28:1，兩種模式都遠超圖示用的 WCAG 門檻
-   （非文字內容 3:1）。 */
+/* 用 --rust 不是直接寫死某個深色模式顏色：這裡要的是「淺色模式用
+   --rust、深色模式自動換一個在深色底也好看的顏色」，--rust 這個 token
+   本身就是為此設計的（見 :root 的深色模式區塊，深色模式下它現在指向
+   --amber）。如果元件自己直接寫 var(--gold)，淺色模式下疊在卡片米色底
+   （--cream）上實測對比只有 1.34:1，幾乎看不見；--rust 淺色模式對比
+   4.79，深色模式下指向的 --amber 疊在深色卡片底上對比 5.15:1，兩種模式
+   都遠超圖示用的 WCAG 門檻（非文字內容 3:1）。 */
 .bookmark-btn:hover {
   border-color: var(--rust);
   color: var(--rust);
