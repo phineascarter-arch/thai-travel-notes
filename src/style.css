@@ -57,7 +57,7 @@
     --text-faint: var(--night-dim);
     --text-secondary: var(--night-dim);
     --text-strong: var(--night-text);
-    --rust: var(--orange);
+    --rust: var(--gold);
     --green-bg: #17392a;
     --green-fg: #7fd9a8;
     --red-bg: #3a1f1c;
@@ -74,7 +74,7 @@
   --text-faint: var(--night-dim);
   --text-secondary: var(--night-dim);
   --text-strong: var(--night-text);
-  --rust: var(--orange);
+  --rust: var(--gold);
   --green-bg: #17392a;
   --green-fg: #7fd9a8;
   --red-bg: #3a1f1c;
@@ -1160,10 +1160,13 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   inset: -6px;
 }
 
-/* 用 --rust 不是 --gold：實測 --gold 疊在卡片米色底（--cream）上對比只有
-   1.34:1，幾乎看不見；--rust 在淺色模式對比 4.79，深色模式底下這個
-   token 本身會自動變成 --orange（見 :root 的深色模式區塊），對比 3.49，
-   都過得了圖示用的 WCAG 門檻（非文字內容 3:1）。 */
+/* 用 --rust 不是直接寫死 --gold：這裡要的是「淺色模式用 --rust、深色模式
+   自動換一個在深色底也好看的顏色」，--rust 這個 token 本身就是為此設計的
+   （見 :root 的深色模式區塊，深色模式下它現在指向 --gold）。如果元件自己
+   直接寫 var(--gold)，淺色模式下疊在卡片米色底（--cream）上實測對比只有
+   1.34:1，幾乎看不見；--rust 淺色模式對比 4.79，深色模式下指向的 --gold
+   疊在深色卡片底上對比 8.28:1，兩種模式都遠超圖示用的 WCAG 門檻
+   （非文字內容 3:1）。 */
 .bookmark-btn:hover {
   border-color: var(--rust);
   color: var(--rust);
