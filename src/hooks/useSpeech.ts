@@ -69,13 +69,30 @@ export function useSpeech() {
       // synth.speak()、沒有互相 cancel，瀏覽器就會把兩句話排隊依序播完，
       // 聽起來像是點了這句、卻先聽到（或被插入）另一句不相干的發音。
       // activeUtterance 不受瀏覽器回報延遲影響，能補上這段空窗期。
-      if (activeUtterance != null || synth.speaking || synth.pending) {
-        // 打斷上一個還在播放的語音時才需要留緩衝：cancel() 之後瀏覽器要一點
-        // 時間才會真的清空音訊管線，緊接著 speak() 常常會把新語音的開頭吃掉，
-        // 短單字（像逐詞拆解）音檔本來就短，吃掉的比例感覺特別明顯。單純點一次、
-        // 沒有其他語音在播放時不會走到這個分支，不會有延遲感。
+      const prevUtterance = activeUtterance;
+      if (prevUtterance != null || synth.speaking || synth.pending) {
+        // 打斷上一個還在播放的語音時才需要等它真的停下來：cancel() 之後
+        // 瀏覽器要一點時間才會清空音訊管線，太早呼叫下一個 speak() 常常會
+        // 把新語音的開頭吃掉，或讓上一句的尾音殘留、聽起來像疊在一起。
+        // 這裡曾經固定等 100ms 賭這段清空時間，但實機（平板）測試發現
+        // 不同裝置的 TTS 引擎清空音訊管線的時間差很多，100ms 對較慢的
+        // 裝置不夠、新語音開始時上一句尾音還沒真的停。改成優先監聽上一個
+        // utterance 真正結束的事件——cancel() 生效時瀏覽器會觸發它的
+        // end 或 error——只有在事件真的不會來（少數瀏覽器 cancel() 後兩個
+        // 事件都不觸發）時才用時間上限保底。兩條路徑不管哪個先到，
+        // proceeded 旗標都只讓它真正往下播一次。
+        let proceeded = false;
+        const proceed = () => {
+          if (proceeded) return;
+          proceeded = true;
+          doSpeak();
+        };
+        if (prevUtterance) {
+          prevUtterance.addEventListener("end", proceed, { once: true });
+          prevUtterance.addEventListener("error", proceed, { once: true });
+        }
         synth.cancel();
-        setTimeout(doSpeak, 100);
+        setTimeout(proceed, 250);
       } else {
         doSpeak();
       }
@@ -84,7 +101,7 @@ export function useSpeech() {
   );
 
   // 讓呼叫端可以主動打斷還在播放的語音（例如使用者手動把唱片從撥放器
-  // 上拿下來，不想等它自然播完）。順便讓還在 100ms 緩衝期、還沒真的
+  // 上拿下來，不想等它自然播完）。順便讓還在等上一句真正停下來、還沒真的
   // 念出來的排程作廢，不然叫停之後過一下子又會突然冒出聲音。
   const stop = useCallback(() => {
     if (!supported) return;
