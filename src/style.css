@@ -591,6 +591,7 @@ nav a:hover {
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: var(--surface);
+  color: var(--ink);
 }
 
 .day-range small {
@@ -777,6 +778,7 @@ nav a:hover {
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: var(--surface);
+  color: var(--ink);
   cursor: pointer;
 }
 
