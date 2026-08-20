@@ -1083,6 +1083,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 
 /* ---------- Speak button ---------- */
 .speak-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1102,10 +1103,24 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 .speak-btn:hover { background: var(--rust); color: #fff; border-color: var(--rust); }
 .speak-btn:active { transform: scale(0.94); }
 
+/* 可點擊範圍用 ::before 往外擴到接近 44px（觸控建議的最小尺寸），
+   但視覺大小維持不變——這兩顆按鈕密集出現在 polaroid、時間軸列、
+   token 卡片裡，直接放大圖示會讓這些本來就緊湊的排版變擠。::before
+   本身透明、不影響版面，只是加大能點到的熱區。 */
+.speak-btn::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+}
+
 .speak-btn-sm {
   width: 22px;
   height: 22px;
   font-size: 11px;
+}
+
+.speak-btn-sm::before {
+  inset: -11px;
 }
 
 /* ---------- Bookmark button ---------- */
@@ -1116,6 +1131,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
    永遠停在淺色模式的 --rust，深色模式也一樣），SpeakButton 沒有這個
    transition 就完全沒事，拿掉就正常了。 */
 .bookmark-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1128,6 +1144,13 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   background: none;
   color: var(--text-faint);
   cursor: pointer;
+}
+
+/* 同 .speak-btn：::before 把可點擊範圍擴到接近 44px，視覺大小不變。 */
+.bookmark-btn::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
 }
 
 /* 用 --rust 不是 --gold：實測 --gold 疊在卡片米色底（--cream）上對比只有
@@ -1147,6 +1170,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 .bookmark-btn-sm {
   width: 24px;
   height: 24px;
+}
+
+.bookmark-btn-sm::before {
+  inset: -10px;
 }
 
 .bookmark-btn-sm svg {
