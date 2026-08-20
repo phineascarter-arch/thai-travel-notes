@@ -273,7 +273,11 @@ nav a:hover {
   padding: 38px 18px 23px;
   position: relative;
   box-shadow: var(--shadow-lg);
-  transition: all var(--transition-fast);
+  /* 只轉場 transform，不能用 all：background／color 用的 --cream／--ink
+     深色模式下會換值，跟 .bookmark-btn 同一個坑——transition 正在盯著的
+     屬性如果剛好是「值本身也在這一刻換掉」的 custom property，瀏覽器會
+     卡在算錯的中間值，永遠出不來（見 .bookmark-btn 附近的說明）。 */
+  transition: transform var(--transition-fast);
 }
 
 .polaroid:hover {
@@ -819,7 +823,10 @@ nav a:hover {
   color: inherit;
   text-align: left;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  /* 同 .polaroid：不能用 all，border-color／background 用的 --line／
+     --cream 深色模式會換值，跟正在盯著它們的 transition 疊在一起會卡死
+     在錯的顏色，只留 transform／box-shadow 這兩個不受主題切換影響的。 */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .note-row:hover {
