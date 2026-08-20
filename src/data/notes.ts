@@ -18,6 +18,7 @@ export const CATEGORIES = [
   "購物殺價",
   "按摩",
   "緊急狀況",
+  "數字／時間",
 ] as const;
 
 export type Category = (typeof CATEGORIES)[number];
@@ -48,6 +49,175 @@ export interface Note {
 }
 
 export const notes: Note[] = [
+  {
+    day: 78,
+    date: "2026.10.07",
+    thai: "ตอนนี้กี่โมงแล้ว",
+    roman: "dtaawn-níi gìi-moong láaeo",
+    zh: "現在幾點了",
+    category: "數字／時間",
+    pattern: "ตอนนี้ + กี่โมง + แล้ว（日常問現在時間，不特別針對某件事）",
+    examples: [
+      {
+        zh: "現在幾點了？",
+        thai: "ตอนนี้กี่โมงแล้วคะ",
+        roman: "dtaawn-níi gìi-moong láaeo khá",
+        tokens: [
+          { thai: "ตอนนี้", roman: "dtaawn-níi", zh: "現在" },
+          { thai: "กี่โมง", roman: "gìi-moong", zh: "幾點" },
+          { thai: "แล้ว", roman: "láaeo", zh: "了（語氣詞）" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "晚上八點",
+        thai: "สองทุ่มค่ะ",
+        roman: "sǎawng-thûm khâ",
+        tokens: [
+          { thai: "สองทุ่ม", roman: "sǎawng-thûm", zh: "晚上八點" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰文報時依時段換單位，不是單純數 1-12：早上用 [數字]โมงเช้า、下午 1-4 點用 บ่าย[數字]โมง、晚上 7-11 點改用 [數字]ทุ่ม（從晚上 7 點＝หนึ่งทุ่ม 重新數，所以 สองทุ่ม 是晚上 8 點）、半夜到凌晨用 ตี[數字]。一開始會覺得複雜，先聽懂「บ่าย＋幾」（下午）和「幾＋ทุ่ม」（晚上）這兩種最常聽到的就夠用了。",
+  },
+  {
+    day: 77,
+    date: "2026.10.06",
+    thai: "วันนี้วันที่เท่าไหร่",
+    roman: "wan-níi wan-thîi thâo-rài",
+    zh: "今天幾號",
+    category: "數字／時間",
+    pattern: "วันนี้ + วันที่ + เท่าไหร่（詢問今天日期）",
+    examples: [
+      {
+        zh: "今天幾號？",
+        thai: "วันนี้วันที่เท่าไหร่คะ",
+        roman: "wan-níi wan-thîi thâo-rài khá",
+        tokens: [
+          { thai: "วันนี้", roman: "wan-níi", zh: "今天" },
+          { thai: "วันที่", roman: "wan-thîi", zh: "日期、幾號" },
+          { thai: "เท่าไหร่", roman: "thâo-rài", zh: "多少、幾" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "今天是十號",
+        thai: "วันนี้วันที่สิบค่ะ",
+        roman: "wan-níi wan-thîi sìp khâ",
+        tokens: [
+          { thai: "วันนี้", roman: "wan-níi", zh: "今天" },
+          { thai: "วันที่", roman: "wan-thîi", zh: "日期、幾號" },
+          { thai: "สิบ", roman: "sìp", zh: "十（號）" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "月份是「เดือน＋數字」或月份名，例如十月完整講是 เดือนตุลาคม，但日常口語常直接省略月份只問「幾號」，訂房、訂票核對日期時這句最常用；跟 Day 74 的數字、Day 76 的 คืน 搭配，退房日期、待幾天都能講清楚。",
+  },
+  {
+    day: 76,
+    date: "2026.10.05",
+    thai: "ขอพักสองคืนค่ะ",
+    roman: "khǎaw phák sǎawng khʉʉn khâ",
+    zh: "我要住兩晚",
+    category: "數字／時間",
+    pattern: "ขอพัก + [數字] + คืน（說明住宿晚數）",
+    examples: [
+      {
+        zh: "我要住兩晚",
+        thai: "ขอพักสองคืนค่ะ",
+        roman: "khǎaw phák sǎawng khʉʉn khâ",
+        tokens: [
+          { thai: "ขอพัก", roman: "khǎaw phák", zh: "我要住" },
+          { thai: "สองคืน", roman: "sǎawng khʉʉn", zh: "兩晚" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "會住到星期五",
+        thai: "อยู่ถึงวันศุกร์ค่ะ",
+        roman: "yùu thʉ̌ng wan-sùk khâ",
+        tokens: [
+          { thai: "อยู่ถึง", roman: "yùu thʉ̌ng", zh: "待到、住到" },
+          { thai: "วันศุกร์", roman: "wan-sùk", zh: "星期五" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "คืน 是算晚數的量詞，跟中文「兩晚」的「晚」用法一樣；櫃檯也常直接問 พักกี่คืนคะ（要住幾晚），照這句的數字部分換掉回答就好，配合 Day 75 的星期講法還能直接說要住到星期幾。",
+  },
+  {
+    day: 75,
+    date: "2026.10.04",
+    thai: "วันนี้วันอะไร",
+    roman: "wan-níi wan-à-rai",
+    zh: "今天星期幾",
+    category: "數字／時間",
+    pattern: "วันนี้ + วันอะไร（詢問今天星期幾）",
+    examples: [
+      {
+        zh: "今天星期幾？",
+        thai: "วันนี้วันอะไรคะ",
+        roman: "wan-níi wan-à-rai khá",
+        tokens: [
+          { thai: "วันนี้", roman: "wan-níi", zh: "今天" },
+          { thai: "วันอะไร", roman: "wan-à-rai", zh: "星期幾" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "今天星期一",
+        thai: "วันนี้วันจันทร์ค่ะ",
+        roman: "wan-níi wan-jan khâ",
+        tokens: [
+          { thai: "วันนี้", roman: "wan-níi", zh: "今天" },
+          { thai: "วันจันทร์", roman: "wan-jan", zh: "星期一" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "星期二到日：วันอังคาร（二）、วันพุธ（三）、วันพฤหัสบดี（四，口語常簡稱 วันพฤหัส）、วันศุกร์（五）、วันเสาร์（六）、วันอาทิตย์（日）。泰國人習慣把星期跟顏色連在一起（週一黃、週二粉紅……），路上常看到有人特定某天穿特定顏色的衣服，就是這個傳統。",
+  },
+  {
+    day: 74,
+    date: "2026.10.03",
+    thai: "หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า สิบ",
+    roman: "nʉ̀ng, sǎawng, sǎam, sìi, hâa, hòk, jèt, bpɛ̀ɛt, gâo, sìp",
+    zh: "數字一到十",
+    category: "數字／時間",
+    pattern: "หนึ่ง～สิบ（1～10 基本數字，問價錢、房號、時間都會用到）",
+    examples: [
+      {
+        zh: "一到十",
+        thai: "หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า สิบ",
+        roman: "nʉ̀ng, sǎawng, sǎam, sìi, hâa, hòk, jèt, bpɛ̀ɛt, gâo, sìp",
+        tokens: [
+          { thai: "หนึ่ง", roman: "nʉ̀ng", zh: "一" },
+          { thai: "สอง", roman: "sǎawng", zh: "二" },
+          { thai: "สาม", roman: "sǎam", zh: "三" },
+          { thai: "สี่", roman: "sìi", zh: "四" },
+          { thai: "ห้า", roman: "hâa", zh: "五" },
+          { thai: "หก", roman: "hòk", zh: "六" },
+          { thai: "เจ็ด", roman: "jèt", zh: "七" },
+          { thai: "แปด", roman: "bpɛ̀ɛt", zh: "八" },
+          { thai: "เก้า", roman: "gâo", zh: "九" },
+          { thai: "สิบ", roman: "sìp", zh: "十" },
+        ],
+      },
+      {
+        zh: "總共五件",
+        thai: "ทั้งหมดห้าชิ้นค่ะ",
+        roman: "tháng-mòt hâa chín khâ",
+        tokens: [
+          { thai: "ทั้งหมด", roman: "tháng-mòt", zh: "總共、全部" },
+          { thai: "ห้าชิ้น", roman: "hâa chín", zh: "五件" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰文數字 11 之後規則很單純：十一是 สิบเอ็ด（十＋一，「一」在十位後面要換成 เอ็ด）、十二是 สิบสอง，以此類推；但「二十」是特例 ยี่สิบ，不是 สองสิบ，要特別記。這十個數字是問價錢、講房號、講時間的地基，先背熟這篇再回頭看其他篇會更順。",
+  },
   {
     day: 73,
     date: "2026.10.02",
