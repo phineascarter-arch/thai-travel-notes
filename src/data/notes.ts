@@ -19,6 +19,7 @@ export const CATEGORIES = [
   "按摩",
   "緊急狀況",
   "數字／時間",
+  "酒吧",
 ] as const;
 
 export type Category = (typeof CATEGORIES)[number];
@@ -49,6 +50,141 @@ export interface Note {
 }
 
 export const notes: Note[] = [
+  {
+    day: 82,
+    date: "2026.10.11",
+    thai: "คืนนี้มีดนตรีสดไหม",
+    roman: "khʉʉn níi mii don-dtrii sòt mǎi",
+    zh: "今晚有現場演奏嗎",
+    category: "酒吧",
+    pattern: "คืนนี้ + มี + ดนตรีสด + ไหม（詢問是否有現場演出）",
+    examples: [
+      {
+        zh: "今晚有現場演奏嗎？",
+        thai: "คืนนี้มีดนตรีสดไหมคะ",
+        roman: "khʉʉn níi mii don-dtrii sòt mǎi khá",
+        tokens: [
+          { thai: "คืนนี้", roman: "khʉʉn níi", zh: "今晚" },
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "ดนตรีสด", roman: "don-dtrii sòt", zh: "現場音樂" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "有的，九點開始",
+        thai: "มีค่ะ เริ่มสามทุ่ม",
+        roman: "mii khâ, rə̂əm sǎam-thûm",
+        tokens: [
+          { thai: "มีค่ะ", roman: "mii khâ", zh: "有的" },
+          { thai: "เริ่ม", roman: "rə̂əm", zh: "開始" },
+          { thai: "สามทุ่ม", roman: "sǎam-thûm", zh: "晚上九點" },
+        ],
+      },
+    ],
+    note: "สด 除了「新鮮」也可以形容「現場」，ดนตรีสด 就是「現場音樂」；觀光區的酒吧晚上很常有現場樂團駐唱，通常晚上 8、9 點後開始，聽到回答時間可以直接用 Day 78 學過的報時方式（สามทุ่ม 就是晚上九點）。",
+  },
+  {
+    day: 81,
+    date: "2026.10.10",
+    thai: "เพลงนี้เพราะมาก",
+    roman: "phleeng níi phráw mâak",
+    zh: "這首歌好好聽",
+    category: "酒吧",
+    pattern: "เพลง + นี้ + เพราะ + มาก（稱讚音樂好聽）",
+    examples: [
+      {
+        zh: "這首歌好好聽！",
+        thai: "เพลงนี้เพราะมากเลยค่ะ",
+        roman: "phleeng níi phráw mâak ləəi khâ",
+        tokens: [
+          { thai: "เพลงนี้", roman: "phleeng níi", zh: "這首歌" },
+          { thai: "เพราะมาก", roman: "phráw mâak", zh: "很好聽" },
+          { thai: "เลย", roman: "ləəi", zh: "（加強語氣）" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "這首歌叫什麼名字？",
+        thai: "เพลงนี้ชื่ออะไรคะ",
+        roman: "phleeng níi chʉ̂ʉ à-rai khá",
+        tokens: [
+          { thai: "เพลงนี้", roman: "phleeng níi", zh: "這首歌" },
+          { thai: "ชื่ออะไร", roman: "chʉ̂ʉ à-rai", zh: "叫什麼名字" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "เพราะ 專門形容聲音好聽（音樂、歌聲、講話都能用），跟形容食物好吃的 อร่อย、形容外表好看的 สวย 是不同詞，別搞混；聽到喜歡的歌主動稱讚一句，是跟酒保或鄰座聊起來的自然開場白。",
+  },
+  {
+    day: 80,
+    date: "2026.10.09",
+    thai: "มีอะไรแนะนำไหม",
+    roman: "mii à-rai nɛ́-nam mǎi",
+    zh: "有什麼推薦的嗎",
+    category: "酒吧",
+    pattern: "มี + อะไร + แนะนำ + ไหม（詢問推薦）",
+    examples: [
+      {
+        zh: "有什麼推薦的嗎？",
+        thai: "มีอะไรแนะนำไหมคะ",
+        roman: "mii à-rai nɛ́-nam mǎi khá",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "อะไร", roman: "à-rai", zh: "什麼" },
+          { thai: "แนะนำ", roman: "nɛ́-nam", zh: "推薦" },
+          { thai: "ไหม", roman: "mǎi", zh: "嗎" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "這個很受歡迎",
+        thai: "อันนี้ขายดีค่ะ",
+        roman: "an-níi khǎai-dii khâ",
+        tokens: [
+          { thai: "อันนี้", roman: "an-níi", zh: "這個" },
+          { thai: "ขายดี", roman: "khǎai-dii", zh: "賣得好、受歡迎" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "這句點餐、點酒都通用，不知道要點什麼、或想試試招牌飲料時最好用；不敢喝太烈可以再加一句 ไม่หวานมาก／ไม่แรงมาก（不要太甜／不要太烈）跟調酒師說明口味偏好。",
+  },
+  {
+    day: 79,
+    date: "2026.10.08",
+    thai: "ขอเบียร์หนึ่งขวดค่ะ",
+    roman: "khǎaw bia nʉ̀ng khùat khâ",
+    zh: "請給我一瓶啤酒",
+    category: "酒吧",
+    pattern: "ขอ + เบียร์ + [數字] + ขวด（點飲料的量詞用法）",
+    examples: [
+      {
+        zh: "請給我一瓶啤酒",
+        thai: "ขอเบียร์หนึ่งขวดค่ะ",
+        roman: "khǎaw bia nʉ̀ng khùat khâ",
+        tokens: [
+          { thai: "ขอ", roman: "khǎaw", zh: "請給我" },
+          { thai: "เบียร์", roman: "bia", zh: "啤酒" },
+          { thai: "หนึ่งขวด", roman: "nʉ̀ng khùat", zh: "一瓶" },
+          { thai: "ค่ะ", roman: "khâ", zh: "（女性禮貌詞尾）" },
+        ],
+      },
+      {
+        zh: "有哪些啤酒？",
+        thai: "มีเบียร์อะไรบ้างคะ",
+        roman: "mii bia à-rai bâang khá",
+        tokens: [
+          { thai: "มี", roman: "mii", zh: "有" },
+          { thai: "เบียร์", roman: "bia", zh: "啤酒" },
+          { thai: "อะไรบ้าง", roman: "à-rai bâang", zh: "哪些、什麼種類" },
+          { thai: "คะ", roman: "khá", zh: "（女性疑問句禮貌詞尾）" },
+        ],
+      },
+    ],
+    note: "泰國常見啤酒品牌有 ช้าง（Chang）、สิงห์（Singha）、ลีโอ（Leo），想指定品牌直接說「ขอ + 品牌名」就好；大部分酒吧是算瓶或算杯計價，點之前可以先用 Day 2 學過的 เท่าไหร่ 問清楚價錢，結帳則是 Day 8 的 ขอเช็คบิล。",
+  },
   {
     day: 78,
     date: "2026.10.07",
