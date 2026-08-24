@@ -13,6 +13,18 @@ let activeUtterance: SpeechSynthesisUtterance | null = null;
 // 出聲，避免聽到一串跟畫面對不上的舊發音依序播完。
 let latestRequestId = 0;
 
+// iPad 實機回報：每次播放都固定殘留同一段、跟目前例句對不上的音檔——
+// 不管點哪個字都一樣，代表殘留的不是「上一句真的還沒停」，而是某個
+// 固定不變的東西。下面 doSpeak() 原本無條件在文字前面墊 ", , " 當緩衝，
+// 這個假設（逗號不會被念出來）只在開發時測試過的桌面 Chrome 語音上
+// 成立；iOS 內建泰文語音顯然會把這段逗號緩衝念成一段固定音檔，因為
+// 不管換講哪句話，這段前綴文字都完全相同。iPadOS 13+ 的 Safari 預設會
+// 偽裝成 Macintosh 的 UA，要另外用 maxTouchPoints 判斷才抓得到。
+const isIOS =
+  typeof navigator !== "undefined" &&
+  (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1));
+
 // 用瀏覽器內建的 Web Speech API 播放泰文發音。
 // 音質取決於裝置系統內建的泰文語音包（iPhone 需在
 // 設定 > 輔助使用 > 語音內容 > 聲音 > 泰文 先下載一次）。
@@ -37,17 +49,19 @@ export function useSpeech() {
       const requestId = ++latestRequestId;
 
       const doSpeak = () => {
-        // 在等待下面那段 100ms 緩衝期間，如果使用者又點了別的發音按鈕
-        // （requestId 被後來的呼叫超車），這次排隊中的播放就直接放棄、
-        // 不要真的念出來——不然快速點好幾個不同的字/句子時，會聽到
+        // 在等待下面那段「上一句真正停下來」的期間，如果使用者又點了別的
+        // 發音按鈕（requestId 被後來的呼叫超車），這次排隊中的播放就直接
+        // 放棄、不要真的念出來——不然快速點好幾個不同的字/句子時，會聽到
         // 排隊播放一串跟畫面上正在看的內容對不上的舊發音。
         if (requestId !== latestRequestId) return;
 
         // 音訊管線啟動本身也有一點延遲，就算前面沒有任何語音在播、單獨點一次
-        // 也偶爾會發生。在真正內容前面墊一個逗號當緩衝——逗號不會被念出來，
-        // 只會造成一個很短的停頓，讓管線啟動的延遲去吃這個停頓，而不是吃到
-        // 真正的第一個音節。
-        const utter = new SpeechSynthesisUtterance(`, , ${text}`);
+        // 也偶爾會發生。桌面瀏覽器在真正內容前面墊一個逗號當緩衝——逗號不會
+        // 被念出來，只會造成一個很短的停頓，讓管線啟動的延遲去吃這個停頓，
+        // 而不是吃到真正的第一個音節。iOS 不套用這個緩衝（見上面 isIOS 的
+        // 說明），寧可偶爾遇到桌機那種開頭截斷，也不要每次都固定多念出一段
+        // 跟例句無關的音檔。
+        const utter = new SpeechSynthesisUtterance(isIOS ? text : `, , ${text}`);
         utter.lang = "th-TH";
         if (thaiVoice) utter.voice = thaiVoice;
         utter.rate = rate;
