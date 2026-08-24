@@ -1,6 +1,8 @@
 // 本機學習紀錄（localStorage）：每個單字的答對/答錯次數 + 真實造訪天數。
 // 全部存在使用者自己的瀏覽器裡，不會上傳到任何地方。
 
+import { safeGetItem, safeSetItem } from "./storage";
+
 const WORD_STATS_KEY = "thai-notes-word-stats";
 const VISITED_DAYS_KEY = "thai-notes-visited-days";
 
@@ -11,7 +13,7 @@ interface WordStat {
 
 function loadWordStats(): Record<string, WordStat> {
   try {
-    const raw = localStorage.getItem(WORD_STATS_KEY);
+    const raw = safeGetItem(WORD_STATS_KEY);
     return raw ? JSON.parse(raw) : {};
   } catch {
     return {};
@@ -19,7 +21,7 @@ function loadWordStats(): Record<string, WordStat> {
 }
 
 function saveWordStats(stats: Record<string, WordStat>) {
-  localStorage.setItem(WORD_STATS_KEY, JSON.stringify(stats));
+  safeSetItem(WORD_STATS_KEY, JSON.stringify(stats));
 }
 
 export function recordAnswer(key: string, correct: boolean) {
@@ -52,7 +54,7 @@ function dateKey(d: Date): string {
 
 function loadVisitedDays(): Set<string> {
   try {
-    const raw = localStorage.getItem(VISITED_DAYS_KEY);
+    const raw = safeGetItem(VISITED_DAYS_KEY);
     return new Set(raw ? JSON.parse(raw) : []);
   } catch {
     return new Set();
@@ -62,7 +64,7 @@ function loadVisitedDays(): Set<string> {
 export function recordVisitToday() {
   const days = loadVisitedDays();
   days.add(dateKey(new Date()));
-  localStorage.setItem(VISITED_DAYS_KEY, JSON.stringify([...days]));
+  safeSetItem(VISITED_DAYS_KEY, JSON.stringify([...days]));
 }
 
 // 從今天開始往回數，只要連續有造訪紀錄就 +1，中斷就停止。

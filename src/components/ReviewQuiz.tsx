@@ -3,6 +3,7 @@ import type { QuizExample, Token } from "../data/notes";
 import SpeakButton from "./SpeakButton";
 import { recordAnswer, weightOf } from "../lib/progress";
 import { dedupeByThai } from "../lib/tokens";
+import { safeGetItem, safeSetItem } from "../lib/storage";
 
 type Mode = "roman-zh" | "zh-roman" | "cloze";
 
@@ -117,7 +118,7 @@ export default function ReviewQuiz({ pool, maxDay, bookmarkedDays }: Props) {
   const [answered, setAnswered] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [selfGrade, setSelfGrade] = useState<"correct" | "wrong" | null>(null);
-  const [best, setBest] = useState<number>(() => Number(localStorage.getItem("thai-quiz-best") || 0));
+  const [best, setBest] = useState<number>(() => Number(safeGetItem("thai-quiz-best") || 0));
 
   const rangePool = pool.filter(
     (q) => q.day >= dayFrom && q.day <= dayTo && (!bookmarkedOnly || bookmarkedDays.has(q.day))
@@ -186,7 +187,7 @@ export default function ReviewQuiz({ pool, maxDay, bookmarkedDays }: Props) {
     if (nextActive === null) {
       const pct = Math.round((firstTryCorrect / totalDistinct) * 100);
       if (pct > best) {
-        localStorage.setItem("thai-quiz-best", String(pct));
+        safeSetItem("thai-quiz-best", String(pct));
         setBest(pct);
       }
       setPhase("result");
