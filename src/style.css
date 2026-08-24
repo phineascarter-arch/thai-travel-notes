@@ -162,6 +162,7 @@ input:focus-visible,
   background: #1b2438f5;
   color: var(--on-dark);
   border-bottom: 1px solid var(--night-border);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -990,6 +991,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   place-items: center;
   padding: 22px;
   background: #17130fc7;
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   overflow: auto;
 }
@@ -1273,7 +1275,12 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 }
 
 /* ---------- Responsive ---------- */
-@media (width <= 850px) {
+/* max-width，不用 CSS Media Queries Level 4 的 range 語法（width <= 850px）：
+   range 語法要 Safari 16.4（2023-03）以後才支援，舊一點的 iPad 遇到會直接
+   整條 media query 靜默失效——不是報錯，是完全不生效，等於手機／平板版
+   面從頭到尾沒切換過，會看到桌面版硬擠進窄螢幕。max-width 兩種寫法功能
+   完全等價、相容性好非常多，沒有理由賭新語法。 */
+@media (max-width: 850px) {
   .topbar { padding: 14px 20px; gap: 16px; }
   .brand { flex-shrink: 0; }
   .brand small { display: none; }
@@ -1317,7 +1324,7 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   .record-wall .vinyl { width: 80px; height: 80px; }
 }
 
-@media (width <= 560px) {
+@media (max-width: 560px) {
   nav { gap: 12px; }
   .hero { padding-top: 52px; }
   .hero h1 { font-size: 44px; }
