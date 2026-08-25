@@ -16,7 +16,10 @@ export default function RecordPlayer({ isPlaying, activeNote, platterRef }: Prop
   return (
     <div className="record-player">
       <div className="record-player-body">
-        <div className="record-player-platter" ref={platterRef} />
+        <div
+          className={`record-player-platter ${isPlaying ? "" : "record-player-platter-idle"}`}
+          ref={platterRef}
+        />
         <div className={`record-player-arm ${isPlaying ? "record-player-arm-down" : ""}`} />
         <div className="record-player-knob" />
       </div>

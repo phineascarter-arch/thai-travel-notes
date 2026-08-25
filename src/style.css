@@ -1392,6 +1392,18 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   margin-top: 24px;
 }
 
+.accent-rust {
+  --vinyl-glow: rgba(179, 87, 42, 0.4);
+}
+
+.accent-orange {
+  --vinyl-glow: rgba(232, 103, 76, 0.4);
+}
+
+.accent-gold {
+  --vinyl-glow: rgba(255, 217, 102, 0.45);
+}
+
 .accent-rust .vinyl-label {
   background: var(--rust);
 }
@@ -1436,13 +1448,15 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: repeating-radial-gradient(
-    circle at center,
-    #1a1a1a 0px,
-    #1a1a1a 2px,
-    #262626 3px,
-    #1a1a1a 4px
-  );
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.16), transparent 45%),
+    repeating-radial-gradient(
+      circle at center,
+      #1a1a1a 0px,
+      #1a1a1a 2px,
+      #262626 3px,
+      #1a1a1a 4px
+    );
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
@@ -1456,6 +1470,23 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
 @keyframes record-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* 唱片還放在架上、還沒被拿去撥放時，用微光暈提示「這張可以拖」──
+   跟 .vinyl-docked 的旋轉動畫互斥（父層 .vinyl-docked 跟 :not(.vinyl-docked)
+   不會同時成立），所以兩個 animation 規則不會互相打架。光暈顏色取自
+   .accent-* 設的 --vinyl-glow，各花色的待機光暈跟自己的唱片標籤同色系。 */
+.vinyl:not(.vinyl-docked) .vinyl-disc {
+  animation: vinyl-breathe 3.2s ease-in-out infinite;
+}
+
+@keyframes vinyl-breathe {
+  0%, 100% {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45), 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45), 0 0 18px 2px var(--vinyl-glow, rgba(232, 160, 76, 0.4));
   }
 }
 
@@ -1480,6 +1511,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   }
 
   .vinyl-docked .vinyl-disc {
+    animation: none;
+  }
+
+  .vinyl:not(.vinyl-docked) .vinyl-disc {
     animation: none;
   }
 }
@@ -1508,14 +1543,38 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   width: 148px;
   height: 148px;
   border-radius: 50%;
-  background: repeating-radial-gradient(
-    circle at center,
-    #1a1a1a 0px,
-    #1a1a1a 2px,
-    #262626 3px,
-    #1a1a1a 4px
-  );
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.14), transparent 45%),
+    repeating-radial-gradient(
+      circle at center,
+      #1a1a1a 0px,
+      #1a1a1a 2px,
+      #262626 3px,
+      #1a1a1a 4px
+    );
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 0 0 7px #3a3a3a;
+}
+
+/* 轉盤上還沒有唱片在轉的時候，用微光暈邀請使用者拖唱片上來；一旦有
+   唱片對接，唱片本身（z-index:2，見上面說明）視覺上蓋住轉盤，這個
+   光暈自然被蓋掉，不用另外寫邏輯避免兩層動畫互相干擾。 */
+.record-player-platter-idle {
+  animation: platter-breathe 3.6s ease-in-out infinite;
+}
+
+@keyframes platter-breathe {
+  0%, 100% {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 0 0 7px #3a3a3a, 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 0 0 7px #3a3a3a, 0 0 20px 3px rgba(232, 160, 76, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .record-player-platter-idle {
+    animation: none;
+  }
 }
 
 .record-player-platter::after {
@@ -1541,7 +1600,10 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   transform: rotate(34deg);
   transform-origin: top center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  transition: transform 480ms ease;
+  /* 跟 .vinyl 的落點動畫用同一條「回彈」曲線（y 分量 > 1 會讓動畫先
+     衝過目標角度一點再彈回來），唱臂放下／收回都帶一點實體手感，
+     不是勻速轉過去。 */
+  transition: transform 560ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .record-player-arm::before {
