@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import type { RefObject } from "react";
 import type { Note } from "../data/notes";
-import { computeDockOffset } from "../lib/dockOffset";
+import { computeDockOffset, type Rect } from "../lib/dockOffset";
 import { useDockingDrag } from "../hooks/useDockingDrag";
 import { useSpeech } from "../hooks/useSpeech";
 
@@ -17,23 +17,35 @@ interface Props {
 export default function VinylRecord({ note, accent, platterRef, isActive, onDock, onUndock }: Props) {
   const { speak, stop } = useSpeech();
   const vinylRef = useRef<HTMLDivElement>(null);
+  // 手指按下、拖拽都還沒開始套用位移的那一刻先量好「架上原本」的矩形，
+  // 放開時直接拿來用。原本是放開當下重新量 vinylRect 再扣掉 currentOffset
+  // 反推回去，但 currentOffset（ref，同步更新）跟畫面上實際套用的
+  // transform（React state 驅動，非同步 commit）在真實觸控快速滑動放開
+  // 時可能對不上——上一次 pointermove 的 setOffset 還沒 commit，
+  // pointerup 就已經觸發，量到的矩形停在更舊的一幀，扣出來的「原本
+  // 座標」整個算錯，唱片對接會飛到完全不相干的位置（用手機測試才會
+  // 重現，這裡的合成事件測試因為是同步觸發，不會踩到這個時間差）。
+  const restingRectRef = useRef<Rect | null>(null);
+
+  const captureRestingRect = useCallback(() => {
+    const vinyl = vinylRef.current;
+    if (!vinyl) return;
+    restingRectRef.current = vinyl.getBoundingClientRect();
+  }, []);
 
   const getDockTarget = useCallback((currentOffset: { x: number; y: number }) => {
     const vinyl = vinylRef.current;
     const platter = platterRef.current;
     if (!vinyl || !platter) return { x: 0, y: 0, scale: 1 };
-    const vinylRect = vinyl.getBoundingClientRect();
-    // vinylRect 反映的是「目前套用的 transform 之後」的位置；拖拽放開的
-    // 當下，.vinyl 身上還留著這次拖拽的 translate(currentOffset)，量出來
-    // 的矩形要先扣掉這個已經套用的位移，才會是「原本在架上、還沒被拖拽
-    // 影響」的真實座標。不扣掉的話，算出來的對接位移會少了 currentOffset
-    // 這一段，唱片會偏移「拖拽距離」那麼多，飛不到轉盤正中央。
-    const restingRect = {
-      left: vinylRect.left - currentOffset.x,
-      top: vinylRect.top - currentOffset.y,
-      width: vinylRect.width,
-      height: vinylRect.height,
-    };
+    // currentOffset 只有在鍵盤觸發的 dockNow()（沒有拖拽過程）才會是
+    // {0,0}——拖拽放開要呼叫到這裡，dist 必須 >= dragThreshold(70)，
+    // 兩者不可能同時是 0。是 {0,0} 時唱片還在原位、沒套用任何 transform，
+    // 直接量當下矩形就準確，不需要也不能用（可能是上一次拖拽留下的）
+    // restingRectRef。
+    const restingRect =
+      currentOffset.x === 0 && currentOffset.y === 0
+        ? vinyl.getBoundingClientRect()
+        : (restingRectRef.current ?? vinyl.getBoundingClientRect());
     return computeDockOffset(restingRect, platter.getBoundingClientRect());
   }, [platterRef]);
 
@@ -87,7 +99,10 @@ export default function VinylRecord({ note, accent, platterRef, isActive, onDock
       role="button"
       tabIndex={0}
       aria-label={ariaLabel}
-      onPointerDown={handlers.onPointerDown}
+      onPointerDown={(e) => {
+        captureRestingRect();
+        handlers.onPointerDown(e);
+      }}
       onPointerMove={handlers.onPointerMove}
       onPointerUp={handlers.onPointerUp}
       onPointerCancel={handlers.onPointerCancel}
