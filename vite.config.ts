@@ -17,6 +17,16 @@ export default defineConfig({
     // media query 靜默失效，等於響應式版面完全沒生效。safari14 這個
     // target 會讓壓縮器改輸出舊語法的等價寫法。
     cssTarget: 'safari14',
+    // 沒有對應的 JS 修法可以放這裡：這個專案用的是 Rolldown 版 Vite
+    // （node_modules 裡有 @rolldown/*），檢查編譯後的產物發現 optional
+    // chaining（?.）、nullish coalescing（??）、邏輯賦值運算子
+    // （||=／&&=／??=）都原封不動輸出，試過設 build.target: 'safari14'
+    // 完全沒有影響（改前改後編譯出來的檔案內容逐位元組相同）——這幾個
+    // 語法背後的 Lightning CSS（處理上面的 cssTarget）是成熟的獨立
+    // 工具，但 Rolldown 本身的 JS 語法降級目前顯然還沒做完整，不是這裡
+    // 能設定繞過去的。這些語法只要 Safari 14（2020-09）就支援，門檻比
+    // CSS 那個 16.4 低很多，也沒有實測證據顯示這是任何回報問題的成因，
+    // 先記錄下來，不為此拉進 @vitejs/plugin-legacy 這種量級的相依套件。
   },
   test: {
     environment: 'node',
