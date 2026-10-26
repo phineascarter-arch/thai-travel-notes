@@ -40,7 +40,9 @@ export function useSpeech() {
     return () => window.speechSynthesis.removeEventListener("voiceschanged", load);
   }, [supported]);
 
-  const thaiVoice = voices.find((v) => v.lang?.toLowerCase().startsWith("th"));
+  const thaiVoices = voices.filter((v) => v.lang?.toLowerCase().startsWith("th"));
+  const thaiVoice =
+    thaiVoices.find((v) => /premwadee/i.test(v.name)) ?? thaiVoices[0];
 
   const speak = useCallback(
     (text: string, rate = 0.65) => {
