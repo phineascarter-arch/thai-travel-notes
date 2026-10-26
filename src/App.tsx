@@ -4,6 +4,7 @@ import ReviewQuiz from "./components/ReviewQuiz";
 import NoteModal from "./components/NoteModal";
 import RecordWall from "./components/RecordWall";
 import SpeakButton from "./components/SpeakButton";
+import SpeechPlayer from "./components/SpeechPlayer";
 import AyutthayaCanal from "./components/AyutthayaCanal";
 import ThemeToggle from "./components/ThemeToggle";
 import BookmarkButton from "./components/BookmarkButton";
@@ -271,6 +272,7 @@ function App() {
           onNext={() => setOpenDay(sortedNotes[openIndex - 1].day)}
         />
       )}
+      <SpeechPlayer />
     </main>
   );
 }

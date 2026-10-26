@@ -4,20 +4,16 @@ interface Props {
   text: string;
   size?: "md" | "sm";
   withLabel?: boolean;
-  // 語速：整句例句維持慢速（預設 0.65）方便學習；逐詞拆解的短字用快一點的
-  // 語速（建議 0.82），因為語速越慢，瀏覽器偶發的開頭截斷佔短音檔的比例
-  // 就越高，感覺特別明顯。
+  // MP3 播放速度：整句預設 0.71；逐詞拆解沿用 0.82，保留原音高。
   rate?: number;
 }
 
 export default function SpeakButton({ text, size = "md", withLabel = false, rate }: Props) {
-  const { speak, supported, hasThaiVoice, voiceName } = useSpeech();
+  const { speak, supported, voiceName } = useSpeech();
 
   if (!supported) return null;
 
-  const title = hasThaiVoice
-    ? `播放發音（語音：${voiceName}）`
-    : "播放發音（iPhone 建議先在設定下載泰文語音包，發音會更準；找不到泰文語音時瀏覽器可能會用預設語音硬唸）";
+  const title = `播放發音（${voiceName}／MP3）`;
 
   return (
     <button

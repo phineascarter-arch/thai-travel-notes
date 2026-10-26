@@ -1364,6 +1364,46 @@ footer span, footer p { color: var(--night-faint); font-size: 12px; }
   .record-wall .record-row { gap: 24px; }
 }
 
+.speech-player {
+  position: fixed;
+  z-index: 100;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  width: min(360px, calc(100vw - 32px));
+  padding: 14px 16px;
+  border: 1px solid var(--line, #d9cdbb);
+  border-radius: 16px;
+  background: var(--paper, #fffaf1);
+  color: var(--ink, #292a2d);
+  box-shadow: 0 8px 32px #0003;
+}
+
+.speech-player-heading,
+.speech-player-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.speech-player-heading { justify-content: space-between; }
+.speech-player-heading strong { font-size: 13px; }
+.speech-player button {
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  padding: 5px 9px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}
+.speech-player button[aria-pressed="true"] { background: #c9a24b44; }
+.speech-player p { margin: 8px 0; }
+.speech-player p[lang="th"] { font-size: 18px; max-height: 54px; overflow: auto; }
+.speech-player small { font-size: 11px; }
+.speech-player audio { display: block; width: 100%; height: 34px; margin-top: 10px; }
+.speech-player .speech-player-error { font-size: 12px; color: #b03224; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .polaroid, .note-row { transition: none; }

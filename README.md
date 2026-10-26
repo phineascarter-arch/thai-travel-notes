@@ -72,13 +72,13 @@ npm test
 
 ## 發音播放（🔊）
 
-點單字、例句、逐詞卡片旁邊的 🔊 就會用瀏覽器內建的 Web Speech API（`speechSynthesis`）唸出泰文，純前端、不用 API key、不用網路服務。實作在 [`src/hooks/useSpeech.ts`](src/hooks/useSpeech.ts) 和 [`src/components/SpeakButton.tsx`](src/components/SpeakButton.tsx)。
+點單字、例句、逐詞卡片旁邊的 🔊，播放預先合成的 **Microsoft Premwadee Neural 女聲**（`th-TH-PremwadeeNeural`）MP3，與 `thai-song-vocab` 使用相同音源。例句、逐詞拆解、複習題、唱片與運河共用同一播放器，切換時立即停止上一段。
 
-**音質吃裝置系統內建的泰文語音包，不是網站自動下載的。** 在 iPhone 上第一次使用前，建議先手動裝一次：
+**不需要安裝泰文語音包，也不會回退成裝置內建的其他聲音。** 音檔由網站提供；第一次播放需要網路。播放器提供原生播放控制、正常重播與慢速重播；慢速約 0.71 倍，短詞沿用 0.82 倍並保留音高。若瀏覽器拒絕啟動播放，可直接按播放器的播放鍵；載入失敗會顯示錯誤並可重播。
 
-> 設定 → 輔助使用 → 語音內容 → 聲音 → 加入新語言 → 泰文 → 下載
+實作：`src/lib/speechAudio.ts`、`src/hooks/useSpeech.ts`、`src/components/SpeechPlayer.tsx`。音檔對照在 `src/data/speech-manifest.json`，MP3 在 `public/audio/premwadee/`，相同文字重用同一檔案，字詞有獨立音檔。
 
-裝好之後 Safari／Chrome 等瀏覽器都能直接用該語音包，不用每個網站另外設定。沒裝的話系統可能會用其他語言的引擎硬唸泰文，發音會不準。
+新增或修改學習文字後，使用 Node.js 22.18+／24+ 執行 `node scripts/collect-speech.mjs`，在 Python 虛擬環境安裝 `scripts/requirements-speech.txt`，再執行 `python scripts/generate-speech.py`。這使用第三方 `edge-tts` 呼叫 Microsoft Edge 線上語音服務，僅在產製時傳送學習文字；網站播放不呼叫即時合成服務，也不需要 API key。固定正常合成速度與音高，每段最多三次嘗試；無法產生時不替換聲音。部署前執行 `python scripts/generate-speech.py --validate-only`，逐段以 FFmpeg 解碼，並執行 `npm test` 確認全站文字都有音檔。
 
 ## 複習測驗怎麼來的？
 
